@@ -67,7 +67,44 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: [...fontFamily.sans],
+				primary: [
+					'Inter Variable',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'sans-serif'
+				],
+				secondary: [
+					'IBM Plex Sans',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'sans-serif'
+				],
+				// Arabic fonts
+				'ar-primary': [
+					'Almarai',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'sans-serif'
+				],
+				'ar-secondary': [
+					'Noto Naskh Arabic Variable',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'sans-serif'
+				]
 			},
 			keyframes: {
 				"accordion-down": {
