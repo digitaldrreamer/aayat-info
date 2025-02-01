@@ -152,7 +152,7 @@
         formData.append('audio', file); // 'audio' is the key, and 'file' is the audio file
 
         console.log(formData)
-        const req = await fetch('https://api.aayah.info/api/v1/ai', {
+        const req = await fetch('/api/reflow/transcribe', {
             method: 'POST',
             body: formData,  // Send the FormData containing the file
         });
