@@ -58,7 +58,7 @@
 						<Card.Footer>
 							<Button onclick={() => {
 								goto(window.location.pathname + '/chapter/' + id)
-							}} variant="outline" class="w-full" onclick={() => readSection(id)}>
+							}} variant="outline" class="w-full">
 								<Book class="mr-2 h-4 w-4" />
 								Read Section
 							</Button>
