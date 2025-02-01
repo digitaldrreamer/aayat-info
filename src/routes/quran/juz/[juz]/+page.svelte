@@ -6,7 +6,6 @@
 	import { onMount } from 'svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import NewSurah from '$lib/components/quran/new-surah.svelte'
-	import SurahInfo from '$lib/components/quran/surah-info.svelte';
 
 	/** @type {any} */
 	let { data } = $props()
