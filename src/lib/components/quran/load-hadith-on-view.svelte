@@ -6,7 +6,7 @@
 	import * as Card from "$lib/components/ui/card";
 	import { toast } from 'svelte-sonner';
 	import { page } from '$app/state'
-	let { number } = $props()
+	let { number, bookTitle, sectionTitle } = $props()
 
 
 	function shareHadith(hadith) {

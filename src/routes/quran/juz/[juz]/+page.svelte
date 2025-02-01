@@ -6,11 +6,16 @@
 	import { onMount } from 'svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import NewSurah from '$lib/components/quran/new-surah.svelte'
+	import SurahInfo from '$lib/components/quran/surah-info.svelte';
 
 	/** @type {any} */
 	let { data } = $props()
 
 	let isMobile = $state(false)
+
+	function getReciterBasmalah(url) {
+		return url.replace(/\/[^\/]*$/, "/001001.mp3");
+	}
 
 	onMount(() => {
 		isMobile = window.innerWidth < 768
@@ -40,6 +45,7 @@
 						},
 						versesCount: verses.length
 					}}
+									 audioUrls={[getReciterBasmalah(juz.data.verses[0].audioUrl), ...juz.data.verses.map(v => v.audioUrl)]}
 									 onRead={() => {
 						// Scroll to verses or navigate to reading view
 					}}
@@ -91,6 +97,7 @@
 					},
 					versesCount: verses.length
 				}}
+								 audioUrls={[getReciterBasmalah(juz.data.verses[0].audioUrl), ...juz.data.verses.map(v => v.audioUrl)]}
 								 onRead={() => {
 					// Scroll to verses or navigate to reading view
 				}}

@@ -19,7 +19,7 @@
 		<ScrollArea class="h-[calc(100vh-12rem)]">
 			<div class="space-y-8">
 				{#each data.numbers as hadith}
-					<LoadHadithOnView number={hadith} />
+					<LoadHadithOnView number={hadith} {bookTitle} {sectionTitle} />
 				{/each}
 			</div>
 		</ScrollArea>

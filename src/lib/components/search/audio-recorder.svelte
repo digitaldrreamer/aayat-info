@@ -4,8 +4,9 @@
     import { Button } from '$lib/components/ui/button/index'
     import * as Dialog from '$lib/components/ui/dialog/index'
     import { Mic, Square, Loader2, RotateCcw, Search } from 'lucide-svelte'
+    import { toast } from 'svelte-sonner';
 
-    let { isOpen = $bindable(false), onSearch = $bindable((file) => {}) } = $props()
+    let { isOpen = $bindable(false) } = $props()
 
     /** @type {MediaRecorder | null} */
     let mediaRecorder = $state(null)
@@ -112,7 +113,7 @@
 
     function handleSearch() {
         if (audioFile) {
-            onSearch(audioFile)
+            transcribe(audioFile)
             isOpen = false
         }
     }
@@ -143,6 +144,28 @@
             URL.revokeObjectURL(audioUrl)
         }
     })
+
+    async function transcribe(file) {
+        const formData = new FormData();
+
+        // Append the audio file to the FormData
+        formData.append('audio', file); // 'audio' is the key, and 'file' is the audio file
+
+        console.log(formData)
+        const req = await fetch('http://localhost:5175/api/v1/ai', {
+            method: 'POST',
+            body: formData,  // Send the FormData containing the file
+        });
+
+        if (!req.ok) {
+            // Handle error if request fails
+            toast.error("Failed to transcribe")
+        }
+
+        const response = await req.json();
+        console.log(response)
+        return response;  // Assuming the server returns a JSON response
+    }
 </script>
 
 <Dialog.Root bind:open={isOpen}>
