@@ -250,7 +250,7 @@
 	let hadiths = $state([])
 
 	onMount(() => {
-		fetch('http://localhost:5175/api/v1/hadith')
+		fetch('https://api/aayah.info/api/v1/hadith')
 			.then(req => req.json()) // Fix: Call .json() as a function
 			.then(res => {
 				console.log(res);

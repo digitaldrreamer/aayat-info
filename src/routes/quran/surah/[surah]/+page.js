@@ -1,11 +1,11 @@
 export const load = async ({ params, fetch }) => {
 	const { surah } = params
 	const fetchSurah = async (num) => {
-		const req = await fetch(`http://localhost:5175/api/v1/quran/ara-qurandoorinonun/surah/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`)
+		const req = await fetch(`https://api/aayah.info/api/v1/quran/ara-qurandoorinonun/surah/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`)
 		const res = await req.json()
-		const transReq = await fetch(`http://localhost:5175/api/v1/quran/eng-abdullahyusufal/surah/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`)
+		const transReq = await fetch(`https://api/aayah.info/api/v1/quran/eng-abdullahyusufal/surah/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`)
 		const transRes = await transReq.json()
-		const quranReq = await fetch('http://localhost:5175/api/v1/quran')
+		const quranReq = await fetch('https://api/aayah.info/api/v1/quran')
 		const quranRes = await quranReq.json()
 		return {
 			success: res?.success && quranRes?.success,
