@@ -19,11 +19,14 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"autoprefixer": "^10.4.20",
+		"bits-ui": "^1.0.0-next.83",
 		"clsx": "^2.1.1",
+		"embla-carousel-svelte": "^8.5.2",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
+		"lucide-svelte": "^0.474.0",
 		"mode-watcher": "^0.5.0",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
@@ -40,6 +43,10 @@
 	},
 	"dependencies": {
 		"@tailwindcss/forms": "^0.5.9",
-		"@tailwindcss/typography": "^0.5.15"
+		"@tailwindcss/typography": "^0.5.15",
+		"dexie": "^4.0.11",
+		"num-to-arabic": "^0.0.3",
+		"sound-visualizer": "^1.4.0",
+		"svelte-persisted-store": "^0.12.0"
 	}
 }

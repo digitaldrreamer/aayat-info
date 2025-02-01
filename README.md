@@ -1,3 +1,4 @@
+[![wakatime](https://wakatime.com/badge/user/0adeced3-467a-4cc6-9433-a47106d2d8b7/project/3a7c6ed2-dda6-4368-9a91-e3ac76ecb854.svg)](https://wakatime.com/badge/user/0adeced3-467a-4cc6-9433-a47106d2d8b7/project/3a7c6ed2-dda6-4368-9a91-e3ac76ecb854)
 Changelog: https://app.whatthediff.ai/changelog/zmqLLSO
 
 # sv

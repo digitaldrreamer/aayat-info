@@ -68,43 +68,10 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans],
-				primary: [
-					'Inter Variable',
-					'system-ui',
-					'-apple-system',
-					'BlinkMacSystemFont',
-					'Segoe UI',
-					'Roboto',
-					'sans-serif'
-				],
-				secondary: [
-					'IBM Plex Sans',
-					'system-ui',
-					'-apple-system',
-					'BlinkMacSystemFont',
-					'Segoe UI',
-					'Roboto',
-					'sans-serif'
-				],
-				// Arabic fonts
-				'ar-primary': [
-					'Almarai',
-					'system-ui',
-					'-apple-system',
-					'BlinkMacSystemFont',
-					'Segoe UI',
-					'Roboto',
-					'sans-serif'
-				],
-				'ar-secondary': [
-					'Noto Naskh Arabic Variable',
-					'system-ui',
-					'-apple-system',
-					'BlinkMacSystemFont',
-					'Segoe UI',
-					'Roboto',
-					'sans-serif'
-				]
+				'primary': ['Roboto', 'sans-serif'],
+				'secondary': ['Montserrat', 'sans-serif'],
+				'ar-secondary': ['KFGQPC BAZZI Uthmanic Script Regular', 'serif'],
+				'ar-primary': ['KFGQPC DOORI Uthmanic Script Regular', 'serif']
 			},
 			keyframes: {
 				"accordion-down": {

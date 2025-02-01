@@ -74,42 +74,107 @@
   }
 }
 
-/* inter-latin-wght-normal */
+/* Make everything unselectable by default */
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow selection for specific elements like inputs and textareas */
+input,
+textarea,
+[contenteditable] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 @font-face {
-  font-family: 'Inter Variable';
+  font-family: 'Almarai Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.ttf') format('truetype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.eot') format('embedded-opentype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Al_Mushaf Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.ttf') format('truetype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.eot') format('embedded-opentype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KFGQPC BAZZI Uthmanic Script Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KFGQPC DOORI Uthmanic Script Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.ttf') format('truetype');
+  font-display: swap;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for all elements */
+html, body {
+  overflow: hidden;
+}
+
+/* Optional: If you want to allow scrolling but just hide the scrollbar */
+html, body {
+  overflow: auto; /* or overflow-y: scroll; for vertical scroll only */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Edge */
+}
+
+/* montserrat-latin-wght-normal */
+@font-face {
+  font-family: 'Montserrat Variable';
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/montserrat:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 
-/* ibm-plex-sans-latin-400-normal */
+/* roboto-latin-400-normal */
 @font-face {
-  font-family: 'IBM Plex Sans';
+  font-family: 'Roboto';
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-sans@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/ibm-plex-sans@latest/latin-400-normal.woff) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-}
-
-/* almarai-latin-400-normal */
-@font-face {
-  font-family: 'Almarai';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/almarai@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/almarai@latest/latin-400-normal.woff) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-}
-
-/* noto-naskh-arabic-latin-wght-normal */
-@font-face {
-  font-family: 'Noto Naskh Arabic Variable';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400 700;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/noto-naskh-arabic:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-400-normal.woff) format('woff');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
