@@ -7,6 +7,7 @@
 	import * as Card from "$lib/components/ui/card/index"
 	import { Progress } from "$lib/components/ui/progress"
 	import { Separator } from "$lib/components/ui/separator/index.js"
+	import { goto } from '$app/navigation'
 
 	/** @type {number} */
 	let progressValue = $state(0)
@@ -94,6 +95,7 @@
 	 */
 	function navigate(path) {
 		// Navigation implementation
+		goto(path)
 	}
 
 	onMount(() => {

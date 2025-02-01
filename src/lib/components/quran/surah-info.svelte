@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button"
 	import { BookOpen, Brain, History } from "lucide-svelte"
+	import AudioControlGroup from '$lib/components/quran/audio-control-group.svelte'
 
 	interface SurahInfo {
 		chapter: number;
@@ -12,7 +13,7 @@
 		versesCount: number;
 	}
 
-	let { info, onRead = $bindable(() => {}), onMurajah = $bindable(() => {}), onHistory = $bindable(() => {}) } = $props<{ info: SurahInfo, onRead?: () => void, onMurajah?: () => void, onHistory?: () => void }>()
+	let { info, audioUrls = [], onRead = $bindable(() => {}), onMurajah = $bindable(() => {}), onHistory = $bindable(() => {}) } = $props<{ info: SurahInfo, onRead?: () => void, onMurajah?: () => void, onHistory?: () => void }>()
 </script>
 
 <div class="flex min-h-[calc(100vh-4rem)] items-center justify-center mx-auto">
@@ -49,6 +50,7 @@
 				History
 			</Button>
 		</div>
+		<AudioControlGroup {audioUrls} />
 	</div>
 </div>
 

@@ -120,7 +120,7 @@
 		size="icon"
 		class="fixed z-50 w-16 h-16 rounded-full shadow-lg"
 		style="transform: translate3d({$position.x}px, {$position.y}px, 0)"
-		on:click={maximize}
+		onclick={maximize}
 	>
 		<Music class="h-6 w-6" />
 		{#if isPlaying}
@@ -152,7 +152,7 @@
 					variant="ghost"
 					size="icon"
 					class="shrink-0"
-					on:click={minimize}
+					onclick={minimize}
 					aria-label="Minimize player"
 				>
 					<Minimize2 class="h-5 w-5" />
@@ -169,7 +169,7 @@
 								variant="ghost"
 								size="icon"
 								disabled={currentVerseIndex === 0 || isLoading}
-								on:click={previousVerse}
+								onclick={previousVerse}
 								aria-label="Previous verse"
 							>
 								<SkipBack class="h-6 w-6" />
@@ -178,7 +178,7 @@
 							<Button
 								size="icon"
 								class="h-16 w-16"
-								on:click={togglePlay}
+								onclick={togglePlay}
 								disabled={isLoading}
 								aria-label={isPlaying ? "Pause" : "Play"}
 							>
@@ -195,7 +195,7 @@
 								variant="ghost"
 								size="icon"
 								disabled={currentVerseIndex === verses.length - 1 || isLoading}
-								on:click={nextVerse}
+								onclick={nextVerse}
 								aria-label="Next verse"
 							>
 								<SkipForward class="h-6 w-6" />

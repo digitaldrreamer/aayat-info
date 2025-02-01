@@ -68,8 +68,8 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans],
-				'a': ['Almarai Regular', 'sans-serif'],
-				'b': ['Al_Mushaf Regular', 'sans-serif'],
+				'primary': ['Roboto', 'sans-serif'],
+				'secondary': ['Montserrat', 'sans-serif'],
 				'ar-secondary': ['KFGQPC BAZZI Uthmanic Script Regular', 'serif'],
 				'ar-primary': ['KFGQPC DOORI Uthmanic Script Regular', 'serif']
 			},

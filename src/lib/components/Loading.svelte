@@ -1,6 +1,5 @@
 <script>
     import { fade, scale } from 'svelte/transition';
-    import { Loader2 } from 'lucide-svelte';
 
     let { message = "Loading..." } = $props()
 </script>
@@ -32,23 +31,10 @@
             <div class="flex flex-col items-center text-center space-y-4">
                 <div class="relative">
                     <!-- Primary spinner -->
-                    <Loader2
-                            class="w-8 h-8 text-primary-600 dark:text-primary-400 animate-spin"
+                    <img src="/loader.svg"
+                            class="w-8 h-8"
+                         alt="loading animation"
                     />
-
-                    <!-- Background spinner for effect -->
-                    <div class="absolute inset-0 w-8 h-8">
-                        <svg class="w-full h-full text-primary-600/20 dark:text-primary-400/20" viewBox="0 0 24 24">
-                            <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="4"
-                            />
-                        </svg>
-                    </div>
                 </div>
 
                 <div class="space-y-2">
