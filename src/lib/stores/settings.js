@@ -6,12 +6,15 @@ export const user = persisted('preferences', {
     history: {
         search: [],
         usage: []
-    }
+    },
     bookmarks: [],
     settings: {
         reciter: "",
         tafsir: "",
-        quran: [],
+        quran: {
+            en: "eng-yusufaliorig",
+            ar: "ara-kingfahadquranc"
+        },
     },
     pinned: []
 })

@@ -67,7 +67,11 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: [...fontFamily.sans],
+				'a': ['Almarai Regular', 'sans-serif'],
+				'b': ['Al_Mushaf Regular', 'sans-serif'],
+				'ar-secondary': ['KFGQPC BAZZI Uthmanic Script Regular', 'serif'],
+				'ar-primary': ['KFGQPC DOORI Uthmanic Script Regular', 'serif']
 			},
 			keyframes: {
 				"accordion-down": {

@@ -73,3 +73,88 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Make everything unselectable by default */
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow selection for specific elements like inputs and textareas */
+input,
+textarea,
+[contenteditable] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+@font-face {
+  font-family: 'Almarai Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.ttf') format('truetype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.eot') format('embedded-opentype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almarai-regular-full.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Al_Mushaf Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.ttf') format('truetype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.eot') format('embedded-opentype'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/almushaf.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KFGQPC BAZZI Uthmanic Script Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/bazzi-v7-full.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KFGQPC DOORI Uthmanic Script Regular';
+  src: url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/fawazahmed0/quran-api@1/fonts/doori-v8-full.ttf') format('truetype');
+  font-display: swap;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for all elements */
+html, body {
+  overflow: hidden;
+}
+
+/* Optional: If you want to allow scrolling but just hide the scrollbar */
+html, body {
+  overflow: auto; /* or overflow-y: scroll; for vertical scroll only */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Edge */
+}
