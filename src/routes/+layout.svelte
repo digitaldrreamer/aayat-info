@@ -272,7 +272,6 @@
 				});
 			})
 			.catch(e => toast.error(e?.message))
-			.finally(() => toast.info(`${hadiths.length}`)); // Fix: Use .length instead of .count
 
 	})
 </script>

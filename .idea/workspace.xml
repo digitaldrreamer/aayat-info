@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="fix: double bismillah audio fatiha">
-      <change afterPath="$PROJECT_DIR$/src/routes/api/reflow/transcribe/+server.js" afterDir="false" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="removed useless toast">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +43,11 @@
         <option value="audio-control-group" />
         <option value="load-hadith-on-view" />
         <option value="+page" />
+        <option value="QuizPage" />
+        <option value="ResultsCard" />
+        <option value="start/+page" />
         <option value="JavaScript File" />
+        <option value="dev-notice/+page" />
       </list>
     </option>
   </component>
@@ -90,7 +93,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#4 on creating-ui",
+    "git-widget-placeholder": "#6 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -108,6 +111,7 @@
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\quiz" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\surah" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\juz" />
@@ -202,7 +206,39 @@
       <option name="project" value="LOCAL" />
       <updated>1738432029239</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="reflow endpoint">
+      <option name="closed" value="true" />
+      <created>1738433381505</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1738433381505</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added logger">
+      <option name="closed" value="true" />
+      <created>1738433543249</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1738433543249</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state">
+      <option name="closed" value="true" />
+      <created>1738446570844</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446570844</updated>
+    </task>
+    <task id="LOCAL-00013" summary="removed useless toast">
+      <option name="closed" value="true" />
+      <created>1738446586405</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446586406</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +253,10 @@
     <MESSAGE value="changed url to production" />
     <MESSAGE value="typo in api endpoint" />
     <MESSAGE value="fix: double bismillah audio fatiha" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: double bismillah audio fatiha" />
+    <MESSAGE value="reflow endpoint" />
+    <MESSAGE value="added logger" />
+    <MESSAGE value="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state" />
+    <MESSAGE value="removed useless toast" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed useless toast" />
   </component>
 </project>
