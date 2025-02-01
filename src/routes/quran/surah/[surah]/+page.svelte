@@ -55,7 +55,7 @@
                     revelation: surah.data.revelation,
                     versesCount: surah.data.versesCount
                 }}
-										 audioUrls={[getReciterBasmalah(surah.data.verses[0].audioUrl), ...surah.data.verses.map(v => v.audioUrl)]}
+										 audioUrls={surah.data.verses[0]?.chapter !== 1 ? [getReciterBasmalah(surah.data.verses[0].audioUrl), ...surah.data.verses.map(v => v.audioUrl)] : [...surah.data.verses.map(v => v.audioUrl)]}
 										 onRead={() => {
                     document.getElementById('reader').scrollTo({
                     behavior: 'smooth'
