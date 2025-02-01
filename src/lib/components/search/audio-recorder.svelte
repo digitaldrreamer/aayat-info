@@ -152,7 +152,7 @@
         formData.append('audio', file); // 'audio' is the key, and 'file' is the audio file
 
         console.log(formData)
-        const req = await fetch('http://localhost:5175/api/v1/ai', {
+        const req = await fetch('https://api/aayah.info/api/v1/ai', {
             method: 'POST',
             body: formData,  // Send the FormData containing the file
         });
