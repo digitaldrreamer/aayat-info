@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="added logger">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/quiz/QuizPage.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/quiz/ResultsCard.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/share.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/dev-notice/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/dua/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/dua/[dua]/+page.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/quran/quiz/+page.svelte" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/quran/quiz/start/+page.svelte" afterDir="false" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="removed useless toast">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/stores/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/stores/settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/dua/[dua]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/dua/[dua]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/surah/[surah]/+page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/surah/[surah]/+page.server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +222,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738433543249</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state">
+      <option name="closed" value="true" />
+      <created>1738446570844</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446570844</updated>
+    </task>
+    <task id="LOCAL-00013" summary="removed useless toast">
+      <option name="closed" value="true" />
+      <created>1738446586405</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446586406</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +255,8 @@
     <MESSAGE value="fix: double bismillah audio fatiha" />
     <MESSAGE value="reflow endpoint" />
     <MESSAGE value="added logger" />
-    <option name="LAST_COMMIT_MESSAGE" value="added logger" />
+    <MESSAGE value="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state" />
+    <MESSAGE value="removed useless toast" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed useless toast" />
   </component>
 </project>
