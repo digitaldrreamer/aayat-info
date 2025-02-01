@@ -12,6 +12,7 @@
       <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.svelte" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +73,7 @@
   "associatedIndex": 7
 }]]></component>
   <component name="ProjectId" id="2sOwy53FTIzZUMjNapnExdBTG3p" />
+
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="2" id="Remove" />
