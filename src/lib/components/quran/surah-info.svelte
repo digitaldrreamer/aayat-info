@@ -41,9 +41,9 @@
 				<BookOpen class="h-4 w-4" />
 				Read
 			</Button>
-			<Button variant="outline" class="gap-2" onclick={onMurajah}>
+			<Button variant="outline" class="gap-2"  onclick={() => goto('/quran/quiz')}>
 				<Brain class="h-4 w-4" />
-				Start Murajah
+				Murajah Test
 			</Button>
 			<Button variant="ghost" class="gap-2" onclick={onHistory}>
 				<History class="h-4 w-4" />

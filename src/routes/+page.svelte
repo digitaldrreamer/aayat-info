@@ -1,18 +1,24 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { fly, scale } from 'svelte/transition'
-	import { quintOut } from 'svelte/easing'
+	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
 	import { Book, Mic, BookOpen, Brain, Calendar, BookMarked, BookText, Trophy, Flame, Star } from 'lucide-svelte'
 	import { Button } from "$lib/components/ui/button"
 	import * as Card from "$lib/components/ui/card/index"
 	import { Progress } from "$lib/components/ui/progress"
 	import { Separator } from "$lib/components/ui/separator/index.js"
 	import { goto } from '$app/navigation'
+	import { toast } from 'svelte-sonner'
+	import {user} from '$lib/stores/settings' ;
 
 	/** @type {number} */
 	let progressValue = $state(0)
 	/** @type {number} */
 	let streakCount = $state(0)
+
+	let open = $state(false)
+
+	let tafsir = $state(false)
 
 	/** @type {Array<{title: string, description: string, icon: any, href: string}>} */
 	const readActions = [
@@ -48,19 +54,21 @@
 			title: "AI Recitation",
 			description: "Practice recitation with AI assistance",
 			icon: Mic,
-			href: "/ai/recite"
+			href: "/ai/recite",
+			disabled: true
 		},
 		{
 			title: "Murajah Tracker",
 			description: "Track your memorization progress",
 			icon: Calendar,
-			href: "/murajah"
+			href: "/murajah",
+			disabled: true
 		},
 		{
-			title: "AI Assistant",
-			description: "Get help understanding Islamic texts",
+			title: "Test Yourself",
+			description: "Test you Murajah",
 			icon: Brain,
-			href: "/ai/assist"
+				href: "/quran/quiz"
 		}
 	]
 
@@ -71,7 +79,7 @@
 			value: 7,
 			total: 30,
 			icon: Flame,
-			color: "bg-orange-500"
+			color: "bg-orange-500",
 		},
 		{
 			title: "Pages Read",
@@ -121,7 +129,7 @@
 				>
 					<button
 						class="w-full h-full p-6 text-left"
-						onclick={() => navigate(action.href)}
+						onclick={() => action.title === "Tafsir" ? tafsir = true : navigate(action.href)}
 					>
 						<div class="flex items-start gap-4">
 							<div class="rounded-lg bg-primary/5 p-2 ring-1 ring-primary/10">
@@ -155,12 +163,20 @@
 		</h2>
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{#each aiActions as action, i}
+
 				<Card.Root
 					class="group relative overflow-hidden transition-all hover:bg-secondary hover:scale-[1.02]"
 				>
+					{#if action.disabled}
+					<!-- Ribbon -->
+					<div class="absolute top-0 right-0 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+						Currently unavailable
+					</div>
+						{/if}
+
 					<button
 						class="w-full h-full p-6 text-left"
-						onclick={() => navigate(action.href)}
+						onclick={() => action.disabled ? toast.error("Currently unavailable") : navigate(action.href)}
 					>
 						<div class="flex items-start gap-4">
 							<div class="rounded-lg bg-primary/5 p-2 ring-1 ring-primary/10">
@@ -180,12 +196,16 @@
 						</div>
 					</button>
 				</Card.Root>
+
 			{/each}
 		</div>
 	</section>
 
 	<!-- Achievements Section -->
-	<section class="pt-4" in:fly={{ y: 20, duration: 500, delay: 800 }}>
+	<section class="relative pt-4" in:fly={{ y: 20, duration: 500, delay: 800 }}>
+		<div class="absolute rounded-md w-full flex justify-center items-center h-full bg-gray-600/10 backdrop-blur-sm z-10">
+	<p class="font-primary font-bold font-neutral-100">Achievements and Rankings currently unavailable</p>
+		</div>
 		<Card.Root class="overflow-hidden">
 			<Card.Header>
 				<Card.Title class="flex items-center gap-2">
@@ -235,4 +255,37 @@
 		</Card.Root>
 	</section>
 </div>
+
+<AlertDialog.Root open={!$user.shownModal}>
+	<AlertDialog.Content>
+		<AlertDialog.Header>
+			<AlertDialog.Title>Some Features Unavailable</AlertDialog.Title>
+			<AlertDialog.Description>
+				Some features are currently unavailable. Please bear with us at the moment and read this short note on why things are like this.
+			</AlertDialog.Description>
+		</AlertDialog.Header>
+		<AlertDialog.Footer>
+			<AlertDialog.Cancel onclick={() => ($user.shownModal = true)}>Cancel</AlertDialog.Cancel>
+			<AlertDialog.Action onclick={() => {
+				$user.shownModal = true
+				goto('/dev-notice')
+			}}>Read Post</AlertDialog.Action>
+		</AlertDialog.Footer>
+	</AlertDialog.Content>
+</AlertDialog.Root>
+
+<AlertDialog.Root bind:open={tafsir}>
+	<AlertDialog.Content>
+		<AlertDialog.Header>
+			<AlertDialog.Title>Tafsir has been moved!</AlertDialog.Title>
+			<AlertDialog.Description>
+				After some deliberation and feedback, the decision was made to move Tafsir completely to Quran. When you click on a verse, you see the associated Tafsir automatically!
+			</AlertDialog.Description>
+		</AlertDialog.Header>
+		<AlertDialog.Footer>
+			<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+			<AlertDialog.Action>Okay</AlertDialog.Action>
+		</AlertDialog.Footer>
+	</AlertDialog.Content>
+</AlertDialog.Root>
 
