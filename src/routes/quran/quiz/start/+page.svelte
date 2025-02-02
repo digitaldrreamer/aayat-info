@@ -6,6 +6,7 @@
 	import { Progress } from '$lib/components/ui/progress/index';
 	import { Pause, Volume2 } from 'lucide-svelte';
 	import ResultsCard from '$lib/components/quiz/ResultsCard.svelte';
+	import { user } from '$lib/stores/settings'
 
 	const surahs = [
 		{ number: 1, name: "Al-Fatihah", arabicName: "الفاتحة", versesCount: 7 },
@@ -144,17 +145,24 @@
 		return copy;
 	}
 
-	function generateQuestion(): QuizQuestion {
-		const chosenSurah = surahs[Math.floor(Math.random() * surahs.length)];
+	function generateQuestion(range = [1, 114]): QuizQuestion {
+		const [min, max] = range;
+		const filteredSurahs = surahs.filter(s => s.number >= min && s.number <= max);
+
+		if (filteredSurahs.length === 0) {
+			throw new Error("No surahs available in the given range");
+		}
+
+		const chosenSurah = filteredSurahs[Math.floor(Math.random() * filteredSurahs.length)];
 		const verse = Math.floor(Math.random() * chosenSurah.versesCount) + 1;
 		const surahStr = chosenSurah.number.toString().padStart(3, '0');
 		const verseStr = verse.toString().padStart(3, '0');
 		const audio_url = `https://everyayah.com/data/Alafasy_128kbps/${surahStr}${verseStr}.mp3`;
 
 		const correctAnswer = chosenSurah.name;
-		const distractors = shuffle(surahs.filter((s) => s.name !== correctAnswer))
+		const distractors = shuffle(surahs.filter(s => s.name !== correctAnswer && s.number >= min && s.number <= max))
 			.slice(0, 3)
-			.map((s) => s.name);
+			.map(s => s.name);
 
 		return {
 			audio_url,
@@ -164,9 +172,10 @@
 	}
 
 	// ----- Quiz Configuration -----
-	const NUM_QUESTIONS = 5;
-	function generateQuiz(): QuizQuestion[] {
-		return Array.from({ length: NUM_QUESTIONS }, generateQuestion);
+	const NUM_QUESTIONS = ($user.quiz.questions && typeof $user.quiz.questions === "number" && $user.quiz.questions > 0 && $user.quiz.questions < 999) ? $user.quiz.questions : 10;
+
+	function generateQuiz(range: [number, number]): QuizQuestion[] {
+		return Array.from({ length: NUM_QUESTIONS }, () => generateQuestion(range));
 	}
 
 
@@ -223,7 +232,7 @@
 
 	// ----- Lifecycle -----
 	onMount(() => {
-		quizData = generateQuiz();
+		quizData = generateQuiz([($user.quiz.from && typeof $user.quiz.from === "number" && $user.quiz.from > 0 && $user.quiz.from < 115) ? $user.quiz.from : 1, ($user.quiz.to && typeof $user.quiz.to === "number" && $user.quiz.to > 0 && $user.quiz.to < 115) ? $user.quiz.to : 114 ]);
 		isLoading = false;
 		return () => cleanupAudio();
 	});

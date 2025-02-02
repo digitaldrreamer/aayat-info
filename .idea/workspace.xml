@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="removed useless toast">
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="changed logo">
+      <change afterPath="$PROJECT_DIR$/src/routes/pitch/+page.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/separator/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/separator/separator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/separator.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/stores/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/stores/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/quran/quiz/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/quiz/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/quran/quiz/start/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/quiz/start/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +56,7 @@
         <option value="start/+page" />
         <option value="JavaScript File" />
         <option value="dev-notice/+page" />
+        <option value="pitch/+page" />
       </list>
     </option>
   </component>
@@ -60,22 +69,22 @@
     &quot;assignee&quot;: &quot;digitaldrreamer&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/digitaldrreamer/aayat-info",
-    "accountId": "73bc7285-6d0b-4f4e-82b5-a1dc3877f16e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/digitaldrreamer/aayat-info&quot;,
+    &quot;accountId&quot;: &quot;73bc7285-6d0b-4f4e-82b5-a1dc3877f16e&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "digitaldrreamer",
-    "repository": "aayat-info"
+    &quot;owner&quot;: &quot;digitaldrreamer&quot;,
+    &quot;repository&quot;: &quot;aayat-info&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -88,24 +97,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#6 on creating-ui",
-    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;creating-ui&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -133,6 +142,9 @@
       <option name="presentableId" value="Default" />
       <updated>1738340186021</updated>
       <workItem from="1738340190525" duration="46940000" />
+      <workItem from="1738446755190" duration="621000" />
+      <workItem from="1738484711813" duration="125000" />
+      <workItem from="1738514332049" duration="5441000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -238,7 +250,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738446586406</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added alert-dialog">
+      <option name="closed" value="true" />
+      <created>1738446782823</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446782823</updated>
+    </task>
+    <task id="LOCAL-00015" summary="changed logo">
+      <option name="closed" value="true" />
+      <created>1738447124173</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1738447124173</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +285,8 @@
     <MESSAGE value="added logger" />
     <MESSAGE value="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state" />
     <MESSAGE value="removed useless toast" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed useless toast" />
+    <MESSAGE value="added alert-dialog" />
+    <MESSAGE value="changed logo" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed logo" />
   </component>
 </project>

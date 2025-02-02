@@ -1,101 +1,100 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { fly, scale } from 'svelte/transition'
+	import { onMount } from 'svelte';
+	import { fly, scale } from 'svelte/transition';
+	import { AudioLines, Book, BookMarked, BookOpen, Brain, Calendar, Flame, Mic, Star, Trophy } from 'lucide-svelte';
+	import { Progress } from '$lib/components/ui/progress';
+	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
+	import { user } from '$lib/stores/settings';
 	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
-	import { Book, Mic, BookOpen, Brain, Calendar, BookMarked, BookText, Trophy, Flame, Star } from 'lucide-svelte'
 	import { Button } from "$lib/components/ui/button"
 	import * as Card from "$lib/components/ui/card/index"
-	import { Progress } from "$lib/components/ui/progress"
-	import { Separator } from "$lib/components/ui/separator/index.js"
-	import { goto } from '$app/navigation'
-	import { toast } from 'svelte-sonner'
-	import {user} from '$lib/stores/settings' ;
 
 	/** @type {number} */
-	let progressValue = $state(0)
+	let progressValue = $state(0);
 	/** @type {number} */
-	let streakCount = $state(0)
+	let streakCount = $state(0);
 
-	let open = $state(false)
 
-	let tafsir = $state(false)
+	let tafsir = $state(false);
 
 	/** @type {Array<{title: string, description: string, icon: any, href: string}>} */
 	const readActions = [
 		{
-			title: "Quran",
-			description: "Read and study the Holy Quran",
+			title: 'Quran',
+			description: 'Read and study the Holy Quran',
 			icon: Book,
-			href: "/quran"
+			href: '/quran'
 		},
 		{
-			title: "Hadith",
-			description: "Explore authenticated Hadith collections",
+			title: 'Hadith',
+			description: 'Explore authenticated Hadith collections',
 			icon: BookOpen,
-			href: "/hadith"
+			href: '/hadith'
 		},
 		{
-			title: "Tafsir",
-			description: "Deep dive into Quranic interpretation",
-			icon: BookText,
-			href: "/tafsir"
+			title: 'Podcasts',
+			description: 'Audio Podcasts from Mufti Menk',
+			icon: AudioLines,
+			href: '/podcasts'
 		},
 		{
-			title: "Dua",
-			description: "Daily prayers and supplications",
+			title: 'Dua',
+			description: 'Daily prayers and supplications',
 			icon: BookMarked,
-			href: "/dua"
+			href: '/dua'
 		}
-	]
+	];
 
 	/** @type {Array<{title: string, description: string, icon: any, href: string}>} */
 	const aiActions = [
 		{
-			title: "AI Recitation",
-			description: "Practice recitation with AI assistance",
+			title: 'AI Search',
+			description: 'Search with your voice powered by AI',
 			icon: Mic,
-			href: "/ai/recite",
+			href: '/ai/recite',
 			disabled: true
 		},
 		{
-			title: "Murajah Tracker",
-			description: "Track your memorization progress",
+			title: 'Murajah Tracker',
+			description: 'Track your memorization progress',
 			icon: Calendar,
-			href: "/murajah",
+			href: '/murajah',
 			disabled: true
 		},
 		{
-			title: "Test Yourself",
-			description: "Test you Murajah",
+			title: 'Test Yourself',
+			description: 'Test you Murajah',
 			icon: Brain,
-				href: "/quran/quiz"
+			href: '/quran/quiz'
 		}
-	]
+	];
 
 	/** @type {Array<{title: string, value: number, total: number, icon: any, color: string}>} */
 	const achievements = [
 		{
-			title: "Daily Streak",
+			title: 'Daily Streak',
 			value: 7,
 			total: 30,
 			icon: Flame,
-			color: "bg-orange-500",
+			color: 'bg-orange-500'
 		},
 		{
-			title: "Pages Read",
+			title: 'Pages Read',
 			value: 124,
 			total: 604,
 			icon: Book,
-			color: "bg-emerald-500"
+			color: 'bg-emerald-500'
 		},
 		{
-			title: "Memorized",
+			title: 'Memorized',
 			value: 3,
 			total: 30,
 			icon: Star,
-			color: "bg-violet-500"
+			color: 'bg-violet-500'
 		}
-	]
+	];
 
 	/**
 	 * Navigate to a page
@@ -103,14 +102,21 @@
 	 */
 	function navigate(path) {
 		// Navigation implementation
-		goto(path)
+		goto(path);
 	}
+
+	const giveExcuse = () => {
+		toast.error('Currently unavailable');
+		$user.showModal = false;
+	};
 
 	onMount(() => {
 		// Animate progress bars
-		progressValue = 100
-		streakCount = 7
-	})
+		progressValue = 100;
+		streakCount = 7;
+	});
+
+
 </script>
 
 <div class="min-h-[calc(100vh-8rem)] container max-w-2xl mx-auto p-4 space-y-8">
@@ -162,21 +168,21 @@
 			AI Features
 		</h2>
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-			{#each aiActions as action, i}
+			{#each aiActions as action}
 
 				<Card.Root
 					class="group relative overflow-hidden transition-all hover:bg-secondary hover:scale-[1.02]"
 				>
 					{#if action.disabled}
-					<!-- Ribbon -->
-					<div class="absolute top-0 right-0 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
-						Currently unavailable
-					</div>
-						{/if}
+						<!-- Ribbon -->
+						<div class="absolute top-0 right-0 bg-red-700 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+							Currently unavailable
+						</div>
+					{/if}
 
 					<button
 						class="w-full h-full p-6 text-left"
-						onclick={() => action.disabled ? toast.error("Currently unavailable") : navigate(action.href)}
+						onclick={() => action.disabled ? giveExcuse() : navigate(action.href)}
 					>
 						<div class="flex items-start gap-4">
 							<div class="rounded-lg bg-primary/5 p-2 ring-1 ring-primary/10">
@@ -203,8 +209,10 @@
 
 	<!-- Achievements Section -->
 	<section class="relative pt-4" in:fly={{ y: 20, duration: 500, delay: 800 }}>
-		<div class="absolute rounded-md w-full flex justify-center items-center h-full bg-gray-600/10 backdrop-blur-sm z-10">
-	<p class="font-primary font-bold font-neutral-100">Achievements and Rankings currently unavailable</p>
+		<div
+			class="absolute rounded-md w-full flex justify-center items-center h-full bg-neutral-950/40 backdrop-blur-sm z-10">
+			<p class="font-primary text-pretty font-bold drop-shadow-lg text-neutral-100">Achievements and Rankings currently
+				unavailable</p>
 		</div>
 		<Card.Root class="overflow-hidden">
 			<Card.Header>
@@ -224,7 +232,7 @@
 							<div class="flex justify-between">
 								<div class="flex items-center gap-2">
 									<div class={`p-1.5 rounded-full ${color}`}>
-										<svelte:component this={Icon} class="w-4 h-4 text-white" ></svelte:component>
+										<svelte:component this={Icon} class="w-4 h-4 text-white"></svelte:component>
 									</div>
 									<span class="text-sm font-medium">{title}</span>
 								</div>
@@ -255,31 +263,34 @@
 		</Card.Root>
 	</section>
 </div>
-
-<AlertDialog.Root open={!$user.shownModal}>
+<AlertDialog.Root bind:open={$user.showModal}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
 			<AlertDialog.Title>Some Features Unavailable</AlertDialog.Title>
 			<AlertDialog.Description>
-				Some features are currently unavailable. Please bear with us at the moment and read this short note on why things are like this.
+				Some features are currently unavailable. Please bear with us at the moment and read this short note on why
+				things are like this.
 			</AlertDialog.Description>
 		</AlertDialog.Header>
 		<AlertDialog.Footer>
-			<AlertDialog.Cancel onclick={() => ($user.shownModal = true)}>Cancel</AlertDialog.Cancel>
+			<AlertDialog.Cancel onclick={() => ($user.showModal = false)}>Cancel</AlertDialog.Cancel>
 			<AlertDialog.Action onclick={() => {
-				$user.shownModal = true
+				$user.showModal = false
 				goto('/dev-notice')
-			}}>Read Post</AlertDialog.Action>
+			}}>Read Post
+			</AlertDialog.Action>
 		</AlertDialog.Footer>
 	</AlertDialog.Content>
 </AlertDialog.Root>
+
 
 <AlertDialog.Root bind:open={tafsir}>
 	<AlertDialog.Content>
 		<AlertDialog.Header>
 			<AlertDialog.Title>Tafsir has been moved!</AlertDialog.Title>
 			<AlertDialog.Description>
-				After some deliberation and feedback, the decision was made to move Tafsir completely to Quran. When you click on a verse, you see the associated Tafsir automatically!
+				After some deliberation and feedback, the decision was made to move Tafsir completely to Quran. When you click
+				on a verse, you see the associated Tafsir automatically!
 			</AlertDialog.Description>
 		</AlertDialog.Header>
 		<AlertDialog.Footer>
