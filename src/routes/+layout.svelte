@@ -435,9 +435,9 @@
 				<Button title="Developer Notice" variant="ghost" onclick={() => (goto('/dev-notice'))} size="icon">
 					<CircleHelp class="size-5" />
 				</Button>
-				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">
-					<Settings class="size-5" />
-				</Button>
+<!--				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">-->
+<!--					<Settings class="size-5" />-->
+<!--				</Button>-->
 			</div>
 		</div>
 	</header>

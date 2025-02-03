@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="added components">
-      <change afterPath="$PROJECT_DIR$/src/routes/api/v1/hadith/[book]/section/[section]/+server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/quran/load-hadith-on-view.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/quran/load-hadith-on-view.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +152,7 @@
       <workItem from="1738340190525" duration="46940000" />
       <workItem from="1738446755190" duration="621000" />
       <workItem from="1738484711813" duration="125000" />
-      <workItem from="1738514332049" duration="25118000" />
+      <workItem from="1738514332049" duration="25476000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -297,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738539740329</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths">
+      <option name="closed" value="true" />
+      <created>1738544752180</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1738544752181</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +321,7 @@
     <MESSAGE value="changed logo" />
     <MESSAGE value="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page" />
     <MESSAGE value="added components" />
-    <option name="LAST_COMMIT_MESSAGE" value="added components" />
+    <MESSAGE value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
   </component>
 </project>
