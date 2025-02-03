@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="removed useless toast">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,8 +44,14 @@
         <option value="QuizPage" />
         <option value="ResultsCard" />
         <option value="start/+page" />
-        <option value="JavaScript File" />
         <option value="dev-notice/+page" />
+        <option value="pitch/+page" />
+        <option value="settings/+page" />
+        <option value="podcasts/+page" />
+        <option value="FloatingPlayer" />
+        <option value="InfoModal" />
+        <option value="DownloadModal" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -60,22 +64,22 @@
     &quot;assignee&quot;: &quot;digitaldrreamer&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/digitaldrreamer/aayat-info",
-    "accountId": "73bc7285-6d0b-4f4e-82b5-a1dc3877f16e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/digitaldrreamer/aayat-info&quot;,
+    &quot;accountId&quot;: &quot;73bc7285-6d0b-4f4e-82b5-a1dc3877f16e&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "digitaldrreamer",
-    "repository": "aayat-info"
+    &quot;owner&quot;: &quot;digitaldrreamer&quot;,
+    &quot;repository&quot;: &quot;aayat-info&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -93,7 +97,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#6 on creating-ui",
+    "git-widget-placeholder": "#9 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -117,6 +121,19 @@
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\juz" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <myKeys>
+      <visibility group="ChatGPT - EasyCode" flag="true" />
+      <visibility group="Grunt" flag="true" />
+      <visibility group="Gulp" flag="true" />
+      <visibility group="HTTP Requests" flag="true" />
+      <visibility group="Node.js" flag="true" />
+      <visibility group="Recent projects" flag="true" />
+      <visibility group="Run configurations" flag="true" />
+      <visibility group="npm" flag="true" />
+      <visibility group="yarn" flag="true" />
+    </myKeys>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -133,6 +150,9 @@
       <option name="presentableId" value="Default" />
       <updated>1738340186021</updated>
       <workItem from="1738340190525" duration="46940000" />
+      <workItem from="1738446755190" duration="621000" />
+      <workItem from="1738484711813" duration="125000" />
+      <workItem from="1738514332049" duration="25476000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -238,7 +258,47 @@
       <option name="project" value="LOCAL" />
       <updated>1738446586406</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added alert-dialog">
+      <option name="closed" value="true" />
+      <created>1738446782823</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1738446782823</updated>
+    </task>
+    <task id="LOCAL-00015" summary="changed logo">
+      <option name="closed" value="true" />
+      <created>1738447124173</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1738447124173</updated>
+    </task>
+    <task id="LOCAL-00016" summary="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page">
+      <option name="closed" value="true" />
+      <created>1738539711189</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1738539711189</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added components">
+      <option name="closed" value="true" />
+      <created>1738539740329</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1738539740329</updated>
+    </task>
+    <task id="LOCAL-00018" summary="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths">
+      <option name="closed" value="true" />
+      <created>1738544752180</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1738544752181</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +317,11 @@
     <MESSAGE value="added logger" />
     <MESSAGE value="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state" />
     <MESSAGE value="removed useless toast" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed useless toast" />
+    <MESSAGE value="added alert-dialog" />
+    <MESSAGE value="changed logo" />
+    <MESSAGE value="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page" />
+    <MESSAGE value="added components" />
+    <MESSAGE value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
   </component>
 </project>

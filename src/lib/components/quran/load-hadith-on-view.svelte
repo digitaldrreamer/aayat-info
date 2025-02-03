@@ -6,16 +6,20 @@
 	import * as Card from "$lib/components/ui/card";
 	import { toast } from 'svelte-sonner';
 	import { page } from '$app/state'
+	import share from '$lib/share.js';
 	let { number, bookTitle, sectionTitle } = $props()
 
 
 	function shareHadith(hadith) {
 		// Implement share functionality
-		console.log(`Sharing hadith ${hadith.hadithnumber}`);
-		toast({
-			title: "Hadith Shared",
-			description: `Hadith ${hadith.hadithnumber} has been shared.`,
-		});
+		share({
+			title: `Hadith ${hadith.hadithnumber}`,
+			text: `${hadith.text.en}\n\n${hadith.text.ar}\n\nReference: ${bookTitle}, ${sectionTitle}, Hadith ${hadith.hadithnumber}`,
+			url: window.location.href
+		})
+			.then(() => {
+				toast.success("Hadith copied!")
+			})
 	}
 
 	function copyHadith(hadith) {
@@ -61,7 +65,7 @@
 
 	// Your function to run when element is visible
 	async function handleVisible () {
-		const req = await fetch(`https://api.aayah.info/api/v1/hadith/${page.params.book}/section/${page.params.section}/${number}`)
+		const req = await fetch(`/api/v1/hadith/${page.params.book}/section/${page.params.chapter}/${number}`)
 		const res =  await req.json()
 		hadith = res?.data?.hadith.hadiths[0]
 	}

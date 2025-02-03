@@ -17,5 +17,10 @@ export const user = persisted('preferences', {
         },
     },
     pinned: [],
-    shownModal: false
+    showModal: true,
+    quiz: {
+        from: 1,
+        to: 114,
+        questions: 10
+    }
 })

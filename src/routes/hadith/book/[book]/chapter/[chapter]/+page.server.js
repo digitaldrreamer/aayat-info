@@ -1,27 +1,53 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ params, fetch }) => {
-	const infoReq = await fetch(`https://api.aayah.info/api/v1/hadith/${params.book}`)
-	const infoRes = await infoReq.json()
-	const req = await fetch(
-		`https://api.aayah.info/api/v1/hadith/${params.book}/section/${params.chapter}`
-	);
-	const res = await req.json();
-	// eslint-disable-next-line no-unsafe-optional-chaining
-	const { from, to } = res?.data?.section;
-	if (!from || !to) redirect(302, '/');
+	try {
+		// Fetch book info
+		const infoReq = await fetch(`https://api.aayah.info/api/v1/hadith/${params.book}`);
+		const infoRes = await infoReq.json();
 
-	function range(start, end) {
-		// Ensure that start is less than or equal to end
-		if (start > end) [start, end] = [end, start];
+		// Get book data using the correct path
+		const bookData = infoRes?.data?.book;
+		if (!bookData) {
+			console.error('Book data not found in the response');
+			throw redirect(302, '/');
+		}
 
-		// Create an array with the desired length and fill it with consecutive numbers
-		return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+		// Fetch section info
+		const req = await fetch(`https://api.aayah.info/api/v1/hadith/${params.book}/section/${params.chapter}`);
+		const res = await req.json();
+
+		// Get section data
+		const sectionData = res?.data?.section;
+		if (!sectionData) {
+			console.error(`No section data found for section ${params.chapter}`);
+			throw redirect(302, '/');
+		}
+
+		// Use the section's from/to values directly from the section response
+		const { from, to } = sectionData;
+		if (!from || !to) {
+			console.error(`Invalid hadith range: ${from} - ${to}`);
+			throw redirect(302, '/');
+		}
+
+		// Get section details from the book data if available
+		const sectionDetails = bookData.section_details?.[params.chapter];
+
+		// Generate number range
+		function range(start, end) {
+			if (start > end) [start, end] = [end, start];
+			return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+		}
+
+		return {
+			numbers: range(from, to),
+			sectionTitle: sectionDetails?.title ?? `Section ${params.chapter}`,
+			bookTitle: bookData.name ?? "Unknown Book"
+		};
+
+	} catch (error) {
+		console.error("Load function error:", error);
+		throw redirect(302, '/');
 	}
-
-	return {
-		numbers: range(from, to),
-		sectionTitle: infoRes.data.book.sections[params.chapter],
-		bookTitle: infoRes.data.book.name
-	};
 };
