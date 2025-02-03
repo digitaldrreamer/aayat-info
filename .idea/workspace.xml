@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(images): Updated image formats to webp in `vite.config.js`">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/dev-notice/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/dev-notice/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/pitch/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/pitch/+page.svelte" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="♻️ refactor(text): Updated copy in `/dev-notice` and fixed `/pitch` iframe sizing" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -160,7 +156,7 @@
       <workItem from="1738514332049" duration="25545000" />
       <workItem from="1738545015089" duration="17000" />
       <workItem from="1738556389677" duration="9156000" />
-      <workItem from="1738583728056" duration="527000" />
+      <workItem from="1738583728056" duration="714000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -370,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738583567640</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="♻️ refactor(text): Updated copy in `/dev-notice` and fixed `/pitch` iframe sizing">
+      <option name="closed" value="true" />
+      <created>1738584435392</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1738584435392</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,6 +405,7 @@
     <MESSAGE value="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching" />
     <MESSAGE value="✨ feat(podcasts): Implemented podcast fetching and UI&#10;&#10;✨ feat(images): Compressed Images" />
     <MESSAGE value="✨ feat(images): Updated image formats to webp in `vite.config.js`" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(images): Updated image formats to webp in `vite.config.js`" />
+    <MESSAGE value="♻️ refactor(text): Updated copy in `/dev-notice` and fixed `/pitch` iframe sizing" />
+    <option name="LAST_COMMIT_MESSAGE" value="♻️ refactor(text): Updated copy in `/dev-notice` and fixed `/pitch` iframe sizing" />
   </component>
 </project>
