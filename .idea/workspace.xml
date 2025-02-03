@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets">
-      <change afterPath="$PROJECT_DIR$/dev-dist/sw.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev-dist/workbox-54d0af47.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/Loading.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/Loading.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,7 +155,7 @@
       <workItem from="1738484711813" duration="125000" />
       <workItem from="1738514332049" duration="25545000" />
       <workItem from="1738545015089" duration="17000" />
-      <workItem from="1738556389677" duration="7751000" />
+      <workItem from="1738556389677" duration="8128000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -354,7 +333,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738577575191</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching">
+      <option name="closed" value="true" />
+      <created>1738582584525</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1738582584525</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,6 +369,7 @@
     <MESSAGE value="trying to make pwa" />
     <MESSAGE value="pwa images" />
     <MESSAGE value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
+    <MESSAGE value="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching" />
   </component>
 </project>
