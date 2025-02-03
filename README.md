@@ -1,41 +1,64 @@
 [![wakatime](https://wakatime.com/badge/user/0adeced3-467a-4cc6-9433-a47106d2d8b7/project/3a7c6ed2-dda6-4368-9a91-e3ac76ecb854.svg)](https://wakatime.com/badge/user/0adeced3-467a-4cc6-9433-a47106d2d8b7/project/3a7c6ed2-dda6-4368-9a91-e3ac76ecb854)
 Changelog: https://app.whatthediff.ai/changelog/zmqLLSO
 
-# sv
+# Aayah.info – A Minimalist Muslim Companion 🌙  
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Aayah.info is a clean, distraction-free web app designed to support your Islamic journey. Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in one place.  
 
-## Creating a project
+![Aayah.info Preview](https://i.postimg.cc/SRXkS6vq/1.png)  
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🌟 Features  
+- 📖 **Quran** – Read and listen to the Holy Quran.  
+- 📜 **Hadith** – Easily find and browse Hadith collections.  
+- 🤲 **Duas** – Access a library of authentic supplications.  
+- 🎙️ **Mufti Menk Podcasts** – Stream lectures and motivational talks.  
+- 📝 **Murajah Test** – Strengthen your memorization with interactive quizzes.  
 
-```bash
-# create a new project in the current directory
-npx sv create
+## 🚀 Live Demo  
+🔗 **[Visit Aayah.info](https://aayah.info)**  
 
-# create a new project in my-app
-npx sv create my-app
+## 🛠️ Tech Stack  
+- **Frontend:** SvelteKit, TailwindCSS  , Shadcn-svelte
+- **Backend:** Node.js (if applicable)  
+- **APIs:** Quran.com, Hadith APIs, Podcast feeds  
+
+## 📦 Installation  
+Clone the repository and install dependencies:  
+
+```sh
+git clone https://github.com/digitaldrreamer/aayat-info.git
+cd aayah-info  
+npm install  
 ```
 
-## Developing
+## Backend API
+Backend API repo is at https://github.com/digitaldrreamer/aayah-info-api
+Endpoint is https://api.aayah.info
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+### Development Server  
+```sh
+npm run dev  
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
+### Build for Production  
+```sh
+npm run build  
 ```
 
-You can preview the production build with `npm run preview`.
+## 📜 License  
+This project is licensed under the **MIT License**.  
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## 💌 Contributing  
+Contributions are welcome! If you have ideas, feature requests, or bug reports, feel free to open an issue or submit a pull request.  
+
+## 📞 Contact  
+For any inquiries or support, reach out via:  
+- Email: **digitaldrreamer@gmail.com**  
+- X (Formerly Twitter): [@digitaldrreamer](https://x.com/digitaldrreamer)
+
+  Create an issue for issues. Contributions are also welcome.
+
+---
+
+🔗 **[Aayah.info](https://aayah.info)** – Your minimalist Islamic companion.  
+```
