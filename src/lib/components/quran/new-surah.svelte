@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Card from "$lib/components/ui/card"
+	import * as Card from "$lib/components/ui/card/index"
 	import { cn } from "$lib/utils"
 
 	interface SurahDividerProps {

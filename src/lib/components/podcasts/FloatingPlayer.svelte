@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { Slider } from "$lib/components/ui/slider";
+	import { Button } from "$lib/components/ui/button/index";
+	import { Slider } from "$lib/components/ui/slider/index";
 	import { Play, Pause, SkipBack, SkipForward, Download, Info } from "lucide-svelte";
 
 	let { episode, onprevious, onnext, ondownload, oninfo } = $props()

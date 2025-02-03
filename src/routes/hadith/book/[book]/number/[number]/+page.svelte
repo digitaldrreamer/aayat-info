@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import * as Card from "$lib/components/ui/card";
-	import { Badge } from "$lib/components/ui/badge";
+	import { Button } from "$lib/components/ui/button/index";
+	import * as Card from "$lib/components/ui/card/index";
+	import { Badge } from "$lib/components/ui/badge/index";
 	import { Share, Copy, Book, Bookmark } from "lucide-svelte";
 	import { toast } from 'svelte-sonner';
 

@@ -3,7 +3,7 @@
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Share, Copy, Check, Loader } from 'lucide-svelte';
-	import * as Card from "$lib/components/ui/card";
+	import * as Card from "$lib/components/ui/card/index";
 	import { toast } from 'svelte-sonner';
 	import { page } from '$app/state'
 	import share from '$lib/share.js';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button"
+	import { Button } from "$lib/components/ui/button/index"
 	import { BookOpen, Brain, History } from "lucide-svelte"
 	import AudioControlGroup from '$lib/components/quran/audio-control-group.svelte';
 	import { goto } from '$app/navigation';

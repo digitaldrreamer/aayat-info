@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as AlertDialog from "$lib/components/ui/alert-dialog";
-	import { Button } from "$lib/components/ui/button";
+	import * as AlertDialog from "$lib/components/ui/alert-dialog/index";
+	import { Button } from "$lib/components/ui/button/index";
 
 
 	let { episode = null, show = false, onclose, ondownload } = $props()

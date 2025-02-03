@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ScrollArea } from "$lib/components/ui/scroll-area"
-	import * as Carousel from "$lib/components/ui/carousel"
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index"
+	import * as Carousel from "$lib/components/ui/carousel/index"
 	import Verse from "$lib/components/quran/verse.svelte"
 	import SurahInfo from "$lib/components/quran/surah-info.svelte"
 	import { onMount } from 'svelte';

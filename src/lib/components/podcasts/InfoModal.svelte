@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Dialog from "$lib/components/ui/dialog";
-	import { Button } from "$lib/components/ui/button";
+	import * as Dialog from "$lib/components/ui/dialog/index";
+	import { Button } from "$lib/components/ui/button/index";
 
 	let { show = $bindable(false), onclose } = $props();
 

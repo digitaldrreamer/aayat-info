@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Play, Pause, SkipForward, SkipBack, Square } from "lucide-svelte";
-	import { Button } from "$lib/components/ui/button";
+	import { Button } from "$lib/components/ui/button/index";
 	import { onDestroy } from "svelte";
 
 	let { audioUrls } = $props<{ audioUrls: string[] }>();
