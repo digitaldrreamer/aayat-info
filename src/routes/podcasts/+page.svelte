@@ -103,19 +103,71 @@
 	}
 
 	function playPreviousEpisode(podcasts) {
+		if (!podcasts?.audioList) return;
+
 		const filteredList = getFilteredAudioList(podcasts, searchQuery);
-		const currentIndex = filteredList.findIndex(episode => episode === currentEpisode);
-		if (currentIndex > 0) {
-			currentEpisode = filteredList[currentIndex - 1];
+
+		// If no filtered list, return
+		if (filteredList.length === 0) return;
+
+		// If no current episode, select the last episode
+		if (!currentEpisode) {
+			currentEpisode = filteredList[filteredList.length - 1];
+			return;
 		}
+
+		const currentIndex = filteredList.findIndex(episode =>
+			episode.url === currentEpisode.url
+		);
+
+		// If current episode not found, select the last episode
+		if (currentIndex === -1) {
+			currentEpisode = filteredList[filteredList.length - 1];
+			return;
+		}
+
+		// If current episode is first, wrap around to the last episode
+		if (currentIndex === 0) {
+			currentEpisode = filteredList[filteredList.length - 1];
+			return;
+		}
+
+		// Select and play previous episode
+		currentEpisode = filteredList[currentIndex - 1];
 	}
 
 	function playNextEpisode(podcasts) {
+		if (!podcasts?.audioList) return;
+
 		const filteredList = getFilteredAudioList(podcasts, searchQuery);
-		const currentIndex = filteredList.findIndex(episode => episode === currentEpisode);
-		if (currentIndex < filteredList.length - 1) {
-			currentEpisode = filteredList[currentIndex + 1];
+
+		// If no filtered list, return
+		if (filteredList.length === 0) return;
+
+		// If no current episode, select the first episode
+		if (!currentEpisode) {
+			currentEpisode = filteredList[0];
+			return;
 		}
+
+		const currentIndex = filteredList.findIndex(episode =>
+			episode.url === currentEpisode.url
+		);
+
+		// If current episode not found, select the first episode
+		if (currentIndex === -1) {
+			currentEpisode = filteredList[0];
+			return;
+		}
+
+		// If current episode is last, wrap around to the first episode
+		if (currentIndex === filteredList.length - 1) {
+			currentEpisode = filteredList[0];
+			return;
+		}
+
+		// Select and play next episode
+		currentEpisode = filteredList[currentIndex + 1];
 	}
 
 	function openInfoModal() {
