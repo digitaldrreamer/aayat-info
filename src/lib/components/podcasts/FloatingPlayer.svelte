@@ -31,10 +31,6 @@
 		duration = audio.duration;
 	}
 
-	function seek(event) {
-		const [newTime] = event.detail;
-		audio.currentTime = newTime;
-	}
 
 	function formatTime(seconds) {
 		const minutes = Math.floor(seconds / 60);
@@ -55,7 +51,6 @@
 					min={0}
 					max={duration}
 					step={1}
-					onchange={seek}
 					class="flex-grow"
 				/>
 				<span class="text-sm">{formattedDuration}</span>

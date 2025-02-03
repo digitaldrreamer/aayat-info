@@ -42,7 +42,7 @@
                             id="loading-title"
                             class="text-lg font-semibold text-neutral-900 dark:text-white"
                     >
-                        {message}
+                        {@html message}
                     </h2>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400">
                         Please wait while we process your request

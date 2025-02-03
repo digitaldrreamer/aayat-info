@@ -5,6 +5,7 @@
 	import Verse from "$lib/components/quran/verse.svelte";
 	import Loading from '$lib/components/Loading.svelte';
 	import NewSurah from '$lib/components/quran/new-surah.svelte'
+	import share from '$lib/share.js'
 	import { onDestroy } from 'svelte';
 
 	let { data } = $props()
@@ -39,6 +40,14 @@
 			audio.pause();
 			audioState = 'paused';
 		}
+	}
+
+	function shareHadith () {
+		share({
+			title: `Quran Page ${data.number}`,
+			text: `Quran Page ${data.number}`,
+			url: window.location.href
+		})
 	}
 
 	function destroyAudio() {
@@ -88,7 +97,7 @@
 				{/if}
 
 
-				<Button variant="outline" size="icon">
+				<Button onclick={() => shareHadith(data.page)} variant="outline" size="icon">
 					<Share class="h-4 w-4" />
 				</Button>
 			</div>

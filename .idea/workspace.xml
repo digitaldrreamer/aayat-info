@@ -4,8 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`">
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets">
+      <change afterPath="$PROJECT_DIR$/dev-dist/sw.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev-dist/workbox-54d0af47.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/Loading.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/Loading.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,34 +113,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#9 on creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static\images" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\api\v1\hadith\[book]\section\[section]\[number]" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\quiz" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\surah" />
-      <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\juz" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -157,6 +176,7 @@
       <workItem from="1738484711813" duration="125000" />
       <workItem from="1738514332049" duration="25545000" />
       <workItem from="1738545015089" duration="17000" />
+      <workItem from="1738556389677" duration="7751000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -310,7 +330,31 @@
       <option name="project" value="LOCAL" />
       <updated>1738544912777</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="trying to make pwa">
+      <option name="closed" value="true" />
+      <created>1738576724746</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1738576724746</updated>
+    </task>
+    <task id="LOCAL-00021" summary="pwa images">
+      <option name="closed" value="true" />
+      <created>1738576868591</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1738576868591</updated>
+    </task>
+    <task id="LOCAL-00022" summary="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets">
+      <option name="closed" value="true" />
+      <created>1738577575191</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1738577575191</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +379,9 @@
     <MESSAGE value="added components" />
     <MESSAGE value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
     <MESSAGE value="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`" />
-    <option name="LAST_COMMIT_MESSAGE" value="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`" />
+    <MESSAGE value="trying to make pwa" />
+    <MESSAGE value="pwa images" />
+    <MESSAGE value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
   </component>
 </project>

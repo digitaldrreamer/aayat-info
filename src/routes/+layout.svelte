@@ -478,6 +478,24 @@
 	{@html webManifest}
 	<meta name="theme-color" content="#ffffff"/>
 	<link rel="apple-touch-icon" href="/pwa-192x192.png">
+		<!-- Standard Meta Tags -->
+		<title>Aayah.info – A Minimalist Muslim Companion</title>
+		<meta name="description" content="Aayah.info is a minimalist Muslim companion web app. Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah." />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Open Graph Meta Tags (For Facebook, LinkedIn, etc.) -->
+		<meta property="og:title" content="Aayah.info – A Minimalist Muslim Companion" />
+		<meta property="og:description" content="Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in a clean, minimalist experience." />
+		<meta property="og:image" content="https://i.postimg.cc/SRXkS6vq/1.png" />
+		<meta property="og:url" content="https://aayah.info" />
+		<meta property="og:type" content="website" />
+
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Aayah.info – A Minimalist Muslim Companion" />
+		<meta name="twitter:description" content="Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in a clean, minimalist experience." />
+		<meta name="twitter:image" content="https://i.postimg.cc/SRXkS6vq/1.png" />
+		<meta name="twitter:url" content="https://aayah.info" />
 </svelte:head>
 
 <svelte:document onkeydown={handleKeydown} />
