@@ -18,17 +18,17 @@ export default defineConfig({
 				start_url: '/',
 				icons: [
 					{
-						src: '/pwa-192x192.png',  // Note the leading slash
+						src: '/pwa-192x192.png',
 						sizes: '192x192',
 						type: 'image/png',
 					},
 					{
-						src: '/pwa-512x512.png',  // Note the leading slash
+						src: '/pwa-512x512.png',
 						sizes: '512x512',
 						type: 'image/png',
 					},
 					{
-						src: '/pwa-512x512.png',  // Note the leading slash
+						src: '/pwa-512x512.png',
 						sizes: '512x512',
 						type: 'image/png',
 						purpose: 'any maskable'
@@ -37,8 +37,7 @@ export default defineConfig({
 			},
 			workbox: {
 				globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,webmanifest}'],
-				globIgnores: ['**/node_modules/**/*', '**/sw.js', '**/workbox-*.js'],
-				navigateFallback: '/',
+				navigateFallback: null,
 				cleanupOutdatedCaches: true,
 				runtimeCaching: [
 					{
@@ -54,12 +53,38 @@ export default defineConfig({
 								statuses: [0, 200]
 							}
 						}
+					},
+					{
+						urlPattern: /^https:\/\/[^/]+\/?$/,
+						handler: 'NetworkFirst',
+						options: {
+							cacheName: 'root-cache'
+						}
+					},
+					{
+						urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'images-cache'
+						}
+					},
+					{
+						urlPattern: /\.(?:js|css)$/,
+						handler: 'StaleWhileRevalidate',
+						options: {
+							cacheName: 'assets-cache'
+						}
 					}
 				]
 			},
 			devOptions: {
 				enabled: true,
 				type: 'module'
+			},
+			// Add this to ensure proper fallback
+			kit: {
+				includeVersionFile: true,
+				trailingSlash: 'always'
 			}
 		})
 	]

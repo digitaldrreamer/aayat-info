@@ -15,30 +15,47 @@
 	import * as Menubar from '$lib/components/ui/menubar/index';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
+	import { writable } from 'svelte/store';
 
-	let installPrompt = null;
-	let isInstalled = false;
+	const installPrompt = writable(null);
+	const isInstalled = writable(false);
 
 	const checkInstalled = async () => {
-		if ('standalone' in window.navigator) {
+		if (window.navigator.standalone) {
+			isInstalled.set(true);
+			return;
+		}
+
+		if (window.matchMedia('(display-mode: standalone)').matches) {
+			isInstalled.set(true);
+			return;
+		}
+
+		try {
 			// @ts-ignore
-			isInstalled = window.navigator.standalone;
-		} else if (window.matchMedia('(display-mode: standalone)').matches) {
-			isInstalled = true;
+			const relatedApps = await navigator.getInstalledRelatedApps?.() || [];
+			if (relatedApps.length > 0) {
+				isInstalled.set(true);
+			}
+		} catch (e) {
+			console.log('Could not check for installed related apps:', e);
 		}
 	};
 
 	const handleInstall = async () => {
-		if (!installPrompt) return;
+		const prompt = $installPrompt;
+		if (!prompt) return;
+
 		try {
-			await installPrompt.prompt();
-			const result = await installPrompt.userChoice;
+			await prompt.prompt();
+			const result = await prompt.userChoice;
 			if (result.outcome === 'accepted') {
-				isInstalled = true;
-				installPrompt = null;
+				isInstalled.set(true);
+				installPrompt.set(null);
 			}
+			console.log('Install prompt result:', result);
 		} catch (e) {
-			console.error('Installation failed', e);
+			console.error('Installation failed:', e);
 		}
 	};
 
@@ -48,30 +65,32 @@
 			registerSW({
 				immediate: true,
 				onRegistered(r) {
-					console.log('SW Registered', r);
+					console.log('Service Worker registered:', r);
 				},
 				onRegisterError(error) {
-					console.log('SW registration error', error);
+					console.error('Service Worker registration error:', error);
 				}
 			});
 		}
 
 		await checkInstalled();
 
+		// Log when beforeinstallprompt is captured
 		window.addEventListener('beforeinstallprompt', (e) => {
 			e.preventDefault();
-			installPrompt = e;
-			console.log('Install prompt captured');
+			installPrompt.set(e);
+			console.log('Install prompt event captured');
 		});
 
+		// Log when app is installed
 		window.addEventListener('appinstalled', () => {
-			isInstalled = true;
-			installPrompt = null;
-			console.log('PWA installed');
+			isInstalled.set(true);
+			installPrompt.set(null);
+			console.log('PWA was installed');
 		});
 	});
 
-	const webManifest = $derived(pwaInfo ? pwaInfo.webManifest.linkTag : '');
+	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
 
 
 	function range(start, end) {
@@ -458,6 +477,7 @@
 <svelte:head>
 	{@html webManifest}
 	<meta name="theme-color" content="#ffffff"/>
+	<link rel="apple-touch-icon" href="/pwa-192x192.png">
 </svelte:head>
 
 <svelte:document onkeydown={handleKeydown} />
@@ -505,7 +525,7 @@
 <!--				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">-->
 <!--					<Settings class="size-5" />-->
 <!--				</Button>-->
-				{#if !isInstalled && installPrompt}
+				{#if !$isInstalled && $installPrompt}
 				<Button title="Install Webapp" variant="ghost" onclick={handleInstall} size="icon">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
