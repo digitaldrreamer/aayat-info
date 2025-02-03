@@ -27,6 +27,5 @@
         height: calc(100vh - 56px); /* Ensures the iframe takes up the rest of the screen */
         border: none;
     }
-npm r
 
 </style>
