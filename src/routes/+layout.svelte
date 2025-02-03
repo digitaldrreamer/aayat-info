@@ -5,12 +5,74 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, Brain, CircleHelp, History, Home, Mic, Plus, Search, Settings } from 'lucide-svelte';
+	import { ArrowLeft, Brain, CircleHelp, History, Home, Mic, Plus, Search,
+		// Settings
+	} from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { toast } from 'svelte-sonner';
-	import * as Command from "$lib/components/ui/command/index";
-	import * as Menubar from "$lib/components/ui/menubar/index";
+	import * as Command from '$lib/components/ui/command/index';
+	import * as Menubar from '$lib/components/ui/menubar/index';
+	import { onMount } from 'svelte';
+	import { pwaInfo } from 'virtual:pwa-info';
+
+	let installPrompt = null;
+	let isInstalled = false;
+
+	const checkInstalled = async () => {
+		if ('standalone' in window.navigator) {
+			// @ts-ignore
+			isInstalled = window.navigator.standalone;
+		} else if (window.matchMedia('(display-mode: standalone)').matches) {
+			isInstalled = true;
+		}
+	};
+
+	const handleInstall = async () => {
+		if (!installPrompt) return;
+		try {
+			await installPrompt.prompt();
+			const result = await installPrompt.userChoice;
+			if (result.outcome === 'accepted') {
+				isInstalled = true;
+				installPrompt = null;
+			}
+		} catch (e) {
+			console.error('Installation failed', e);
+		}
+	};
+
+	onMount(async () => {
+		if (pwaInfo) {
+			const { registerSW } = await import('virtual:pwa-register');
+			registerSW({
+				immediate: true,
+				onRegistered(r) {
+					console.log('SW Registered', r);
+				},
+				onRegisterError(error) {
+					console.log('SW registration error', error);
+				}
+			});
+		}
+
+		await checkInstalled();
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+			installPrompt = e;
+			console.log('Install prompt captured');
+		});
+
+		window.addEventListener('appinstalled', () => {
+			isInstalled = true;
+			installPrompt = null;
+			console.log('PWA installed');
+		});
+	});
+
+	const webManifest = $derived(pwaInfo ? pwaInfo.webManifest.linkTag : '');
+
 
 	function range(start, end) {
 		// Ensure that start is less than or equal to end
@@ -393,6 +455,11 @@
 
 </script>
 
+<svelte:head>
+	{@html webManifest}
+	<meta name="theme-color" content="#ffffff"/>
+</svelte:head>
+
 <svelte:document onkeydown={handleKeydown} />
 
 <div class="h-screen bg-background text-foreground font-primary flex flex-col">
@@ -438,6 +505,15 @@
 <!--				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">-->
 <!--					<Settings class="size-5" />-->
 <!--				</Button>-->
+				{#if !isInstalled && installPrompt}
+				<Button title="Install Webapp" variant="ghost" onclick={handleInstall} size="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+									</svg>
+
+								</Button>
+					{/if}
+
 			</div>
 		</div>
 	</header>
