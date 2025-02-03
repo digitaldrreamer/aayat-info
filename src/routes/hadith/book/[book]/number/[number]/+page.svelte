@@ -20,11 +20,15 @@
 	}
 
 	function shareHadith() {
-		// Implement share functionality
-		console.log(`Sharing hadith ${hadith.hadithnumber}`);
-		toast.success("Hadith Shared", {
-			description: `Hadith ${hadith.hadithnumber} has been shared.`,
-		});
+		if (navigator.share) {
+			navigator.share({
+				title: `Hadith ${hadith.hadithnumber}`,
+				text: `${hadith.text.en}\n\n${hadith.text.ar}\n\nReference: ${metadata.name}, ${Object.values(metadata.section)[0]}, Hadith ${hadith.hadithnumber}\nSource: ${window.location.href}`,
+				url: window.location.href
+			});
+		} else {
+			copyHadith()
+		}
 	}
 
 	function viewSection() {

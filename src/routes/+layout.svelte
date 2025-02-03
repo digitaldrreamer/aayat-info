@@ -5,12 +5,93 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, Brain, CircleHelp, History, Home, Mic, Plus, Search, Settings } from 'lucide-svelte';
+	import { ArrowLeft, Brain, CircleHelp, History, Home, Mic, Plus, Search,
+		// Settings
+	} from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { toast } from 'svelte-sonner';
-	import * as Command from "$lib/components/ui/command/index";
-	import * as Menubar from "$lib/components/ui/menubar/index";
+	import * as Command from '$lib/components/ui/command/index';
+	import * as Menubar from '$lib/components/ui/menubar/index';
+	import { onMount } from 'svelte';
+	import { pwaInfo } from 'virtual:pwa-info';
+	import { writable } from 'svelte/store';
+
+	const installPrompt = writable(null);
+	const isInstalled = writable(false);
+
+	const checkInstalled = async () => {
+		if (window.navigator.standalone) {
+			isInstalled.set(true);
+			return;
+		}
+
+		if (window.matchMedia('(display-mode: standalone)').matches) {
+			isInstalled.set(true);
+			return;
+		}
+
+		try {
+			// @ts-ignore
+			const relatedApps = await navigator.getInstalledRelatedApps?.() || [];
+			if (relatedApps.length > 0) {
+				isInstalled.set(true);
+			}
+		} catch (e) {
+			console.log('Could not check for installed related apps:', e);
+		}
+	};
+
+	const handleInstall = async () => {
+		const prompt = $installPrompt;
+		if (!prompt) return;
+
+		try {
+			await prompt.prompt();
+			const result = await prompt.userChoice;
+			if (result.outcome === 'accepted') {
+				isInstalled.set(true);
+				installPrompt.set(null);
+			}
+			console.log('Install prompt result:', result);
+		} catch (e) {
+			console.error('Installation failed:', e);
+		}
+	};
+
+	onMount(async () => {
+		if (pwaInfo) {
+			const { registerSW } = await import('virtual:pwa-register');
+			registerSW({
+				immediate: true,
+				onRegistered(r) {
+					console.log('Service Worker registered:', r);
+				},
+				onRegisterError(error) {
+					console.error('Service Worker registration error:', error);
+				}
+			});
+		}
+
+		await checkInstalled();
+
+		// Log when beforeinstallprompt is captured
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+			installPrompt.set(e);
+			console.log('Install prompt event captured');
+		});
+
+		// Log when app is installed
+		window.addEventListener('appinstalled', () => {
+			isInstalled.set(true);
+			installPrompt.set(null);
+			console.log('PWA was installed');
+		});
+	});
+
+	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
+
 
 	function range(start, end) {
 		// Ensure that start is less than or equal to end
@@ -393,6 +474,30 @@
 
 </script>
 
+<svelte:head>
+	{@html webManifest}
+	<meta name="theme-color" content="#ffffff"/>
+	<link rel="apple-touch-icon" href="/pwa-192x192.png">
+		<!-- Standard Meta Tags -->
+		<title>Aayah.info – A Minimalist Muslim Companion</title>
+		<meta name="description" content="Aayah.info is a minimalist Muslim companion web app. Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah." />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Open Graph Meta Tags (For Facebook, LinkedIn, etc.) -->
+		<meta property="og:title" content="Aayah.info – A Minimalist Muslim Companion" />
+		<meta property="og:description" content="Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in a clean, minimalist experience." />
+		<meta property="og:image" content="https://i.postimg.cc/SRXkS6vq/1.png" />
+		<meta property="og:url" content="https://aayah.info" />
+		<meta property="og:type" content="website" />
+
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Aayah.info – A Minimalist Muslim Companion" />
+		<meta name="twitter:description" content="Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in a clean, minimalist experience." />
+		<meta name="twitter:image" content="https://i.postimg.cc/SRXkS6vq/1.png" />
+		<meta name="twitter:url" content="https://aayah.info" />
+</svelte:head>
+
 <svelte:document onkeydown={handleKeydown} />
 
 <div class="h-screen bg-background text-foreground font-primary flex flex-col">
@@ -438,6 +543,15 @@
 <!--				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">-->
 <!--					<Settings class="size-5" />-->
 <!--				</Button>-->
+				{#if !$isInstalled && $installPrompt}
+				<Button title="Install Webapp" variant="ghost" onclick={handleInstall} size="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+									</svg>
+
+								</Button>
+					{/if}
+
 			</div>
 		</div>
 	</header>

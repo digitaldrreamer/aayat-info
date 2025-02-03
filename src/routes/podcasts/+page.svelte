@@ -8,6 +8,7 @@
 	import FloatingPlayer from '$lib/components/podcasts/FloatingPlayer.svelte';
 	import InfoModal from '$lib/components/podcasts/InfoModal.svelte';
 	import DownloadModal from '$lib/components/podcasts/DownloadModal.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 
 	// Enhanced fuzzy matching with scoring
 	function fuzzyMatch(query, text, threshold = 0.3) {
@@ -78,50 +79,42 @@
 		return dp[m][n];
 	}
 
-
-
-	let { data } = $props()
-	let podcastData = {
-		...data
-	};
-
+	let { data } = $props();
 	let searchQuery = $state("");
-	let filteredAudioList = $state([]);
 	let currentEpisode = $state(null);
 	let showInfoModal = $state(false);
 	let showDownloadModal = $state(false);
 	let currentPage = $state(1);
 	const episodesPerPage = 10;
 
-	$effect(() => {
-		filteredAudioList = podcastData.audioList.filter(audio =>
-			fuzzyMatch(searchQuery, audio.title).match
+	function getFilteredAudioList(podcasts, query) {
+		if (!podcasts?.audioList) return [];
+		return podcasts.audioList.filter(audio =>
+			fuzzyMatch(query, audio.title).match
 		);
-		currentPage = 1; // Reset to first page when search query changes
-	})
+	}
 
-	const paginatedAudioList = $derived(filteredAudioList.slice(
-		(currentPage - 1) * episodesPerPage,
-		currentPage * episodesPerPage
-	));
-
-	const totalPages = $derived(Math.ceil(filteredAudioList.length / episodesPerPage));
+	function normalizeText(text) {
+		return text.toLowerCase().replace(/[^\w\s]/g, '');
+	}
 
 	function playEpisode(episode) {
 		currentEpisode = episode;
 	}
 
-	function playPreviousEpisode() {
-		const currentIndex = filteredAudioList.findIndex(episode => episode === currentEpisode);
+	function playPreviousEpisode(podcasts) {
+		const filteredList = getFilteredAudioList(podcasts, searchQuery);
+		const currentIndex = filteredList.findIndex(episode => episode === currentEpisode);
 		if (currentIndex > 0) {
-			currentEpisode = filteredAudioList[currentIndex - 1];
+			currentEpisode = filteredList[currentIndex - 1];
 		}
 	}
 
-	function playNextEpisode() {
-		const currentIndex = filteredAudioList.findIndex(episode => episode === currentEpisode);
-		if (currentIndex < filteredAudioList.length - 1) {
-			currentEpisode = filteredAudioList[currentIndex + 1];
+	function playNextEpisode(podcasts) {
+		const filteredList = getFilteredAudioList(podcasts, searchQuery);
+		const currentIndex = filteredList.findIndex(episode => episode === currentEpisode);
+		if (currentIndex < filteredList.length - 1) {
+			currentEpisode = filteredList[currentIndex + 1];
 		}
 	}
 
@@ -150,11 +143,7 @@
 		closeDownloadModal();
 	}
 
-	function normalizeText(text) {
-		return text.toLowerCase().replace(/[^\w\s]/g, '');
-	}
-
-	function goToPage(page) {
+	function goToPage(page, totalPages) {
 		if (page >= 1 && page <= totalPages) {
 			currentPage = page;
 		}
@@ -163,87 +152,104 @@
 	function openSeries(series) {
 		window.open(series.link, '_blank');
 	}
-
-
 </script>
 
 <div class="min-h-screen bg-neutral-50 p-8">
 	<div class="max-w-4xl mx-auto space-y-8">
 		<h1 class="text-3xl font-bold text-center">Mufti Menk Podcasts</h1>
 
-		<div class="relative">
-			<Search class="absolute left-2 top-2.5 h-4 w-4 text-neutral-500" />
-			<Input
-				type="text"
-				placeholder="Search episodes"
-				class="pl-8"
-				bind:value={searchQuery}
-			/>
-		</div>
-
-		<ScrollArea class="h-[calc(100vh-24rem)]">
-			<div class="space-y-4">
-				{#each paginatedAudioList as episode}
-					<Card.Root>
-						<Card.Header>
-							<Card.Title>{episode.title}</Card.Title>
-							<Card.Description>{episode.date} | {episode.duration}</Card.Description>
-						</Card.Header>
-						<Card.Footer class="flex justify-between gap-2 mt-4">
-							<Button variant="outline" class="w-full sm:w-auto" onclick={() => playEpisode(episode)}>
-								<Play class="mr-2 h-4 w-4" />
-								<span class="hidden sm:inline">Play</span>
-							</Button>
-							<Button variant="outline" class="w-full sm:w-auto" onclick={() => openDownloadModal(episode)}>
-								<Download class="mr-2 h-4 w-4" />
-								<span class="hidden sm:inline">Download</span>
-							</Button>
-						</Card.Footer>
-					</Card.Root>
-				{/each}
+		{#await data.podcasts}
+			<Loading message="Loading Podcasts data. This might take a while..." />
+		{:then podcasts}
+			<div class="relative">
+				<Search class="absolute left-2 top-2.5 h-4 w-4 text-neutral-500" />
+				<Input
+					type="text"
+					placeholder="Search episodes"
+					class="pl-8"
+					bind:value={searchQuery}
+				/>
 			</div>
-		</ScrollArea>
 
-		<div class="flex justify-center items-center space-x-2">
-			<Button variant="outline" onclick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
-				<ChevronLeft class="h-4 w-4" />
-			</Button>
-			<span>Page {currentPage} of {totalPages}</span>
-			<Button variant="outline" onclick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
-				<ChevronRight class="h-4 w-4" />
-			</Button>
-		</div>
+			{#if podcasts?.audioList}
+				{@const filteredList = getFilteredAudioList(podcasts, searchQuery)}
+				{@const totalPages = Math.ceil(filteredList.length / episodesPerPage)}
+				{@const paginatedList = filteredList.slice(
+					(currentPage - 1) * episodesPerPage,
+					currentPage * episodesPerPage
+				)}
 
-		<div class="mt-8">
-			<Carousel.Root class="w-full py-4">
-				<h2 class="text-2xl font-bold mb-4 text-center">Series</h2>
-				<Carousel.Content>
-					{#each podcastData.seriesList as series, i}
-						<Carousel.Item class="w-full md:basis-1/2 lg:basis-1/3 p-2">
-							<Card.Root class="h-full">
-								<Card.Header class="p-6">
-									<Card.Title class="text-center">{series.title}</Card.Title>
+				<ScrollArea class="h-[calc(100vh-24rem)]">
+					<div class="space-y-4">
+						{#each paginatedList as episode}
+							<Card.Root>
+								<Card.Header>
+									<Card.Title>{episode.title}</Card.Title>
+									<Card.Description>{episode.date} | {episode.duration}</Card.Description>
 								</Card.Header>
-								<Card.Footer class="p-4">
-									<Button variant="outline" class="w-full" onclick={() => openSeries(series)}>
-										View Series
+								<Card.Footer class="flex justify-between gap-2 mt-4">
+									<Button variant="outline" class="w-full sm:w-auto" onclick={() => playEpisode(episode)}>
+										<Play class="mr-2 h-4 w-4" />
+										<span class="hidden sm:inline">Play</span>
+									</Button>
+									<Button variant="outline" class="w-full sm:w-auto" onclick={() => openDownloadModal(episode)}>
+										<Download class="mr-2 h-4 w-4" />
+										<span class="hidden sm:inline">Download</span>
 									</Button>
 								</Card.Footer>
 							</Card.Root>
-						</Carousel.Item>
-					{/each}
-				</Carousel.Content>
-				<div class="flex justify-center w-full gap-2 pt-4">
-					<Carousel.Previous />
-					<Carousel.Next />
-				</div>
-			</Carousel.Root>
-		</div>
+						{/each}
+					</div>
+				</ScrollArea>
 
-		<p class="text-sm text-neutral-500 text-center">
-			Disclaimer: Audio content is scraped daily from MuslimCentral (https://muslimcentral.com/audio/mufti-menk/).
-			All content belongs to their respective owners.
-		</p>
+				<div class="flex justify-center items-center space-x-2">
+					<Button variant="outline" onclick={() => goToPage(currentPage - 1, totalPages)} disabled={currentPage === 1}>
+						<ChevronLeft class="h-4 w-4" />
+					</Button>
+					<span>Page {currentPage} of {totalPages}</span>
+					<Button variant="outline" onclick={() => goToPage(currentPage + 1, totalPages)} disabled={currentPage === totalPages}>
+						<ChevronRight class="h-4 w-4" />
+					</Button>
+				</div>
+			{/if}
+
+			{#if podcasts?.seriesList}
+				<div class="mt-8">
+					<Carousel.Root class="w-full py-4">
+						<h2 class="text-2xl font-bold mb-4 text-center">Series</h2>
+						<Carousel.Content>
+							{#each podcasts.seriesList as series}
+								<Carousel.Item class="w-full md:basis-1/2 lg:basis-1/3 p-2">
+									<Card.Root class="h-full">
+										<Card.Header class="p-6">
+											<Card.Title class="text-center">{series.title}</Card.Title>
+										</Card.Header>
+										<Card.Footer class="p-4">
+											<Button variant="outline" class="w-full" onclick={() => openSeries(series)}>
+												View Series
+											</Button>
+										</Card.Footer>
+									</Card.Root>
+								</Carousel.Item>
+							{/each}
+						</Carousel.Content>
+						<div class="flex justify-center w-full gap-2 pt-4">
+							<Carousel.Previous />
+							<Carousel.Next />
+						</div>
+					</Carousel.Root>
+				</div>
+			{/if}
+
+			<p class="text-sm text-neutral-500 text-center">
+				Disclaimer: Audio content is scraped daily from MuslimCentral (https://muslimcentral.com/audio/mufti-menk/).
+				All content belongs to their respective owners.
+			</p>
+		{:catch error}
+			<div class="text-center text-red-500">
+				Error loading podcasts: {error.message}
+			</div>
+		{/await}
 	</div>
 
 	{#if currentEpisode}
@@ -251,8 +257,8 @@
 			episode={currentEpisode}
 			oninfo={openInfoModal}
 			ondownload={openDownloadModal}
-			onprevious={playPreviousEpisode}
-			onnext={playNextEpisode}
+			onprevious={() => playPreviousEpisode(data.podcasts)}
+			onnext={() => playNextEpisode(data.podcasts)}
 		/>
 	{/if}
 
@@ -264,4 +270,3 @@
 		ondownload={downloadEpisode}
 	/>
 </div>
-
