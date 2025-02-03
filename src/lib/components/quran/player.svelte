@@ -3,11 +3,11 @@
 	import { tweened } from 'svelte/motion'
 	import { fade, scale } from 'svelte/transition'
 	import { quintOut } from 'svelte/easing'
-	import * as Dialog from "$lib/components/ui/dialog"
-	import { Button } from "$lib/components/ui/button"
-	import { Skeleton } from "$lib/components/ui/skeleton"
-	import { Progress } from "$lib/components/ui/progress"
-	import { ScrollArea } from "$lib/components/ui/scroll-area"
+	import * as Dialog from "$lib/components/ui/dialog/index"
+	import { Button } from "$lib/components/ui/button/index"
+	import { Skeleton } from "$lib/components/ui/skeleton/index"
+	import { Progress } from "$lib/components/ui/progress/index"
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index"
 	import {
 		ChevronDown,
 		Play,

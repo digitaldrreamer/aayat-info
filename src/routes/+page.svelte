@@ -8,8 +8,8 @@
 	import { toast } from 'svelte-sonner';
 	import { user } from '$lib/stores/settings';
 	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
-	import { Button } from "$lib/components/ui/button"
-	import * as Card from "$lib/components/ui/card/index"
+	import { Button } from "$lib/components/ui/button/index.js"
+	import * as Card from "$lib/components/ui/card/index.js"
 
 	/** @type {number} */
 	let progressValue = $state(0);

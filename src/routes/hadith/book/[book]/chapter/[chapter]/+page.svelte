@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ScrollArea } from "$lib/components/ui/scroll-area";
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index";
 	import LoadHadithOnView from '$lib/components/quran/load-hadith-on-view.svelte'
 	import { page } from '$app/state'
 

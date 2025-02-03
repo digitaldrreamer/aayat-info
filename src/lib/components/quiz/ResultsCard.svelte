@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import * as Card from "$lib/components/ui/card";
+	import { Button } from "$lib/components/ui/button/index";
+	import * as Card from "$lib/components/ui/card/index";
 	import { Save, RotateCcw } from "lucide-svelte";
 	import { fade } from 'svelte/transition';
 	import { goto } from '$app/navigation';

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { ScrollArea } from "$lib/components/ui/scroll-area";
-	import { Button } from "$lib/components/ui/button";
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index";
+	import { Button } from "$lib/components/ui/button/index";
 	import { Play, Share, Pause, Square, Loader } from 'lucide-svelte';
 	import Verse from "$lib/components/quran/verse.svelte";
 	import Loading from '$lib/components/Loading.svelte';

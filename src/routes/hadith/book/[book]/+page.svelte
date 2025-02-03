@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import * as Card from "$lib/components/ui/card";
-	import { ScrollArea } from "$lib/components/ui/scroll-area";
+	import { Button } from "$lib/components/ui/button/index";
+	import * as Card from "$lib/components/ui/card/index";
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index";
 	import { Book, BookOpen } from "lucide-svelte";
 	import { goto } from '$app/navigation';
 

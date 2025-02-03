@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Card from "$lib/components/ui/card";
-	import { Button } from "$lib/components/ui/button";
-	import { Badge } from "$lib/components/ui/badge";
+	import * as Card from "$lib/components/ui/card/index";
+	import { Button } from "$lib/components/ui/button/index";
+	import { Badge } from "$lib/components/ui/badge/index";
 	import { ArrowLeft, Copy, Volume2 } from "lucide-svelte";
 	import { toast } from 'svelte-sonner';
 

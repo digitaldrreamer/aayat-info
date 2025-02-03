@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { Input } from "$lib/components/ui/input";
-	import * as Card from "$lib/components/ui/card";
-	import * as Tabs from "$lib/components/ui/tabs";
+	import { Button } from "$lib/components/ui/button/index";
+	import { Input } from "$lib/components/ui/input/index";
+	import * as Card from "$lib/components/ui/card/index";
+	import * as Tabs from "$lib/components/ui/tabs/index";
 	import { MicVocal, Search } from 'lucide-svelte';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation'

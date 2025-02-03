@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button";
-	import { Input } from "$lib/components/ui/input";
-	import * as Dialog from "$lib/components/ui/dialog";
-	import { ScrollArea } from "$lib/components/ui/scroll-area";
+	import { Button } from "$lib/components/ui/button/index";
+	import { Input } from "$lib/components/ui/input/index";
+	import * as Dialog from "$lib/components/ui/dialog/index";
+	import { ScrollArea } from "$lib/components/ui/scroll-area/index";
 	import { Search, ArrowLeft, Book } from "lucide-svelte";
-	import { Badge } from "$lib/components/ui/badge";
+	import { Badge } from "$lib/components/ui/badge/index";
 	import { fade } from "svelte/transition";
 	import Loading from '$lib/components/Loading.svelte';
 	import { goto } from '$app/navigation';
