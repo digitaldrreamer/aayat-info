@@ -19,53 +19,53 @@ export default defineConfig({
 				start_url: '/',
 				screenshots: [
 					{
-						src: "/images/1.png",
-						type: "image/png",
+						src: "/images/1.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/2.png",
-						type: "image/png",
+						src: "/images/2.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/3.png",
-						type: "image/png",
+						src: "/images/3.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/4.png",
-						type: "image/png",
+						src: "/images/4.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/5.png",
-						type: "image/png",
+						src: "/images/5.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/6.png",
-						type: "image/png",
+						src: "/images/6.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/7.png",
-						type: "image/png",
+						src: "/images/7.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/8.png",
-						type: "image/png",
+						src: "/images/8.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/9.png",
-						type: "image/png",
+						src: "/images/9.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 					{
-						src: "/images/10.png",
-						type: "image/png",
+						src: "/images/10.webp",
+						type: "image/webp",
 						label: "Info 1"
 					},
 				],
