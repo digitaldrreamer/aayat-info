@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui/button/index";
 	import { Slider } from "$lib/components/ui/slider/index";
-	import { Play, Pause, SkipBack, SkipForward, Download, Info } from "lucide-svelte";
+	import { Play, Pause, Rewind, FastForward, Download, Info } from "lucide-svelte";
 
 	let { episode, onprevious, onnext, ondownload, oninfo } = $props()
 
-
-	let audio = $state();
+	let audio: HTMLAudioElement | null = $state(null);
 	let isPlaying = $state(false);
 	let currentTime = $state(0);
 	let duration = $state(0);
@@ -15,6 +14,8 @@
 	const formattedDuration = $derived(formatTime(duration));
 
 	function togglePlay() {
+		if (!audio) return;
+
 		if (isPlaying) {
 			audio.pause();
 		} else {
@@ -23,20 +24,56 @@
 		isPlaying = !isPlaying;
 	}
 
+	function skipBackward() {
+		if (!audio) return;
+		audio.currentTime = Math.max(0, audio.currentTime - 15);
+	}
+
+	function skipForward() {
+		if (!audio) return;
+		audio.currentTime = Math.min(duration, audio.currentTime + 15);
+	}
+
 	function handleTimeUpdate() {
-		currentTime = audio.currentTime;
+		if (audio) {
+			currentTime = audio.currentTime;
+		}
 	}
 
 	function handleLoadedMetadata() {
-		duration = audio.duration;
+		if (audio) {
+			duration = audio.duration;
+			// Automatically start playing when new episode loads
+			audio.play();
+			isPlaying = true;
+		}
 	}
 
+	function handleEnded() {
+		// Call the next episode function when the current episode ends
+		if (onnext) {
+			onnext();
+		}
+	}
 
-	function formatTime(seconds) {
+	function formatTime(seconds: number) {
 		const minutes = Math.floor(seconds / 60);
 		const remainingSeconds = Math.floor(seconds % 60);
 		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 	}
+
+	// Effect to handle episode changes
+	$effect(() => {
+		if (audio && episode) {
+			try {
+				audio.src = episode.url;
+				audio.load();
+			} catch (error) {
+				console.error('Error loading audio:', error);
+				isPlaying = false;
+			}
+		}
+	});
 </script>
 
 <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 p-2 sm:p-4">
@@ -49,7 +86,7 @@
 				<Slider
 					value={[currentTime]}
 					min={0}
-					max={duration}
+					max={duration || 0}
 					step={1}
 					class="flex-grow"
 				/>
@@ -57,8 +94,8 @@
 			</div>
 		</div>
 		<div class="flex items-center space-x-2 mt-2 sm:mt-0">
-			<Button variant="ghost" size="icon" onclick={onprevious} class="hidden sm:inline-flex">
-				<SkipBack class="h-4 w-4" />
+			<Button variant="ghost" size="icon" onclick={skipBackward} class="sm:inline-flex">
+				<Rewind class="h-4 w-4" />
 			</Button>
 			<Button variant="ghost" size="icon" onclick={togglePlay}>
 				{#if isPlaying}
@@ -67,8 +104,8 @@
 					<Play class="h-4 w-4" />
 				{/if}
 			</Button>
-			<Button variant="ghost" size="icon" onclick={onnext} class="hidden sm:inline-flex">
-				<SkipForward class="h-4 w-4" />
+			<Button variant="ghost" size="icon" onclick={skipForward} class="sm:inline-flex">
+				<FastForward class="h-4 w-4" />
 			</Button>
 			<Button variant="ghost" size="icon" onclick={ondownload}>
 				<Download class="h-4 w-4" />
@@ -83,6 +120,6 @@
 		src={episode.url}
 		ontimeupdate={handleTimeUpdate}
 		onloadedmetadata={handleLoadedMetadata}
+		onended={handleEnded}
 	></audio>
 </div>
-

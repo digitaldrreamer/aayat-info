@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="♻️ refactor: Updated component imports to use index files">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat: Integrated Sentry for error tracking&#10;&#10;Alternatively:&#10;&#10;🐛 fix: Added Sentry error tracking to `vite.config.js`&#10;&#10;Alternatively:&#10;&#10;chore: Set up Sentry in `vite.config.js`">
+      <change afterPath="$PROJECT_DIR$/src/hooks.client.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks.server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,24 +101,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -166,7 +166,8 @@
       <workItem from="1738545015089" duration="17000" />
       <workItem from="1738556389677" duration="9156000" />
       <workItem from="1738583728056" duration="714000" />
-      <workItem from="1738586064786" duration="1268000" />
+      <workItem from="1738586064786" duration="2710000" />
+      <workItem from="1738603692692" duration="3458000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -408,14 +409,21 @@
       <option name="project" value="LOCAL" />
       <updated>1738586661025</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="✨ feat(sentry): Integrated Sentry">
+      <option name="closed" value="true" />
+      <created>1738587514231</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1738587514231</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(quran): Add Quran functionality&#10;&#10;This commit introduces several new features related to the Quran:&#10;&#10;Added Card, Progress, and Separator components for improved UI.&#10;&#10;Implemented a Quran player for audio playback.&#10;&#10;Created a dedicated Quran surah page for viewing individual surahs.&#10;&#10;Updated the overall layout and home page design.&#10;&#10;Added new tabs for easier navigation (Surah, Juz, Page)&#10;&#10;Added Juz and Page views.&#10;&#10;Added Basic search functionality&#10;&#10;Added loading screen with custom animation.&#10;&#10;Added Bismillah image to surah view&#10;&#10;Added audio controls&#10;&#10;Implemented basic copy and share functionality for verses.&#10;&#10;Added Hadith Section with book and chapter views.&#10;&#10;Added loading screens for Hadith and Quran pages.&#10;&#10;Improved error handling." />
     <MESSAGE value="fixed build" />
     <MESSAGE value="changed url to production" />
     <MESSAGE value="typo in api endpoint" />
@@ -440,6 +448,7 @@
     <MESSAGE value="♻️ refactor(pitch): Removed stray &quot;npm r&quot; in `/pitch` and updated IDEA metadata" />
     <MESSAGE value="♻️ refactor(`src/routes/pitch/+page.svelte`): Removed stray text and updated IDEA metadata" />
     <MESSAGE value="♻️ refactor: Updated component imports to use index files" />
-    <option name="LAST_COMMIT_MESSAGE" value="♻️ refactor: Updated component imports to use index files" />
+    <MESSAGE value="✨ feat(sentry): Integrated Sentry" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(sentry): Integrated Sentry" />
   </component>
 </project>
