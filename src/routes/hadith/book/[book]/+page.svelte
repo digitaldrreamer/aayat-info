@@ -6,21 +6,36 @@
 	import { goto } from '$app/navigation';
 
 	// Mock data for demonstration
-	let { data: book } = $props()
+	let { data: book } = $props();
 
+	// Function to count sections properly
 	function getSectionCount(book) {
-		return Object.values(book.sections).filter(section => section !== "").length;
+		if (book?.sections) {
+			return Object.values(book.sections).filter(section => section !== "").length;
+		}
+
+		if (book?.section_details) {
+			return Object.values(book.section_details)
+				.filter(section => section?.hadithnumber_first && section.hadithnumber_first !== 0)
+				.length;
+		}
+
+		return 0;
 	}
 
 	function readSection(sectionId) {
-		// Implement navigation to the specific section
 		console.log(`Reading section ${sectionId}`);
 	}
 
 	function readAll() {
-		// Implement navigation to read all sections
 		console.log("Reading all sections");
 	}
+
+	const sections = book.sections
+		? Object.entries(book.sections).filter(([_, name]) => name !== "")
+		: Object.entries(book.section_details || {})
+			.filter(([_, details]) => details.hadithnumber_first !== 0)
+			.map(([id, details], index) => [id, `Section ${index + 1}`]); // Generate section names
 </script>
 
 <div class="min-h-screen bg-neutral-50 p-8">
@@ -40,24 +55,24 @@
 
 		<ScrollArea class="h-[calc(100vh-12rem)]">
 			<div class="grid gap-6">
-				{#each Object.entries(book.sections).filter(([_, name]) => name !== "") as [id, name], index}
+				{#each sections as [id, name], index}
 					<Card.Root>
 						<Card.Header>
 							<Card.Title class="flex justify-between items-center">
 								<span>{index + 1}. {name}</span>
 								<span class="text-sm font-normal text-neutral-500">
-                  {book.section_details[id].hadithnumber_last - book.section_details[id].hadithnumber_first + 1} Hadiths
+                  {book.section_details?.[id]?.hadithnumber_last - book.section_details?.[id]?.hadithnumber_first + 1 || 0} Hadiths
                 </span>
 							</Card.Title>
 						</Card.Header>
 						<Card.Content>
 							<p class="text-neutral-600">
-								Hadiths {book.section_details[id].hadithnumber_first} - {book.section_details[id].hadithnumber_last}
+								Hadiths {book.section_details?.[id]?.hadithnumber_first || "?"} - {book.section_details?.[id]?.hadithnumber_last || "?"}
 							</p>
 						</Card.Content>
 						<Card.Footer>
 							<Button onclick={() => {
-								goto(window.location.pathname + '/chapter/' + id)
+								goto(window.location.pathname + '/chapter/' + id);
 							}} variant="outline" class="w-full">
 								<Book class="mr-2 h-4 w-4" />
 								Read Section

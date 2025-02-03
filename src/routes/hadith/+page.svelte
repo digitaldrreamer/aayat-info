@@ -42,20 +42,32 @@
 	}
 
 	function getSectionCount(book) {
-		console.log(book)
-		if (!book?.sections && book?.section_details) {
-			return Object.values(book.section_details)
-				.filter(section => section.hadithnumber_first !== 0)
-				.length;
-
+		if (book?.sections) {
+			return Object.values(book.sections).filter(section => typeof section === "string" && section !== "").length;
 		}
-		return Object.values(book.sections).filter(section => section !== "").length;
+
+		if (book?.section_details) {
+			return Object.values(book.section_details)
+				.filter(section => section?.hadithnumber_first && section.hadithnumber_first !== 0)
+				.length;
+		}
+
+		return 0; // Default if no sections exist
 	}
 
-	const filteredSections = $derived(selectedBook ?
-		Object.entries(selectedBook.sections)
-			.filter(([_, name]) => name.toLowerCase().includes(searchTerm.toLowerCase()))
-			.filter(([_, name]) => name !== "") : []);
+
+	const filteredSections = $derived(selectedBook
+		? (selectedBook.sections
+				? Object.entries(selectedBook.sections)
+					.filter(([_, name]) => typeof name === "string" && name.toLowerCase().includes(searchTerm.toLowerCase()))
+					.filter(([_, name]) => name !== "")
+				: Object.entries(selectedBook.section_details || {}) // Handle section_details case
+					.filter(([id, details]) => details.hadithnumber_first !== 0)
+					.map(([id]) => [id, `Section ${id}`]) // Placeholder names if sections are missing
+		)
+		: []
+	);
+
 </script>
 {#await data.books}
 	<Loading message="Loading Hadith Books..." />

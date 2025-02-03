@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="changed logo">
-      <change afterPath="$PROJECT_DIR$/src/routes/pitch/+page.svelte" afterDir="false" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="added components">
+      <change afterPath="$PROJECT_DIR$/src/routes/api/v1/hadith/[book]/section/[section]/+server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/separator/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/ui/separator/separator.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/ui/separator/separator.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/stores/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/stores/settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/quiz/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/quiz/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/quiz/start/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/quiz/start/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/quran/load-hadith-on-view.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/quran/load-hadith-on-view.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/hadith/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +51,14 @@
         <option value="QuizPage" />
         <option value="ResultsCard" />
         <option value="start/+page" />
-        <option value="JavaScript File" />
         <option value="dev-notice/+page" />
         <option value="pitch/+page" />
+        <option value="settings/+page" />
+        <option value="podcasts/+page" />
+        <option value="FloatingPlayer" />
+        <option value="InfoModal" />
+        <option value="DownloadModal" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -97,24 +99,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "#9 on creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -125,6 +127,19 @@
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\surah" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\juz" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <myKeys>
+      <visibility group="ChatGPT - EasyCode" flag="true" />
+      <visibility group="Grunt" flag="true" />
+      <visibility group="Gulp" flag="true" />
+      <visibility group="HTTP Requests" flag="true" />
+      <visibility group="Node.js" flag="true" />
+      <visibility group="Recent projects" flag="true" />
+      <visibility group="Run configurations" flag="true" />
+      <visibility group="npm" flag="true" />
+      <visibility group="yarn" flag="true" />
+    </myKeys>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -144,7 +159,7 @@
       <workItem from="1738340190525" duration="46940000" />
       <workItem from="1738446755190" duration="621000" />
       <workItem from="1738484711813" duration="125000" />
-      <workItem from="1738514332049" duration="5441000" />
+      <workItem from="1738514332049" duration="25118000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -266,7 +281,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738447124173</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page">
+      <option name="closed" value="true" />
+      <created>1738539711189</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1738539711189</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added components">
+      <option name="closed" value="true" />
+      <created>1738539740329</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1738539740329</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +318,8 @@
     <MESSAGE value="removed useless toast" />
     <MESSAGE value="added alert-dialog" />
     <MESSAGE value="changed logo" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed logo" />
+    <MESSAGE value="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page" />
+    <MESSAGE value="added components" />
+    <option name="LAST_COMMIT_MESSAGE" value="added components" />
   </component>
 </project>
