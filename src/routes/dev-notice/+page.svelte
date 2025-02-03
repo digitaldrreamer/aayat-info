@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as Card from "$lib/components/ui/card";
-	import { Button } from "$lib/components/ui/button";
-	import { Separator } from "$lib/components/ui/separator";
+	import * as Card from "$lib/components/ui/card/index";
+	import { Button } from "$lib/components/ui/button/index";
+	import { Separator } from "$lib/components/ui/separator/index";
 	import { AlertTriangle, Clock, Rocket, Heart, Construction, ThumbsUp } from "lucide-svelte";
 
 	function navigateHome() {
@@ -27,7 +27,7 @@
 				<div class="flex items-center space-x-4">
 					<Clock class="h-8 w-8 text-blue-500" />
 					<p>
-						This project was built in a very short time frame - less than 2 days for the backend and less than a day for the frontend. While we're proud of what we've accomplished, there's still a lot more we want to do.
+						This project was built in a very short time frame - 9 hours 45 minutes for the backend and 22 hours 52 minutes for the frontend. A lot of this time was wasted testing OpenAI and Gemini's Speech-To-Text, which eventually was unreliable for Quran Recognition via API. While I'm proud of what has been accomplished, there's still a lot more I want to do.
 					</p>
 				</div>
 
@@ -52,7 +52,7 @@
 				<div class="flex items-center space-x-4">
 					<Rocket class="h-8 w-8 text-purple-500" />
 					<p>
-						Despite these challenges, we've created a source of truth - a quick way for you to check through Quranic verses and listen to reciters. It may not be everything we envisioned, but Alhamdulillah for what we have achieved.
+						Despite these challenges, I've created a source of truth - a quick way for you to check through Quranic verses and listen to reciters. It may not be everything we envisioned, but Alhamdulillah for what we have achieved.
 					</p>
 				</div>
 
@@ -66,7 +66,7 @@
 				<div class="flex items-center space-x-4">
 					<Construction class="h-8 w-8 text-orange-500" />
 					<p>
-						We're actively working on enhancing features like AI recognition, improving the Murajah Tracker, and adding more customization options. Your feedback is invaluable in this process.
+						I hope to eventually work on enhancing features like AI recognition, improving the Murajah Tracker, and adding more customization options. Your feedback is invaluable in this process.
 					</p>
 				</div>
 
