@@ -496,6 +496,8 @@
 		<meta name="twitter:description" content="Find Hadith, read and listen to the Quran, see Duas, stream Mufti Menk podcasts, and test your Murajah—all in a clean, minimalist experience." />
 		<meta name="twitter:image" content="https://i.postimg.cc/SRXkS6vq/1.png" />
 		<meta name="twitter:url" content="https://aayah.info" />
+
+	<script defer src="https://umami-one-omega.vercel.app/script.js" data-website-id="5167e72f-6d85-49d7-ba7f-a4cf09e19490"></script>
 </svelte:head>
 
 <svelte:document onkeydown={handleKeydown} />
