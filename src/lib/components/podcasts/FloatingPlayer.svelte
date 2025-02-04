@@ -5,13 +5,60 @@
 
 	let { episode, onprevious, onnext, ondownload, oninfo } = $props()
 
-	let audio: HTMLAudioElement | null = $state(null);
+	let audio = $state(null);
 	let isPlaying = $state(false);
 	let currentTime = $state(0);
 	let duration = $state(0);
 
 	const formattedCurrentTime = $derived(formatTime(currentTime));
 	const formattedDuration = $derived(formatTime(duration));
+
+	function setMediaSessionMetadata() {
+		if ('mediaSession' in navigator && episode) {
+			navigator.mediaSession.metadata = new MediaMetadata({
+				title: episode.title,
+				artist: "Mufti Menk",
+				artwork: [
+					{
+						src: "https://artwork.muslimcentral.com/mufti-menk-150x150.jpg",
+						sizes: "150x150",
+						type: "image/jpeg"
+					}
+				]
+			});
+
+			// Set up media session action handlers
+			navigator.mediaSession.setActionHandler('play', () => {
+				if (audio) {
+					audio.play();
+					isPlaying = true;
+				}
+			});
+
+			navigator.mediaSession.setActionHandler('pause', () => {
+				if (audio) {
+					audio.pause();
+					isPlaying = false;
+				}
+			});
+
+			navigator.mediaSession.setActionHandler('previoustrack', () => {
+				if (onprevious) onprevious();
+			});
+
+			navigator.mediaSession.setActionHandler('nexttrack', () => {
+				if (onnext) onnext();
+			});
+
+			navigator.mediaSession.setActionHandler('seekbackward', () => {
+				skipBackward();
+			});
+
+			navigator.mediaSession.setActionHandler('seekforward', () => {
+				skipForward();
+			});
+		}
+	}
 
 	function togglePlay() {
 		if (!audio) return;
@@ -37,12 +84,22 @@
 	function handleTimeUpdate() {
 		if (audio) {
 			currentTime = audio.currentTime;
+			// Update media session position state
+			if ('setPositionState' in navigator.mediaSession) {
+				navigator.mediaSession.setPositionState({
+					duration: duration,
+					playbackRate: audio.playbackRate,
+					position: currentTime
+				});
+			}
 		}
 	}
 
 	function handleLoadedMetadata() {
 		if (audio) {
 			duration = audio.duration;
+			// Set metadata when audio is loaded
+			setMediaSessionMetadata();
 			// Automatically start playing when new episode loads
 			audio.play();
 			isPlaying = true;
@@ -68,6 +125,8 @@
 			try {
 				audio.src = episode.url;
 				audio.load();
+				// Update metadata when episode changes
+				setMediaSessionMetadata();
 			} catch (error) {
 				console.error('Error loading audio:', error);
 				isPlaying = false;

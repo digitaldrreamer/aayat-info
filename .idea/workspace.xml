@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat: Integrated Sentry for error tracking&#10;&#10;Alternatively:&#10;&#10;🐛 fix: Added Sentry error tracking to `vite.config.js`&#10;&#10;Alternatively:&#10;&#10;chore: Set up Sentry in `vite.config.js`">
-      <change afterPath="$PROJECT_DIR$/src/hooks.client.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/podcasts/FloatingPlayer.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +100,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "creating-ui",
+    "git-widget-placeholder": "#14 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -167,7 +161,7 @@
       <workItem from="1738556389677" duration="9156000" />
       <workItem from="1738583728056" duration="714000" />
       <workItem from="1738586064786" duration="2710000" />
-      <workItem from="1738603692692" duration="3458000" />
+      <workItem from="1738603692692" duration="4167000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -417,14 +411,21 @@
       <option name="project" value="LOCAL" />
       <updated>1738587514231</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons">
+      <option name="closed" value="true" />
+      <created>1738607815925</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1738607815925</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed build" />
     <MESSAGE value="changed url to production" />
     <MESSAGE value="typo in api endpoint" />
     <MESSAGE value="fix: double bismillah audio fatiha" />
@@ -449,6 +450,7 @@
     <MESSAGE value="♻️ refactor(`src/routes/pitch/+page.svelte`): Removed stray text and updated IDEA metadata" />
     <MESSAGE value="♻️ refactor: Updated component imports to use index files" />
     <MESSAGE value="✨ feat(sentry): Integrated Sentry" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(sentry): Integrated Sentry" />
+    <MESSAGE value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
   </component>
 </project>
