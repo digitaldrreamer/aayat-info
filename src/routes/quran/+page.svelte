@@ -172,19 +172,43 @@
 
 	const pages = range(1, 604)
 
+	const filteredSurahs = $derived(surahs.filter(surah => {
+		const query = searchQuery.toLowerCase().trim();
+		if (!query) return true;
+		return (
+			surah.name.toLowerCase().includes(query) ||
+			surah.arabicName.toLowerCase().includes(query) ||
+			surah.number.toString().includes(query)
+		);
+	}));
+
+	const filteredJuzs = $derived(juzs.filter(juz => {
+		const query = searchQuery.toLowerCase().trim();
+		if (!query) return true;
+		return (
+			juz.number.toString().includes(query) ||
+			juz.name.toLowerCase().includes(query) ||
+			juz.surahs.toLowerCase().includes(query)
+		);
+	}));
+
+	const filteredPages = $derived(pages.filter(page => {
+		const query = searchQuery.trim();
+		if (!query) return true;
+		return page.toString().includes(query);
+	}));
+
 	function handleSearch() {
-		// Implement search functionality
-		console.log(`Searching for: ${searchQuery}`);
 		toast.success("Search", {
 			description: `Searching for "${searchQuery}"`,
 		});
 	}
 
+
 	function playAudio() {
 		// Implement audio playback
-		console.log("Playing audio for search query");
-		toast.success("Audio", {
-			description: "Playing audio for search query",
+		toast.success("Feature Unavailable", {
+			description: "This feature is currently unavailable.",
 		});
 	}
 
@@ -226,7 +250,7 @@
 			</Tabs.List>
 			<Tabs.Content value="surah">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-					{#each surahs as surah}
+					{#each filteredSurahs as surah}
 						<Card.Root class="cursor-pointer pb-4 px-2 hover:bg-neutral-100 transition-colors" onclick={() => openSurah(surah.number)}>
 							<Card.Header>
 								<Card.Title class="flex justify-between">
@@ -241,7 +265,7 @@
 			</Tabs.Content>
 			<Tabs.Content value="juz">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-					{#each juzs as juz}
+					{#each filteredJuzs as juz}
 						<Card.Root class="cursor-pointer hover:bg-neutral-100 transition-colors" onclick={() => openJuz(juz.number)}>
 							<Card.Header>
 								<Card.Title>Juz {juz.number}</Card.Title>
@@ -256,7 +280,7 @@
 			</Tabs.Content>
 			<Tabs.Content value="page">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-					{#each pages as page}
+					{#each filteredPages as page}
 						<Card.Root onclick={() => (goto(`/quran/page/${page}`))} class="flex justify-center items-center py-4 cursor-pointer hover:bg-neutral-100 transition-colors">
 
 									<span>Page {page}</span>

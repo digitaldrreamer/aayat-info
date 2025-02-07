@@ -557,7 +557,7 @@
 	</main>
 
 
-	{#if page.url.pathname !== '/podcasts'}
+	{#if page.url.pathname !== '/podcasts' && !page.url.pathname.startsWith('/quiz') && page.url.pathname !== ('/pitch')}
 	<!-- Mobile Bottom Navigation -->
 	<nav
 		class="md:hidden fixed bottom-4 inset-x-4 h-14 bg-background border rounded-full shadow-lg z-50"
