@@ -6,7 +6,7 @@
 	import { Progress } from '$lib/components/ui/progress/index';
 	import { Pause, Volume2 } from 'lucide-svelte';
 	import ResultsCard from '$lib/components/quiz/ResultsCard.svelte';
-	import { user } from '$lib/stores/settings'
+	import { user } from '$lib/stores/settings';
 
 	const surahs = [
 		{ number: 1, name: "Al-Fatihah", arabicName: "الفاتحة", versesCount: 7 },
@@ -125,15 +125,12 @@
 		{ number: 114, name: "An-Nas", arabicName: "الناس", versesCount: 6 }
 	];
 
-
-	// ----- Type Definitions -----
-	interface QuizQuestion {
-		audio_url: string;
-		correct: string;
-		options: string[];
+	interface QuizResult {
+		question: QuizQuestion;
+		selectedAnswer: string | null;
+		isCorrect: boolean;
 	}
 
-	// ----- Helper Functions -----
 	function shuffle<T>(array: T[]): T[] {
 		const copy = [...array];
 		let currentIndex = copy.length;
@@ -160,7 +157,7 @@
 		const audio_url = `https://everyayah.com/data/Alafasy_128kbps/${surahStr}${verseStr}.mp3`;
 
 		const correctAnswer = chosenSurah.name;
-		const distractors = shuffle(surahs.filter(s => s.name !== correctAnswer && s.number >= min && s.number <= max))
+		const distractors = shuffle(filteredSurahs.filter(s => s.name !== correctAnswer))
 			.slice(0, 3)
 			.map(s => s.name);
 
@@ -171,18 +168,22 @@
 		};
 	}
 
-	// ----- Quiz Configuration -----
-	const NUM_QUESTIONS = ($user.quiz.questions && typeof $user.quiz.questions === "number" && $user.quiz.questions > 0 && $user.quiz.questions < 999) ? $user.quiz.questions : 10;
+	// Validated user settings
+	const NUM_QUESTIONS = ($user.quiz.questions && typeof $user.quiz.questions === "number" &&
+		$user.quiz.questions > 0 && $user.quiz.questions < 999) ? $user.quiz.questions : 10;
+	const FROM_SURAH = (Number($user.quiz.from) && typeof Number($user.quiz.from) === "number" &&
+		Number($user.quiz.from) > 0 && Number($user.quiz.from) < 115) ? Number($user.quiz.from) : 1;
+	const TO_SURAH = (Number($user.quiz.to) && typeof Number($user.quiz.to) === "number" &&
+		Number($user.quiz.to) > 0 && Number($user.quiz.to) < 115) ? Number($user.quiz.to) : 114;
 
-	function generateQuiz(range: [number, number]): QuizQuestion[] {
-		return Array.from({ length: NUM_QUESTIONS }, () => generateQuestion(range));
+	function generateQuiz(): QuizQuestion[] {
+		return Array.from({ length: NUM_QUESTIONS }, () => generateQuestion([FROM_SURAH, TO_SURAH]));
 	}
 
-
-	// ----- Component State -----
+	// Component state
 	let quizData = $state<QuizQuestion[]>([]);
 	let currentQuestion = $state(0);
-	let score = $state(0);
+	let results = $state<QuizResult[]>([]);
 	let selectedAnswer = $state<string | null>(null);
 	let showResults = $state(false);
 	let isLoading = $state(true);
@@ -193,11 +194,9 @@
 		quizData.length > 0 ? (currentQuestion / quizData.length) * 100 : 0
 	);
 
-	// ----- Audio Management -----
 	function createAudioElement(src: string) {
 		cleanupAudio();
 		audioElement = new Audio(src);
-
 		audioElement.addEventListener('play', () => isPlaying = true);
 		audioElement.addEventListener('pause', () => isPlaying = false);
 		audioElement.addEventListener('ended', () => isPlaying = false);
@@ -219,33 +218,25 @@
 		if (!audioElement) {
 			createAudioElement(quizData[currentQuestion].audio_url);
 		}
-
-		if (isPlaying) {
-			audioElement?.pause();
-		} else {
-			audioElement?.play().catch(error => {
-				console.error('Audio playback failed:', error);
-				isPlaying = false;
-			});
-		}
+		isPlaying ? audioElement?.pause() : audioElement?.play().catch(console.error);
 	}
 
-	// ----- Lifecycle -----
 	onMount(() => {
-		quizData = generateQuiz([($user.quiz.from && typeof $user.quiz.from === "number" && $user.quiz.from > 0 && $user.quiz.from < 115) ? $user.quiz.from : 1, ($user.quiz.to && typeof $user.quiz.to === "number" && $user.quiz.to > 0 && $user.quiz.to < 115) ? $user.quiz.to : 114 ]);
+		quizData = generateQuiz();
 		isLoading = false;
-		return () => cleanupAudio();
+		return cleanupAudio;
 	});
 
-	onDestroy(() => cleanupAudio());
+	onDestroy(cleanupAudio);
 
-	// ----- Answer Submission -----
 	function submitAnswer() {
 		cleanupAudio();
-
-		if (selectedAnswer === quizData[currentQuestion].correct) {
-			score++;
-		}
+		const isCorrect = selectedAnswer === quizData[currentQuestion].correct;
+		results = [...results, {
+			question: quizData[currentQuestion],
+			selectedAnswer,
+			isCorrect
+		}];
 
 		if (currentQuestion < quizData.length - 1) {
 			currentQuestion++;
@@ -258,7 +249,7 @@
 
 <div class="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
 	{#if showResults}
-		<ResultsCard {score} totalQuestions={quizData.length} />
+		<ResultsCard {results} totalQuestions={quizData.length} />
 	{:else if isLoading}
 		<div class="text-center">Loading quiz...</div>
 	{:else}
@@ -273,11 +264,9 @@
 					<Progress value={progress} class="w-full" />
 					<Button variant="outline" class="w-full" onclick={toggleAudio}>
 						{#if isPlaying}
-							<Pause class="mr-2 h-5 w-5" />
-							Pause Audio
+							<Pause class="mr-2 h-5 w-5" /> Pause Audio
 						{:else}
-							<Volume2 class="mr-2 h-5 w-5" />
-							Play Audio
+							<Volume2 class="mr-2 h-5 w-5" /> Play Audio
 						{/if}
 					</Button>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">

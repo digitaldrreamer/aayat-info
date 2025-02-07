@@ -1,7 +1,7 @@
 {
 	"name": "aayat-info",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.7.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
@@ -49,6 +49,7 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"cheerio": "^1.0.0",
 		"dexie": "^4.0.11",
+		"lodash": "^4.17.21",
 		"num-to-arabic": "^0.0.3",
 		"sound-visualizer": "^1.4.0",
 		"svelte-persisted-store": "^0.12.0"

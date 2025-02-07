@@ -29,7 +29,7 @@
 		},
 		{
 			title: 'Hadith',
-			description: 'Explore authenticated Hadith collections',
+			description: 'Explore Hadith collections',
 			icon: BookOpen,
 			href: '/hadith'
 		},

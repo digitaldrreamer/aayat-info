@@ -5,6 +5,7 @@
 	import { goto } from '$app/navigation';
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { user } from '$lib/stores/settings'
+	import { toast } from 'svelte-sonner';
 
 	function startQuiz() {
 		// Implement navigation to QuizPage
@@ -127,6 +128,26 @@
 		{ number: 113, name: "Al-Falaq", arabicName: "الفلق", versesCount: 5 },
 		{ number: 114, name: "An-Nas", arabicName: "الناس", versesCount: 6 }
 	];
+
+const checkFromValidity = (value) => {
+	if (Number(value) > Number($user.quiz.to)) {
+		toast.error('Starting surah cannot be greater than ending surah', {
+			duration: 8000,
+			description: "Defaults back to ending surah"
+		})
+		$user.quiz.from = $user.quiz.to
+	}
+}
+
+const checkToValidity = (value) => {
+	if (Number(value) < Number($user.quiz.from)) {
+		toast.error('Ending surah cannot be less than starting surah', {
+			duration: 8000,
+			description: "Defaults back to starting surah"
+		})
+		$user.quiz.to = $user.quiz.from
+	}
+}
 </script>
 
 <div class="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
@@ -141,16 +162,16 @@
 		<Card.Content class="space-y-4">
 			<p class="text-center">Are you ready to challenge yourself with questions about the Quran?</p>
 			<ul class="list-disc list-inside">
-				<li>10 questions</li>
+				<li>{$user.quiz.questions} questions</li>
 				<li>Multiple choice answers</li>
 				<li>Audio clips from the Quran</li>
 				<li>Track your progress</li>
 			</ul>
 
 			<label for="from-surah" class="block text-sm font-medium text-gray-700">From Surah {surahs.find(sur => sur.number === $user.quiz.from)?.name}</label>
-			<Select.Root type="single" bind:value={$user.quiz.from} id="from-surah">
+			<Select.Root type="single" onValueChange={checkFromValidity} bind:value={$user.quiz.from} id="from-surah">
 				<Select.Trigger class="w-full">
-					{surahs.find(sur => sur.number === $user.quiz.from)?.name} {surahs.find(sur => sur.number === $user.quiz.from)?.arabicName}
+					{surahs.find(sur => sur.number === Number($user.quiz.from))?.name} {surahs.find(sur => sur.number === Number($user.quiz.from))?.arabicName}
 				</Select.Trigger>
 				<Select.Content>
 					{#each surahs as surah}
@@ -160,9 +181,9 @@
 			</Select.Root>
 
 			<label for="to-surah" class="block text-sm font-medium text-gray-700">To Surah {surahs.find(sur => sur.number === $user.quiz.to)?.name}</label>
-			<Select.Root type="single" bind:value={$user.quiz.to} id="to-surah">
+			<Select.Root type="single" onValueChange={checkToValidity} bind:value={$user.quiz.to} id="to-surah">
 				<Select.Trigger class="w-full">
-					{surahs.find(sur => sur.number === $user.quiz.to)?.name} {surahs.find(sur => sur.number === $user.quiz.to)?.arabicName}
+					{surahs.find(sur => sur.number === Number($user.quiz.to))?.name} {surahs.find(sur => sur.number === Number($user.quiz.to))?.arabicName}
 				</Select.Trigger>
 				<Select.Content>
 					{#each surahs as surah}

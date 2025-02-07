@@ -33,7 +33,7 @@
 
 <div class="min-h-screen bg-neutral-50 p-8">
 	<div class="max-w-4xl mx-auto space-y-8">
-		<Button variant="ghost" on:click={goBack} class="mb-4">
+		<Button variant="ghost" onclick={goBack} class="mb-4">
 			<ArrowLeft class="mr-2 h-4 w-4" />
 			Back to Duas
 		</Button>
@@ -66,11 +66,11 @@
 				</div>
 			</Card.Content>
 			<Card.Footer class="flex justify-between">
-				<Button variant="outline" on:click={copyDua}>
+				<Button variant="outline" onclick={copyDua}>
 					<Copy class="mr-2 h-4 w-4" />
 					Copy Dua
 				</Button>
-				<Button variant="outline" on:click={playAudio}>
+				<Button variant="outline" onclick={playAudio}>
 					<Volume2 class="mr-2 h-4 w-4" />
 					Play Audio
 				</Button>

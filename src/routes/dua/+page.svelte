@@ -1509,7 +1509,7 @@
 		}
 	]
 
-	const filteredDuas = $state(duas.filter(dua =>
+	const filteredDuas = $derived(duas.filter(dua =>
 		dua.name.toLowerCase().includes(searchQuery.toLowerCase())
 	));
 
