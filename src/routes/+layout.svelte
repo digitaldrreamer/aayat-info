@@ -5,13 +5,9 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, Brain, CircleHelp, History, Home, Mic, Plus, Search,
-		// Settings
-	} from 'lucide-svelte';
+	import { ArrowLeft, CircleHelp, History, Home, Plus } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { toast } from 'svelte-sonner';
-	import * as Command from '$lib/components/ui/command/index';
 	import * as Menubar from '$lib/components/ui/menubar/index';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
@@ -260,9 +256,6 @@
 
 	// Standard booleans for state
 	let open = $state(false);
-	let showBookmarks = $state(false);
-	let showHistory = $state(false);
-	let showVoiceSearch = $state(false);
 	let query = $state('');
 
 	// Utility function to normalize text for searching
@@ -563,129 +556,6 @@
 		{@render children?.()}
 	</main>
 
-	<!-- Command Dialog -->
-	<Command.Dialog bind:open>
-		<Command.Input
-			placeholder="Search Quran, Hadith, Dua and more..."
-			bind:value={query}
-		/>
-
-		<Command.List>
-			{#if !filteredSurahs.total && !filteredJuzs.total && !filteredPages.total}
-				<Command.Empty>No results found.</Command.Empty>
-			{/if}
-
-			{#if filteredSurahs.total}
-				<Command.Group heading={`Surahs (${filteredSurahs.total})`}>
-					{#each filteredSurahs.results as surah}
-						<Command.Item onclick={() => handleSurahClick(surah)}>
-							<div class="flex flex-col">
-								<span class="font-secondary">{surah.name}</span>
-								<span class="font-ar-primary text-sm text-muted-foreground">
-                  {surah.arabicName}
-                </span>
-							</div>
-						</Command.Item>
-					{/each}
-					{#if filteredSurahs.hasMore}
-						<Command.Item class="italic text-muted-foreground">
-							Show more results...
-						</Command.Item>
-					{/if}
-				</Command.Group>
-			{/if}
-
-			{#if filteredJuzs.total}
-				<Command.Group heading={`Juzs (${filteredJuzs.total})`}>
-					{#each filteredJuzs.results as juz}
-						<Command.Item onclick={() => handleJuzClick(juz)}>
-							<div class="flex flex-col">
-								<span class="font-secondary">{juz.name}</span>
-								<span class="text-sm text-muted-foreground">
-                  {juz.surahs}
-                </span>
-							</div>
-						</Command.Item>
-					{/each}
-					{#if filteredJuzs.hasMore}
-						<Command.Item class="italic text-muted-foreground">
-							Show more results...
-						</Command.Item>
-					{/if}
-				</Command.Group>
-			{/if}
-
-			{#if filteredPages.total}
-				<Command.Group heading={`Pages (${filteredPages.total})`}>
-					{#each filteredPages.results as page}
-						<Command.Item onclick={() => handlePageClick(page.number)}>
-							<div class="flex items-center">
-								<span>Page {page.number}</span>
-							</div>
-						</Command.Item>
-					{/each}
-					{#if filteredPages.hasMore}
-						<Command.Item class="italic text-muted-foreground">
-							Show more results...
-						</Command.Item>
-					{/if}
-				</Command.Group>
-			{/if}
-
-			{#if filteredHadiths.total}
-				<Command.Group heading={`Hadiths (${filteredHadiths.total})`}>
-					{#each filteredHadiths.results as hadith}
-						<Command.Item onclick={() => handleHadithClick(hadith)}>
-							<div class="flex items-center">
-								<span>{hadith.label}</span>
-							</div>
-						</Command.Item>
-					{/each}
-					{#if filteredHadiths.hasMore}
-						<Command.Item class="italic text-muted-foreground">
-							Show more results...
-						</Command.Item>
-					{/if}
-				</Command.Group>
-			{/if}
-
-
-			<Command.Separator />
-
-			<Command.Group heading="Actions">
-				<Command.Item onclick={() => (showVoiceSearch = !showVoiceSearch)}>
-					<div class="flex items-center">
-						<Mic class="mr-2 h-4 w-4" />
-						<span>Voice Search (AI)</span>
-					</div>
-				</Command.Item>
-				<Command.Item>
-					<div class="flex items-center">
-						<Search class="mr-2 h-4 w-4" />
-						<span>Advanced Search</span>
-					</div>
-				</Command.Item>
-				<Command.Item onclick={() => (goto('/quran/quiz'))}>
-					<div class="flex items-center">
-						<Brain class="mr-2 h-4 w-4" />
-						<span>Murajah Test</span>
-					</div>
-				</Command.Item>
-				<Command.Item onclick={() => (goto('/podcasts'))}>
-					<div class="flex items-center">
-						<Mic class="mr-2 h-4 w-4" />
-						<span>Podcasts (Mufti Menk)</span>
-					</div>
-				</Command.Item>
-				<Command.Item onclick={() => (goto('/pitch'))}>
-					<div class="flex items-center">
-						<Mic class="mr-2 h-4 w-4" />
-						<span>Pitch</span>
-					</div>
-				</Command.Item>
-			</Command.Group>
-		</Command.List>
-	</Command.Dialog>
 
 	{#if page.url.pathname !== '/podcasts'}
 	<!-- Mobile Bottom Navigation -->
@@ -731,77 +601,64 @@
 		<div class="bg-background/80 backdrop-blur-sm border rounded-lg shadow-lg p-1">
 			<Menubar.Root>
 				<Menubar.Menu>
-					<Menubar.Trigger>Search</Menubar.Trigger>
+					<Menubar.Trigger>Home</Menubar.Trigger>
 					<Menubar.Content>
-						<Menubar.Item onclick={() => open = true}>
-							Quick Search
-							<Menubar.Shortcut>⌘K</Menubar.Shortcut>
+						<Menubar.Item onclick={() => goto('/')}>
+						Go Home
 						</Menubar.Item>
-						<Menubar.Item onclick={() => showVoiceSearch = true}>
-							Voice Search
+						{#if !$isInstalled && $installPrompt}
+						<Menubar.Item onclick={handleInstall}>
+							Install WebApp
 						</Menubar.Item>
-						<Menubar.Separator />
-						<Menubar.Sub>
-							<Menubar.SubTrigger>Recent Searches</Menubar.SubTrigger>
-							<Menubar.SubContent>
-								{#each suggestions as { text, arabic }}
-									<Menubar.Item>
-										<span class="font-secondary">{text}</span>
-										<span class="font-ar-primary text-sm text-muted-foreground ml-2">{arabic}</span>
-									</Menubar.Item>
-								{/each}
-							</Menubar.SubContent>
-						</Menubar.Sub>
+							{/if}
 					</Menubar.Content>
 				</Menubar.Menu>
 
 				<Menubar.Menu>
-					<Menubar.Trigger>View</Menubar.Trigger>
+					<Menubar.Trigger>Links</Menubar.Trigger>
 					<Menubar.Content>
-						<Menubar.CheckboxItem bind:checked={showBookmarks}>
-							Show Bookmarks
-						</Menubar.CheckboxItem>
-						<Menubar.CheckboxItem bind:checked={showHistory}>
-							Show History
-						</Menubar.CheckboxItem>
-						<Menubar.Separator />
-						<Menubar.Item inset onclick={() => window.location.reload()}>
-							Reload
-							<Menubar.Shortcut>⌘R</Menubar.Shortcut>
+						<Menubar.Item inset onclick={() => goto('/quran')}>
+							Qur'an
 						</Menubar.Item>
-						<Menubar.Separator />
-						<Menubar.Item inset>Toggle Dark Mode</Menubar.Item>
+						<Menubar.Item inset onclick={() => goto('/hadith')}>
+							Hadith
+						</Menubar.Item>
+						<Menubar.Item inset onclick={() => goto('/podcasts')}>
+							Podcasts
+						</Menubar.Item>
+						<Menubar.Item inset onclick={() => goto('/dua')}>
+							Dua
+						</Menubar.Item>
+						<Menubar.Item inset onclick={() => goto('/quran/quiz')}>
+							Murajah Quiz
+						</Menubar.Item>
 					</Menubar.Content>
 				</Menubar.Menu>
 
 				<Menubar.Menu>
-					<Menubar.Trigger>Tools</Menubar.Trigger>
+					<Menubar.Trigger>More</Menubar.Trigger>
 					<Menubar.Content>
-						<Menubar.Item onclick={() => goto('/settings/translation')}>
-							Translation Settings
+						<Menubar.Item onclick={() => goto('/pitch')}>
+							Hackathon Pitch
 						</Menubar.Item>
-						<Menubar.Item onclick={() => goto('/settings/reading')}>
-							Reading Preferences
+						<Menubar.Item onclick={() => goto('/dev-notice')}>
+							Dev Note
 						</Menubar.Item>
 						<Menubar.Separator />
 						<Menubar.Sub>
-							<Menubar.SubTrigger>Share</Menubar.SubTrigger>
+							<Menubar.SubTrigger>Open Source</Menubar.SubTrigger>
 							<Menubar.SubContent>
-								<Menubar.Item onclick={() => {
-                  navigator.clipboard.writeText(window.location.href);
-                  toast.success('Link copied to clipboard');
-                }}>
-									Copy Link
+								<Menubar.Item onclick={() => window.open('https://github.com/digitaldrreamer/aayat-info')}>
+									Frontend Repo
 								</Menubar.Item>
-								<Menubar.Item onclick={() => {
-                  window.location.href = `mailto:?subject=Check this out&body=${window.location.href}`;
-                }}>
-									Share via Email
+								<Menubar.Item onclick={() => window.open('https://github.com/digitaldrreamer/aayah-info-api')}>
+									Backend Repo
 								</Menubar.Item>
-								<Menubar.Item onclick={() => {
-                  window.location.href = `sms:?body=${window.location.href}`;
-                }}>
-									Share via Message
+								<Menubar.Item onclick={() => window.open('https://api.aayah.info')}>
+									API Docs
+								</Menubar.Item>
+								<Menubar.Item onclick={() => window.open('https://liktr.ee/digitaldrreamer')}>
+									Contact Dev
 								</Menubar.Item>
 							</Menubar.SubContent>
 						</Menubar.Sub>
@@ -812,7 +669,7 @@
 	</div>
 
 	<!-- Audio Recorder Component -->
-	<AudioRecorder bind:isOpen={showVoiceSearch} />
+<!--	<AudioRecorder bind:isOpen={showVoiceSearch} />-->
 		{/if}
 
 	<!-- Toast Notifications -->
