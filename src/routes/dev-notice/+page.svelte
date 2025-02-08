@@ -81,7 +81,7 @@
 				</p>
 			</Card.Content>
 			<Card.Footer class="flex justify-center">
-				<Button on:click={navigateHome} class="w-full sm:w-auto">
+				<Button onclick={navigateHome} class="w-full sm:w-auto">
 					<ThumbsUp class="mr-2 h-5 w-5" />
 					Continue to App
 				</Button>
