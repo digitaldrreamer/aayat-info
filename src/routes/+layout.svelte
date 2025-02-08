@@ -5,7 +5,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, CircleHelp, History, Home, Plus } from 'lucide-svelte';
+	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Plus } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import * as Menubar from '$lib/components/ui/menubar/index';
@@ -585,10 +585,10 @@
 			<Button
 				variant="ghost"
 				class="flex flex-col items-center gap-1"
-				onclick={() => goto('/history')}
+				onclick={() => goto('/podcasts')}
 			>
-				<History class="w-5 h-5" />
-				<span class="text-xs">History</span>
+				<AudioLines class="w-5 h-5" />
+				<span class="text-xs">Podcasts</span>
 			</Button>
 		</div>
 	</nav>
