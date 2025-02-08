@@ -68,11 +68,11 @@
 			<Card.Footer class="flex justify-between">
 				<Button variant="outline" onclick={copyDua}>
 					<Copy class="mr-2 h-4 w-4" />
-					Copy Dua
+					<span class="hidden sm:inline">Copy Dua</span>
 				</Button>
 				<Button variant="outline" onclick={playAudio}>
 					<Volume2 class="mr-2 h-4 w-4" />
-					Play Audio
+					<span class="hidden sm:inline">Play Audio</span>
 				</Button>
 			</Card.Footer>
 		</Card.Root>
