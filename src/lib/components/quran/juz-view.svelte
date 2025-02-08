@@ -41,7 +41,7 @@
 			<span>{info.versesCount} Verses</span>
 		</div>
 
-		<div class="flex items-center justify-center gap-4">
+		<div class="flex sm:flex-row flex-col items-center justify-center gap-4">
 			<Button variant="default" class="gap-2" onclick={onRead}>
 				<BookOpen class="h-4 w-4" />
 				Read

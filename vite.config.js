@@ -107,7 +107,7 @@ export default defineConfig({
                     "short_name": "See Duas",
                     "description": "See 400+ Duas from verified sources..",
                     "url": "/dua",
-                    "icons": [{ "src": "/icons/play-later.png", "sizes": "192x192" }]
+                    "icons": [{ "src": "/icons/pray.png", "sizes": "192x192" }]
                 },
             ],
             icons: [
