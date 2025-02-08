@@ -3,10 +3,11 @@
 	import { Button } from "$lib/components/ui/button/index";
 	import { Separator } from "$lib/components/ui/separator/index";
 	import { AlertTriangle, Clock, Rocket, Heart, Construction, ThumbsUp } from "lucide-svelte";
+	import { goto } from '$app/navigation';
 
 	function navigateHome() {
 		// Implement navigation to home page
-		console.log("Navigating to home page");
+		goto('/')
 	}
 </script>
 
