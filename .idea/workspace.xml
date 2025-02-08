@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat: Added Umami analytics script to `+layout.svelte`">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,24 +95,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "#18 on creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -169,6 +167,7 @@
       <workItem from="1738663990943" duration="62000" />
       <workItem from="1738665408223" duration="19000" />
       <workItem from="1738844394342" duration="37000" />
+      <workItem from="1738964926099" duration="10708000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -442,19 +441,61 @@
       <option name="project" value="LOCAL" />
       <updated>1738664029659</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="✨ feat: Added Umami analytics script to +layout.svelte&#10;&#10;This commit integrates Umami analytics tracking into the application's root layout component to enable usage monitoring. The analytics script is added directly to the layout template to ensure it loads on all pages. Additionally, minor syntax adjustments were made to click handlers in the dua page component for consistency.">
+      <option name="closed" value="true" />
+      <created>1738969531674</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1738969531674</updated>
+    </task>
+    <task id="LOCAL-00036" summary="✨ feat: Integrated Umami analytics and enhanced search/filter functionality&#10;&#10;- Upped minor version to 0.7.1&#10;- Added Umami analytics script to +layout.svelte for comprehensive usage tracking across all pages.&#10;- Implemented advanced filtering logic for surahs, juzs, and pages in the Quran page component:&#10;  - Filters based on search query matching name, Arabic name, number, or related attributes.&#10;  - Replaced static lists with derived filtered lists for dynamic updates.&#10;- Updated quiz functionality:&#10;  - Improved question generation logic with validated user settings (number of questions, range of surahs).&#10;  - Enhanced results display with detailed feedback, including correct/incorrect answers and audio playback options.&#10;  - Refactored state management and lifecycle hooks for better performance and maintainability.&#10;- Fixed minor syntax inconsistencies in click handlers and imports across components.&#10;- Updated ResultsCard component for a more detailed and user-friendly quiz results summary.&#10;- Adjusted conditional rendering logic in +layout.svelte to exclude specific routes from certain layouts.&#10;&#10;🔧 Chore: Minor code cleanups and consistency improvements.">
+      <option name="closed" value="true" />
+      <created>1738971673555</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1738971673555</updated>
+    </task>
+    <task id="LOCAL-00037" summary="✨ feat: Updated app icon and implemented navigation to home page">
+      <option name="closed" value="true" />
+      <created>1738972835414</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1738972835414</updated>
+    </task>
+    <task id="LOCAL-00038" summary="✨ feat: Refactor dev-notice page layout and improve accessibility features">
+      <option name="closed" value="true" />
+      <created>1738973003291</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1738973003291</updated>
+    </task>
+    <task id="LOCAL-00039" summary="✨ feat: Change event handler from on:click to onclick for consistency">
+      <option name="closed" value="true" />
+      <created>1738994254782</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1738994254782</updated>
+    </task>
+    <task id="LOCAL-00040" summary="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation">
+      <option name="closed" value="true" />
+      <created>1738996647052</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1738996647052</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: double bismillah audio fatiha" />
-    <MESSAGE value="reflow endpoint" />
-    <MESSAGE value="added logger" />
-    <MESSAGE value="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state" />
-    <MESSAGE value="removed useless toast" />
-    <MESSAGE value="added alert-dialog" />
     <MESSAGE value="changed logo" />
     <MESSAGE value="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page" />
     <MESSAGE value="added components" />
@@ -474,6 +515,12 @@
     <MESSAGE value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
     <MESSAGE value="✨ feat: Added media session support to audio player with metadata and action handlers" />
     <MESSAGE value="✨ feat: Added Umami analytics script to `+layout.svelte`" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat: Added Umami analytics script to `+layout.svelte`" />
+    <MESSAGE value="✨ feat: Added Umami analytics script to +layout.svelte&#10;&#10;This commit integrates Umami analytics tracking into the application's root layout component to enable usage monitoring. The analytics script is added directly to the layout template to ensure it loads on all pages. Additionally, minor syntax adjustments were made to click handlers in the dua page component for consistency." />
+    <MESSAGE value="✨ feat: Integrated Umami analytics and enhanced search/filter functionality&#10;&#10;- Upped minor version to 0.7.1&#10;- Added Umami analytics script to +layout.svelte for comprehensive usage tracking across all pages.&#10;- Implemented advanced filtering logic for surahs, juzs, and pages in the Quran page component:&#10;  - Filters based on search query matching name, Arabic name, number, or related attributes.&#10;  - Replaced static lists with derived filtered lists for dynamic updates.&#10;- Updated quiz functionality:&#10;  - Improved question generation logic with validated user settings (number of questions, range of surahs).&#10;  - Enhanced results display with detailed feedback, including correct/incorrect answers and audio playback options.&#10;  - Refactored state management and lifecycle hooks for better performance and maintainability.&#10;- Fixed minor syntax inconsistencies in click handlers and imports across components.&#10;- Updated ResultsCard component for a more detailed and user-friendly quiz results summary.&#10;- Adjusted conditional rendering logic in +layout.svelte to exclude specific routes from certain layouts.&#10;&#10; Chore: Minor code cleanups and consistency improvements." />
+    <MESSAGE value="✨ feat: Updated app icon and implemented navigation to home page" />
+    <MESSAGE value="✨ feat: Refactor dev-notice page layout and improve accessibility features" />
+    <MESSAGE value="✨ feat: Change event handler from on:click to onclick for consistency" />
+    <MESSAGE value="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation" />
   </component>
 </project>
