@@ -1,6 +1,7 @@
 // src/routes/api/upload/+server.js
 import logger from '$lib/logger.js';
 import { json } from "@sveltejs/kit";
+import { url } from '$lib/url.js'
 
 export async function POST({ request, fetch }) {
 	try {
@@ -26,7 +27,7 @@ export async function POST({ request, fetch }) {
 		processingFormData.append('audio', audioFile);
 
 		// Call the processing endpoint
-		const response = await fetch('https://api.aayah.info/api/v1/ai', {
+		const response = await fetch(`${url}/api/v1/ai`, {
 			method: 'POST',
 			body: processingFormData
 		});
