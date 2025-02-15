@@ -1,9 +1,10 @@
 import { redirect } from '@sveltejs/kit';
+import { url } from '$lib/url.js'
 
 export const load = async ({ params, fetch }) => {
 	try {
 		// Fetch book info
-		const infoReq = await fetch(`https://api.aayah.info/api/v1/hadith/${params.book}`);
+		const infoReq = await fetch(`${url}/api/v1/hadith/${params.book}`);
 		const infoRes = await infoReq.json();
 
 		// Get book data using the correct path
@@ -14,7 +15,7 @@ export const load = async ({ params, fetch }) => {
 		}
 
 		// Fetch section info
-		const req = await fetch(`https://api.aayah.info/api/v1/hadith/${params.book}/section/${params.chapter}`);
+		const req = await fetch(`${url}/api/v1/hadith/${params.book}/section/${params.chapter}`);
 		const res = await req.json();
 
 		// Get section data

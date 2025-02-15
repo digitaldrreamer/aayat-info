@@ -1,7 +1,8 @@
+import { url } from '$lib/url.js'
 export const load = async () => {
 	let hadiths = []
 	try {
-		const response = await fetch('https://api.aayah.info/api/v1/hadith');
+		const response = await fetch(`${url}/api/v1/hadith`);
 		const result = await response.json();
 		const books = Object.values(result?.data?.books || {});
 

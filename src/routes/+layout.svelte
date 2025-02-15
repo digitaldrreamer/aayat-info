@@ -5,7 +5,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Plus } from 'lucide-svelte';
+	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Mic, Plus } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import * as Menubar from '$lib/components/ui/menubar/index';
@@ -257,6 +257,7 @@
 	// Standard booleans for state
 	let open = $state(false);
 	let query = $state('');
+	let showVoiceSearch = $state(false)
 
 	// Utility function to normalize text for searching
 	function normalizeText(text) {
@@ -576,9 +577,9 @@
 			<div class="absolute left-1/2 -translate-x-1/2 -top-6">
 				<Button
 					class="h-16 w-16 rounded-full bg-neutral-900 hover:bg-neutral-800 text-neutral-50 shadow-md"
-					onclick={() => open = true}
+					onclick={() => (showVoiceSearch = !showVoiceSearch)}
 				>
-					<Plus class="w-6 h-6" />
+					<Mic class="w-6 h-6" />
 				</Button>
 			</div>
 
@@ -600,6 +601,21 @@
 	>
 		<div class="bg-background/80 backdrop-blur-sm border rounded-lg shadow-lg p-1">
 			<Menubar.Root>
+				<Menubar.Menu>
+					<Menubar.Trigger>Search</Menubar.Trigger>
+					<Menubar.Content>
+						<Menubar.Item onclick={() => (showVoiceSearch = !showVoiceSearch)}>
+							Audio Search
+						</Menubar.Item>
+							<Menubar.Item onclick={() => {
+								toast.error('Text Search', {
+									description: 'This feature is currently unavailable.'
+								})
+							}}>
+								Text Search
+							</Menubar.Item>
+					</Menubar.Content>
+				</Menubar.Menu>
 				<Menubar.Menu>
 					<Menubar.Trigger>Home</Menubar.Trigger>
 					<Menubar.Content>
@@ -669,7 +685,7 @@
 	</div>
 
 	<!-- Audio Recorder Component -->
-<!--	<AudioRecorder bind:isOpen={showVoiceSearch} />-->
+	<AudioRecorder bind:isOpen={showVoiceSearch} />
 		{/if}
 
 	<!-- Toast Notifications -->

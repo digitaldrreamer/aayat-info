@@ -1,10 +1,12 @@
+import { url } from '$lib/url.js';
+
 export const load = async ({ params, fetch }) => {
 	const { juz } = params;
 
 	const fetchSurah = async (num) => {
 		try {
 			// First fetch - Arabic verses
-			const req = await fetch(`https://api.aayah.info/api/v1/quran/ara-qurandoorinonun/juz/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`);
+			const req = await fetch(`${url}/api/v1/quran/ara-qurandoorinonun/juz/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`);
 			const res = await req.json();
 
 			if (!res?.data?.juz) {
@@ -12,7 +14,7 @@ export const load = async ({ params, fetch }) => {
 			}
 
 			// Second fetch - English translation
-			const transReq = await fetch(`https://api.aayah.info/api/v1/quran/eng-abdullahyusufal/juz/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`);
+			const transReq = await fetch(`${url}/api/v1/quran/eng-abdullahyusufal/juz/${num}?audio=Alafasy_128kbps&tafsir=en-tafisr-ibn-kathir`);
 			const transRes = await transReq.json();
 
 			if (!transRes?.data?.juz) {
@@ -23,7 +25,7 @@ export const load = async ({ params, fetch }) => {
 			const surahs = [...new Set(res.data.juz.map(v => v.chapter))];
 
 			// Third fetch - Get surah metadata
-			const newReq = await fetch('https://api.aayah.info/api/v1/quran/');
+			const newReq = await fetch(`${url}/api/v1/quran/`);
 			const newRes = await newReq.json();
 
 			if (!newRes?.data?.quran?.chapters) {
