@@ -471,6 +471,7 @@
 <svelte:head>
 	{@html webManifest}
 	<meta name="theme-color" content="#ffffff"/>
+<meta name="google" content="notranslate">
 	<link rel="apple-touch-icon" href="/pwa-192x192.png">
 		<!-- Standard Meta Tags -->
 		<title>Aayah.info – A Minimalist Muslim Companion</title>
@@ -691,3 +692,9 @@
 	<!-- Toast Notifications -->
 	<Toaster />
 </div>
+
+<style>
+html {
+  translate: no;
+}
+</style>
