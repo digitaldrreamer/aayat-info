@@ -5,7 +5,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Mic, Plus } from 'lucide-svelte';
+	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Mic, Plus, Rss } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import * as Menubar from '$lib/components/ui/menubar/index';
@@ -657,6 +657,9 @@
 				</Button>
 				<Button title="Developer Notice" variant="ghost" onclick={() => (goto('/dev-notice'))} size="icon">
 					<CircleHelp class="size-5" />
+				</Button>
+				<Button title="Sitemap" href="/sitemap.xml" variant="link">
+					<Rss class="size-5" />
 				</Button>
 <!--				<Button title="Settings" variant="ghost" onclick={() => (goto('/settings'))} size="icon">-->
 <!--					<Settings class="size-5" />-->
