@@ -84,6 +84,33 @@
 			installPrompt.set(null);
 			console.log('PWA was installed');
 		});
+
+		const hash = window.location.hash.slice(1);
+		if (!hash) return;
+
+		const scrollToElement = () => {
+			const element = document.getElementById(hash);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth' });
+				return true;
+			}
+			return false;
+		};
+
+		// Try immediately
+		if (!scrollToElement()) {
+			// If failed, retry a few times
+			let attempts = 0;
+			const interval = setInterval(() => {
+				if (scrollToElement() || attempts >= 50) {
+					clearInterval(interval);
+				}
+				attempts++;
+			}, 100);
+
+			// Cleanup
+			return () => clearInterval(interval);
+		}
 	});
 
 	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
