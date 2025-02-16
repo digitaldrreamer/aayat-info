@@ -5,13 +5,14 @@
 	import { quintOut } from 'svelte/easing';
 	import { AudioRecorder } from '$lib/components/search/index';
 	import { Button } from '$lib/components/ui/button/index';
-	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Mic, Plus, Rss } from 'lucide-svelte';
+	import { ArrowLeft, AudioLines, CircleHelp, History, Home, Mic, Plus, Rss, Search } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import * as Menubar from '$lib/components/ui/menubar/index';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { writable } from 'svelte/store';
+	import { toast } from 'svelte-sonner';
 
 	const installPrompt = writable(null);
 	const isInstalled = writable(false);
@@ -388,173 +389,6 @@
 			.replace(/[^\w\s]/g, '');
 	}
 
-	// Enhanced fuzzy matching with scoring
-	function fuzzyMatch(query, text, threshold = 0.3) {
-		if (!query) return { match: true, score: 1 };
-
-		const normalizedQuery = normalizeText(query);
-		const normalizedText = normalizeText(text);
-
-		if (normalizedText.includes(normalizedQuery)) {
-			return { match: true, score: 1 };
-		}
-
-		const queryWords = normalizedQuery.split(/\s+/);
-		const textWords = normalizedText.split(/\s+/);
-
-		let matchCount = 0;
-		let totalScore = 0;
-
-		for (const queryWord of queryWords) {
-			let bestWordScore = 0;
-
-			for (const textWord of textWords) {
-				const distance = levenshteinDistance(queryWord, textWord);
-				const maxLength = Math.max(queryWord.length, textWord.length);
-				const similarity = 1 - (distance / maxLength);
-
-				if (similarity > bestWordScore) {
-					bestWordScore = similarity;
-				}
-			}
-
-			if (bestWordScore > threshold) {
-				matchCount++;
-				totalScore += bestWordScore;
-			}
-		}
-
-		const finalScore = totalScore / queryWords.length;
-		return {
-			match: matchCount > 0,
-			score: finalScore
-		};
-	}
-
-	// Levenshtein distance calculation
-	function levenshteinDistance(str1, str2) {
-		const m = str1.length;
-		const n = str2.length;
-		const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
-
-		for (let i = 0; i <= m; i++) dp[i][0] = i;
-		for (let j = 0; j <= n; j++) dp[0][j] = j;
-
-		for (let i = 1; i <= m; i++) {
-			for (let j = 1; j <= n; j++) {
-				if (str1[i - 1] === str2[j - 1]) {
-					dp[i][j] = dp[i - 1][j - 1];
-				} else {
-					dp[i][j] = 1 + Math.min(
-						dp[i - 1][j],
-						dp[i][j - 1],
-						dp[i - 1][j - 1]
-					);
-				}
-			}
-		}
-
-		return dp[m][n];
-	}
-
-	// Enhanced filtering with scoring and pagination
-	function getFilteredResults(query, items, options = {}) {
-		const {
-			searchFields = ['name', 'arabicName', 'number'],
-			limit = 10,
-			offset = 0,
-			minScore = 0.3
-		} = options;
-
-		if (!query) return {
-			results: items.slice(offset, offset + limit),
-			total: items.length,
-			hasMore: items.length > offset + limit
-		};
-
-		const scoredResults = items.map(item => {
-			let maxScore = 0;
-
-			for (const field of searchFields) {
-				if (item[field]) {
-					const { score } = fuzzyMatch(
-						query,
-						String(item[field]),
-						minScore
-					);
-					maxScore = Math.max(maxScore, score);
-				}
-			}
-
-			return {
-				item,
-				score: maxScore
-			};
-		});
-
-		const filteredResults = scoredResults
-			.filter(result => result.score >= minScore)
-			.sort((a, b) => b.score - a.score);
-
-		return {
-			results: filteredResults
-				.slice(offset, offset + limit)
-				.map(result => result.item),
-			total: filteredResults.length,
-			hasMore: filteredResults.length > offset + limit
-		};
-	}
-
-	/** @type {Array<{id: string, text: string, arabic: string}>} */
-	const suggestions = $state([
-		{
-			id: '1:1',
-			text: 'Al-Fatihah',
-			arabic: 'الفاتحة'
-		},
-		{
-			id: '2:255',
-			text: 'Ayatul Kursi',
-			arabic: 'آية الكرسي'
-		},
-		{
-			id: '36:1',
-			text: 'Surah Yasin',
-			arabic: 'سورة يس'
-		}
-	]);
-
-	// Your existing surahs, juzs, and pages data here...
-	// [Previous data arrays remain unchanged]
-
-	// Reactive filtered results based on the enhanced search
-	const filteredSurahs = $derived(
-		getFilteredResults(query, surahs, {
-			searchFields: ['name', 'arabicName', 'number'],
-			limit: 4
-		})
-	);
-
-	const filteredJuzs = $derived(
-		getFilteredResults(query, juzs, {
-			searchFields: ['name', 'surahs', 'number'],
-			limit: 3
-		})
-	);
-
-	const filteredPages = $derived(
-		getFilteredResults(query, pages.map(p => ({ number: p })), {
-			searchFields: ['number'],
-			limit: 3
-		})
-	);
-
-	const filteredHadiths = $derived(
-		getFilteredResults(query, hadiths.map(h => ({ label: h.label })), {
-			searchFields: ['label'],
-			limit: 5
-		})
-	);
 
 	function handleKeydown(e) {
 		if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -565,26 +399,6 @@
 
 
 
-	function handleHadithClick(hadith) {
-		goto(hadith.link);
-		open = false;
-	}
-
-
-	function handleSurahClick(surah) {
-		goto(`/quran/surah/${surah.number}`);
-		open = false;
-	}
-
-	function handleJuzClick(juz) {
-		goto(`/quran/juz/${juz.number}`);
-		open = false;
-	}
-
-	function handlePageClick(page) {
-		goto(`/quran/page/${page}`);
-		open = false;
-	}
 
 
 </script>
@@ -695,10 +509,10 @@
 			<Button
 				variant="ghost"
 				class="flex flex-col items-center gap-1"
-				onclick={() => goto('/')}
+				onclick={() => goto('/search')}
 			>
-				<Home class="w-5 h-5" />
-				<span class="text-xs">Home</span>
+				<Search class="w-5 h-5" />
+				<span class="text-xs">Search</span>
 			</Button>
 
 			<div class="absolute left-1/2 -translate-x-1/2 -top-6">
