@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { ScrollArea } from "$lib/components/ui/scroll-area/index";
-	import * as Carousel from "$lib/components/ui/carousel/index";
 	import Verse from "$lib/components/quran/verse.svelte";
 	import JuzInfo from "$lib/components/quran/juz-view.svelte";
-	import { onMount } from 'svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import NewSurah from '$lib/components/quran/new-surah.svelte'
 	import { goto } from '$app/navigation';
@@ -17,6 +15,12 @@
 		goto(url)
 	}
 </script>
+
+<svelte:head>
+	<title>Read Juz {data.number} on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read Juz {data.number} on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read Juz {data.number} on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
 
 {#await data.juz}
 	<Loading message="Loading juz data..." />

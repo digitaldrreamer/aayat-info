@@ -1515,6 +1515,12 @@
 
 </script>
 
+<svelte:head>
+	<title>Read Hisnul Muslim (Prayers) on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read Hisnul Muslim (Prayers) on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read Hisnul Muslim (Prayers) on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
+
 <div class="min-h-screen bg-neutral-50 p-8">
 	<div class="max-w-4xl mx-auto space-y-8">
 		<h1 class="text-3xl font-bold text-center">Duas</h1>

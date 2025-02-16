@@ -29,7 +29,16 @@
 			description: "Playing audio for dua",
 		});
 	}
+
+	const startsWithDua = dua.title.toLowerCase().startsWith('dua')
+	const seoText = (dua.title.toLowerCase().startsWith('upon') || dua.title.toLowerCase().startsWith('before') || dua.title.toLowerCase().startsWith('after') || dua.title.toLowerCase().startsWith('between')) ? `Prayer ${dua.title}` : `Prayer for ${dua.title}`
 </script>
+
+<svelte:head>
+	<title>Read {startsWithDua ? dua.title : seoText} on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read {startsWithDua ? dua.title : seoText} on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read {startsWithDua ? dua.title : seoText} on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
 
 <div class="min-h-screen bg-neutral-50 p-8">
 	<div class="max-w-4xl mx-auto space-y-8">
