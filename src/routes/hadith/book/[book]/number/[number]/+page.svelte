@@ -4,11 +4,13 @@
 	import { Badge } from "$lib/components/ui/badge/index";
 	import { Share, Copy, Book, Bookmark } from "lucide-svelte";
 	import { toast } from 'svelte-sonner';
+	import { goto} from '$app/navigation';
 
 	let { data } = $props()
 	const hadithData = data
 	const { metadata, hadiths } = hadithData.data.hadith;
 	const hadith = hadiths[0];
+	console.log(hadith.reference)
 
 	function copyHadith() {
 		const textToCopy = `${hadith.text.en}\n\n${hadith.text.ar}\n\nReference: ${metadata.name}, ${Object.values(metadata.section)[0]}, Hadith ${hadith.hadithnumber}`;
@@ -37,6 +39,7 @@
 		toast.success("Viewing Section", {
 			description: `Navigating to ${Object.values(metadata.section)[0]}`,
 		});
+		goto(`/hadith/book/${hadith.reference.book}/chapter/${Object.keys(metadata.section)[0]}`)
 	}
 
 	function viewBook() {
@@ -45,6 +48,7 @@
 		toast.success("Viewing Book", {
 			description: `Navigating to ${metadata.name}`,
 		});
+		goto(`/hadith/book/${hadith.reference.book}`)
 	}
 </script>
 

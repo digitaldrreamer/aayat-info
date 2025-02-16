@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="♻️ refactor(dua): Added responsive labels to dua actions">
-      <change afterPath="$PROJECT_DIR$/src/lib/url.js" afterDir="false" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(layout): Implement async scrolling with retry logic and highlight effect for hash elements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/api/reflow/transcribe/+server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/reflow/transcribe/+server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/api/v1/hadith/[book]/section/[section]/[number]/+server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/api/v1/hadith/[book]/section/[section]/[number]/+server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/dua/[dua]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/dua/[dua]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/chapter/[chapter]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/juz/[juz]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/page/[page]/+page.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/quran/surah/[surah]/+page.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/quran/surah/[surah]/+page.server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/hadith/book/[book]/number/[number]/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +56,7 @@
         <option value="InfoModal" />
         <option value="DownloadModal" />
         <option value="JavaScript File" />
+        <option value="AsyncScrollHandler" />
       </list>
     </option>
   </component>
@@ -111,24 +100,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "#22 on creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -190,6 +179,8 @@
       <workItem from="1739179112863" duration="43000" />
       <workItem from="1739359203622" duration="585000" />
       <workItem from="1739389692011" duration="667000" />
+      <workItem from="1739656410341" duration="507000" />
+      <workItem from="1739698055264" duration="5263000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -519,18 +510,53 @@
       <option name="project" value="LOCAL" />
       <updated>1739020693396</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="✨ feat: Refactor API calls to use centralized URL configuration">
+      <option name="closed" value="true" />
+      <created>1739656451423</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1739656451423</updated>
+    </task>
+    <task id="LOCAL-00043" summary="✨ feat(layout): Implement smooth scrolling to elements based on URL hash">
+      <option name="closed" value="true" />
+      <created>1739698306021</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1739698306021</updated>
+    </task>
+    <task id="LOCAL-00044" summary="✨ feat(layout): Enhance smooth scrolling with highlight effect for target elements">
+      <option name="closed" value="true" />
+      <created>1739698591144</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1739698591144</updated>
+    </task>
+    <task id="LOCAL-00045" summary="✨ feat(layout): Implement async scrolling with highlight effect for target elements">
+      <option name="closed" value="true" />
+      <created>1739698908322</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1739698908322</updated>
+    </task>
+    <task id="LOCAL-00046" summary="✨ feat(layout): Implement async scrolling with retry logic and highlight effect for hash elements">
+      <option name="closed" value="true" />
+      <created>1739702331527</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1739702331527</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="✨ feat(podcasts): Added podcasts page and components&#10;&#10;✨ feat(quiz): Added quiz settings to customize the quiz&#10;&#10;♻️ refactor(components): Improved `&lt;Separator&gt;` component API&#10;&#10;♻️ refactor(layout): Improved search functionality and added hadith links&#10;&#10;✨ feat(layout): Added podcasts and pitch links to the navigation&#10;&#10;✨ feat(pitch): Added pitch page" />
-    <MESSAGE value="added components" />
-    <MESSAGE value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
-    <MESSAGE value="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`" />
-    <MESSAGE value="trying to make pwa" />
     <MESSAGE value="pwa images" />
     <MESSAGE value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
     <MESSAGE value="✨ feat(podcasts): Implemented podcast fetching and UI enhancements&#10;&#10;Alternatively:&#10;&#10;♻️ refactor(podcasts): Improved podcast data handling and added loading state&#10;&#10;Alternatively:&#10;&#10;fix(podcasts): Resolved 429 error by refactoring data fetching" />
@@ -551,6 +577,11 @@
     <MESSAGE value="✨ feat: Change event handler from on:click to onclick for consistency" />
     <MESSAGE value="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation" />
     <MESSAGE value="♻️ refactor(dua): Added responsive labels to dua actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="♻️ refactor(dua): Added responsive labels to dua actions" />
+    <MESSAGE value="✨ feat: Refactor API calls to use centralized URL configuration" />
+    <MESSAGE value="✨ feat(layout): Implement smooth scrolling to elements based on URL hash" />
+    <MESSAGE value="✨ feat(layout): Enhance smooth scrolling with highlight effect for target elements" />
+    <MESSAGE value="✨ feat(layout): Implement async scrolling with highlight effect for target elements" />
+    <MESSAGE value="✨ feat(layout): Implement async scrolling with retry logic and highlight effect for hash elements" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(layout): Implement async scrolling with retry logic and highlight effect for hash elements" />
   </component>
 </project>
