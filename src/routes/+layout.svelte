@@ -12,6 +12,7 @@
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { writable } from 'svelte/store';
+	import AsyncScrollHandler from '$lib/components/AsyncScrollHandler.svelte';
 
 	const installPrompt = writable(null);
 	const isInstalled = writable(false);
@@ -84,53 +85,23 @@
 			installPrompt.set(null);
 			console.log('PWA was installed');
 		});
-
 		const hash = window.location.hash.slice(1);
-		if (!hash) return;
-
-		function scrollToElement() {
-			const element = document.getElementById(targetId);
-			if (element) {
-				setTimeout(() => {
-					element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-					// Add highlight classes
-					element.classList.add('bg-yellow-200', 'underline', 'decoration-yellow-400');
-
-					// Remove highlight classes after duration
-					setTimeout(() => {
-						element.classList.remove('bg-yellow-200', 'underline', 'decoration-yellow-400');
-					}, highlightDuration);
-
-				}, 100);
-				return true;
-			}
-			return false;
-		}
-
-		// Try immediately
-		if (!scrollToElement()) {
-			// If failed, retry a few times
-			let attempts = 0;
-			const interval = setInterval(() => {
-				if (scrollToElement() || attempts >= 50) {
-					clearInterval(interval);
+		if (hash) {
+			// Add the async scroll handler component
+			const scrollHandler = new AsyncScrollHandler({
+				target: document.body,
+				props: {
+					targetId: hash,
+					highlightDuration: 3000,
+					maxAttempts: 50,
+					interval: 100
 				}
-				attempts++;
-			}, 100);
+			});
 
-			// Cleanup on component destroy
 			return () => {
-				if (intervalId) clearInterval(intervalId);
-
-				// Clean up highlight if component is destroyed before animation finishes
-				const element = document.getElementById(targetId);
-				if (element) {
-					element.classList.remove('bg-yellow-200', 'underline', 'decoration-yellow-400');
-				}
+				scrollHandler.$destroy();
 			};
 		}
-
 	});
 
 	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
@@ -738,9 +709,3 @@
 	<!-- Toast Notifications -->
 	<Toaster />
 </div>
-
-<style>
-    :global(.bg-yellow-200) {
-        transition: background-color 0.3s ease-in-out;
-    }
-</style>
