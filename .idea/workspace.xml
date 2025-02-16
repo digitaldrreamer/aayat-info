@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(layout): Enhance smooth scrolling with highlight effect for target elements" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(layout): Implement async scrolling with highlight effect for target elements">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/quran/verse.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/quran/verse.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,6 +57,7 @@
         <option value="InfoModal" />
         <option value="DownloadModal" />
         <option value="JavaScript File" />
+        <option value="AsyncScrollHandler" />
       </list>
     </option>
   </component>
@@ -175,7 +181,7 @@
       <workItem from="1739359203622" duration="585000" />
       <workItem from="1739389692011" duration="667000" />
       <workItem from="1739656410341" duration="507000" />
-      <workItem from="1739698055264" duration="706000" />
+      <workItem from="1739698055264" duration="3685000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -529,14 +535,21 @@
       <option name="project" value="LOCAL" />
       <updated>1739698591144</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="✨ feat(layout): Implement async scrolling with highlight effect for target elements">
+      <option name="closed" value="true" />
+      <created>1739698908322</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1739698908322</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`" />
     <MESSAGE value="trying to make pwa" />
     <MESSAGE value="pwa images" />
     <MESSAGE value="✨ feat(PWA): Implemented installation prompt and caching strategies for PWA assets" />
@@ -561,6 +574,7 @@
     <MESSAGE value="✨ feat: Refactor API calls to use centralized URL configuration" />
     <MESSAGE value="✨ feat(layout): Implement smooth scrolling to elements based on URL hash" />
     <MESSAGE value="✨ feat(layout): Enhance smooth scrolling with highlight effect for target elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(layout): Enhance smooth scrolling with highlight effect for target elements" />
+    <MESSAGE value="✨ feat(layout): Implement async scrolling with highlight effect for target elements" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(layout): Implement async scrolling with highlight effect for target elements" />
   </component>
 </project>

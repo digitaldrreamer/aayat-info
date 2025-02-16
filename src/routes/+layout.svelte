@@ -12,7 +12,6 @@
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { writable } from 'svelte/store';
-	import AsyncScrollHandler from '$lib/components/AsyncScrollHandler.svelte';
 
 	const installPrompt = writable(null);
 	const isInstalled = writable(false);
@@ -56,6 +55,116 @@
 		}
 	};
 
+	let scrollIntervalId = $state(null);
+	let attempts = $state(0);
+
+	// Utility function to handle scrolling to hash elements with retry logic
+	function createHashScrollHandler(options = {}) {
+		const {
+			maxAttempts = 50,
+			interval = 100,
+			highlightDuration = 3000,
+			highlightClasses = ['bg-yellow-200', 'underline', 'decoration-yellow-400']
+		} = options;
+
+
+
+		function scrollToHashElement(hash) {
+			if (!hash) return null;
+
+			const elementId = hash.slice(1); // Remove the # from the hash
+			const element = document.getElementById(elementId);
+
+			if (element) {
+				// Clear any existing highlight timeouts
+				const existingTimeoutId = element.dataset.highlightTimeoutId;
+				if (existingTimeoutId) {
+					clearTimeout(Number(existingTimeoutId));
+				}
+
+				// Schedule the scroll and highlight
+				setTimeout(() => {
+					// Scroll the element into view
+					element.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+
+					// Add highlight classes
+					element.classList.add(...highlightClasses);
+
+					// Remove highlight classes after duration
+					const timeoutId = setTimeout(() => {
+						element.classList.remove(...highlightClasses);
+						delete element.dataset.highlightTimeoutId;
+					}, highlightDuration);
+
+					// Store the timeout ID for cleanup
+					element.dataset.highlightTimeoutId = timeoutId;
+				}, 100);
+
+				return true;
+			}
+
+			return false;
+		}
+
+		function startScrollAttempts(hash) {
+			attempts = 0;
+
+			// Try immediate scroll first
+			if (scrollToHashElement(hash)) {
+				return null; // Success, no need for interval
+			}
+
+			// If immediate scroll fails, start polling
+			return setInterval(() => {
+				attempts++;
+
+				if (attempts >= maxAttempts) {
+					clearInterval(scrollIntervalId);
+					console.log(`Failed to find element with hash ${hash} after ${maxAttempts} attempts`);
+					return;
+				}
+
+				if (scrollToHashElement(hash)) {
+					clearInterval(scrollIntervalId);
+				}
+			}, interval);
+		}
+
+		function cleanup() {
+			if (scrollIntervalId) {
+				clearInterval(scrollIntervalId);
+			}
+
+			// Clean up any existing highlights
+			const hash = window.location.hash.slice(1);
+			if (hash) {
+				const element = document.getElementById(hash);
+				if (element) {
+					element.classList.remove(...highlightClasses);
+					const timeoutId = element.dataset.highlightTimeoutId;
+					if (timeoutId) {
+						clearTimeout(Number(timeoutId));
+						delete element.dataset.highlightTimeoutId;
+					}
+				}
+			}
+		}
+
+		// Return the public interface
+		return {
+			initialize(hash = window.location.hash) {
+				cleanup();
+				if (hash) {
+					scrollIntervalId = startScrollAttempts(hash);
+				}
+			},
+			cleanup
+		};
+	}
+
 	onMount(async () => {
 		if (pwaInfo) {
 			const { registerSW } = await import('virtual:pwa-register');
@@ -72,36 +181,30 @@
 
 		await checkInstalled();
 
-		// Log when beforeinstallprompt is captured
 		window.addEventListener('beforeinstallprompt', (e) => {
 			e.preventDefault();
 			installPrompt.set(e);
 			console.log('Install prompt event captured');
 		});
 
-		// Log when app is installed
 		window.addEventListener('appinstalled', () => {
 			isInstalled.set(true);
 			installPrompt.set(null);
 			console.log('PWA was installed');
 		});
-		const hash = window.location.hash.slice(1);
-		if (hash) {
-			// Add the async scroll handler component
-			const scrollHandler = new AsyncScrollHandler({
-				target: document.body,
-				props: {
-					targetId: hash,
-					highlightDuration: 3000,
-					maxAttempts: 50,
-					interval: 100
-				}
-			});
 
-			return () => {
-				scrollHandler.$destroy();
-			};
-		}
+		const scrollHandler = createHashScrollHandler({
+			maxAttempts: 50,
+			interval: 100,
+			highlightDuration: 3000,
+			highlightClasses: ['bg-yellow-200', 'underline', 'decoration-yellow-400']
+		});
+
+		scrollHandler.initialize();
+
+		return () => {
+			scrollHandler.cleanup();
+		};
 	});
 
 	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
@@ -712,7 +815,7 @@
 </div>
 
 <style>
-html {
-  translate: no;
-}
+    :global(.bg-yellow-200) {
+        transition: background-color 0.3s ease-in-out;
+    }
 </style>
