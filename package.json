@@ -44,11 +44,16 @@
 		"workbox-window": "^7.3.0"
 	},
 	"dependencies": {
+		"@algolia/autocomplete-core": "^1.18.1",
+		"@algolia/client-search": "^5.20.2",
 		"@sentry/sveltekit": "^8.54.0",
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
+		"algoliasearch": "^5.20.2",
 		"cheerio": "^1.0.0",
 		"dexie": "^4.0.11",
+		"instantsearch.css": "^8.5.1",
+		"instantsearch.js": "^4.77.3",
 		"lodash": "^4.17.21",
 		"num-to-arabic": "^0.0.3",
 		"sound-visualizer": "^1.4.0",

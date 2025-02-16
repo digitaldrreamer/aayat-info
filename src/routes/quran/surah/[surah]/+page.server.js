@@ -25,6 +25,7 @@ export const load = async ({ params, fetch }) => {
 		}
 	}
 	return {
-		surah: fetchSurah(surah)
+		surah: fetchSurah(surah),
+		number: surah
 	}
 }

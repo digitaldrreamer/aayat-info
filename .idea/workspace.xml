@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(server): Refactor sitemap generation and update API fetch logic" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(layout): Add Sitemap button to navigation menu" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +101,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#23 on creating-ui",
+    "git-widget-placeholder": "#24 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -178,14 +178,7 @@
       <workItem from="1739656410341" duration="507000" />
       <workItem from="1739698055264" duration="5263000" />
       <workItem from="1739704562010" duration="7658000" />
-    </task>
-    <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
-      <option name="closed" value="true" />
-      <created>1738340494481</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1738340494481</updated>
+      <workItem from="1739717770076" duration="316000" />
     </task>
     <task id="LOCAL-00002" summary="✨ chore: Added IDE config files">
       <option name="closed" value="true" />
@@ -571,14 +564,21 @@
       <option name="project" value="LOCAL" />
       <updated>1739717464067</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="✨ feat(layout): Add Sitemap button to navigation menu">
+      <option name="closed" value="true" />
+      <created>1739718066450</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1739718066451</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="✨ feat(podcasts): Implemented podcast fetching and UI&#10;&#10;✨ feat(images): Compressed Images" />
     <MESSAGE value="✨ feat(images): Updated image formats to webp in `vite.config.js`" />
     <MESSAGE value="♻️ refactor(text): Updated copy in `/dev-notice` and fixed `/pitch` iframe sizing" />
     <MESSAGE value="♻️ refactor(pitch): Removed stray &quot;npm r&quot; in `/pitch` and updated IDEA metadata" />
@@ -603,6 +603,7 @@
     <MESSAGE value="✨ feat(verse): Update share URL format to include hash for verse navigation" />
     <MESSAGE value="✨ feat(page): Update SEO titles and meta tags for Quran and Dua pages" />
     <MESSAGE value="✨ feat(server): Refactor sitemap generation and update API fetch logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(server): Refactor sitemap generation and update API fetch logic" />
+    <MESSAGE value="✨ feat(layout): Add Sitemap button to navigation menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(layout): Add Sitemap button to navigation menu" />
   </component>
 </project>

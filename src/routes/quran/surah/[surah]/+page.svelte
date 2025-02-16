@@ -27,16 +27,19 @@
 
 
 	const navigate = () => {}
+
+	const seoText = $derived(data?.surah?.name ? `${data.surah.data.name.ar} (${data.surah.data.name.en})` : data.number)
 </script>
 
 <svelte:head>
-	<title>Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion</title>
-	<meta property="og:title" content="Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion" />
-	<meta name="twitter:title" content="Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion" />
+	<title>Read Surah {seoText} on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read Surah {seoText} on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read Surah {seoText} on Aayah.info – A Minimalist Muslim Companion" />
 </svelte:head>
 
 {#await data.surah}
 	<Loading message="Loading surah data..." />
+
 {:then surah}
 		<ScrollArea class="h-[calc(100vh-4rem)] mx-auto w-full">
 			<div class="container max-w-3xl mx-auto">
