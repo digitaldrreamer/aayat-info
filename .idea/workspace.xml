@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat: Refactor API calls to use centralized URL configuration">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(layout): Implement smooth scrolling to elements based on URL hash" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +100,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#20 on creating-ui",
+    "git-widget-placeholder": "#22 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -177,6 +175,7 @@
       <workItem from="1739359203622" duration="585000" />
       <workItem from="1739389692011" duration="667000" />
       <workItem from="1739656410341" duration="507000" />
+      <workItem from="1739698055264" duration="409000" />
     </task>
     <task id="LOCAL-00001" summary="✨ feat: Added wakatime badge">
       <option name="closed" value="true" />
@@ -514,14 +513,21 @@
       <option name="project" value="LOCAL" />
       <updated>1739656451423</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="✨ feat(layout): Implement smooth scrolling to elements based on URL hash">
+      <option name="closed" value="true" />
+      <created>1739698306021</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1739698306021</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added components" />
     <MESSAGE value="✨ feat(hadith): Implemented hadith viewing and sharing&#10;&#10;Alternatively:&#10;&#10;✨ feat(hadith): Added API route and page for individual hadiths" />
     <MESSAGE value="♻️ refactor(UI): Removed `Settings` button from `+layout.svelte`" />
     <MESSAGE value="trying to make pwa" />
@@ -546,6 +552,7 @@
     <MESSAGE value="✨ feat(quran): enhance juz/surah handling, audio, and UI&#10;&#10;- Standardize event handlers from `on:click` to `onclick` across components  &#10;- Improve error handling and data validation in juz data fetching&#10;- Implement audio preloading and batched loading for smoother playback&#10;- Enhance juz view with better verse grouping and basmalah handling&#10;- Add responsive layout improvements for mobile views&#10;- Update navigation paths for quizzes and podcasts&#10;- Remove deprecated mobile carousel implementations&#10;- Add error logging and user feedback via toasts&#10;- Refactor surah metadata handling and audio URL generation" />
     <MESSAGE value="♻️ refactor(dua): Added responsive labels to dua actions" />
     <MESSAGE value="✨ feat: Refactor API calls to use centralized URL configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat: Refactor API calls to use centralized URL configuration" />
+    <MESSAGE value="✨ feat(layout): Implement smooth scrolling to elements based on URL hash" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(layout): Implement smooth scrolling to elements based on URL hash" />
   </component>
 </project>

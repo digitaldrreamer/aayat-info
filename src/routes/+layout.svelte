@@ -88,14 +88,25 @@
 		const hash = window.location.hash.slice(1);
 		if (!hash) return;
 
-		const scrollToElement = () => {
-			const element = document.getElementById(hash);
+		function scrollToElement() {
+			const element = document.getElementById(targetId);
 			if (element) {
-				element.scrollIntoView({ behavior: 'smooth' });
+				setTimeout(() => {
+					element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+					// Add highlight classes
+					element.classList.add('bg-yellow-200', 'underline', 'decoration-yellow-400');
+
+					// Remove highlight classes after duration
+					setTimeout(() => {
+						element.classList.remove('bg-yellow-200', 'underline', 'decoration-yellow-400');
+					}, highlightDuration);
+
+				}, 100);
 				return true;
 			}
 			return false;
-		};
+		}
 
 		// Try immediately
 		if (!scrollToElement()) {
@@ -108,9 +119,18 @@
 				attempts++;
 			}, 100);
 
-			// Cleanup
-			return () => clearInterval(interval);
+			// Cleanup on component destroy
+			return () => {
+				if (intervalId) clearInterval(intervalId);
+
+				// Clean up highlight if component is destroyed before animation finishes
+				const element = document.getElementById(targetId);
+				if (element) {
+					element.classList.remove('bg-yellow-200', 'underline', 'decoration-yellow-400');
+				}
+			};
 		}
+
 	});
 
 	const webManifest = $state(pwaInfo ? pwaInfo.webManifest.linkTag : '');
@@ -718,3 +738,9 @@
 	<!-- Toast Notifications -->
 	<Toaster />
 </div>
+
+<style>
+    :global(.bg-yellow-200) {
+        transition: background-color 0.3s ease-in-out;
+    }
+</style>
