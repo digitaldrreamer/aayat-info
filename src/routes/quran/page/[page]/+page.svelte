@@ -65,6 +65,12 @@
 	$inspect(audioState)
 </script>
 
+<svelte:head>
+	<title>Read Quran {data.number} on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read Quran {data.number} on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read Quran {data.number} on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
+
 {#await data.page}
 	<Loading message="Loading Quran Page Data..." />
 	{:then page}

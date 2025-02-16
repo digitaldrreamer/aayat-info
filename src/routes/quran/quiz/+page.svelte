@@ -150,6 +150,12 @@ const checkToValidity = (value) => {
 }
 </script>
 
+<svelte:head>
+	<title>Test your Quran Memorisation on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Test your Quran Memorisation on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Test your Quran Memorisation on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
+
 <div class="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
 	<Card.Root class="w-full max-w-md">
 		<Card.Header>

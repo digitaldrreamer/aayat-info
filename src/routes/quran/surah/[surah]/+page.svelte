@@ -28,6 +28,13 @@
 
 	const navigate = () => {}
 </script>
+
+<svelte:head>
+	<title>Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion</title>
+	<meta property="og:title" content="Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion" />
+	<meta name="twitter:title" content="Read Surah {surah.data.name.ar} ({surah.data.name.en}) on Aayah.info – A Minimalist Muslim Companion" />
+</svelte:head>
+
 {#await data.surah}
 	<Loading message="Loading surah data..." />
 {:then surah}

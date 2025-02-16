@@ -34,7 +34,7 @@
 			navigator.share({
 				title: `Verse ${chapter}:${verse}`,
 				text: `${text}\n\n${translation}`,
-				url: window.location.href + 'verse:' + `${verse}`
+				url: window.location.href + '#verse:' + `${verse}`
 			});
 		} else {
 			copyText(`${text}\n\n${translation}`);
