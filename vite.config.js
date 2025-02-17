@@ -12,15 +12,21 @@ export default defineConfig({
     }), sveltekit(), SvelteKitPWA({
         registerType: 'autoUpdate',
         manifest: {
-            name: 'Aayah.info',
-            short_name: 'Aayah.info',
-            description: 'A Minimalist Muslim Companion Webapp. Find Hadith. Read and Listen to Quran. See Duas. Stream Mufti Menk Podcasts. Test your Murajah.',
-            theme_color: '#ffffff',
-            background_color: '#ffffff',
-            display: 'standalone',
-            display_override: ["window-control-overlay", "minimal-ui"],
-            scope: '/',
-            start_url: '/',
+            "name": "Aayah.info",
+            "short_name": "Aayah.info",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#ffffff",
+            "lang": "en",
+            "scope": "/",
+            "description": "A Minimalist Muslim Companion Webapp. Find Hadith. Read and Listen to Quran. See Duas. Stream Mufti Menk Podcasts. Test your Murajah.",
+            "theme_color": "#ffffff",
+            "display_override": [
+                "window-control-overlay",
+                "window-controls-overlay",
+                "standalone",
+                "minimal-ui"
+            ],
             screenshots: [
                 {
                     src: "/images/1.webp",
@@ -559,6 +565,17 @@ export default defineConfig({
                     "src": "ios/1024.png",
                     "sizes": "1024x1024"
                 }
+            ],
+            "id": "aayah-info",
+            "dir": "auto",
+            "orientation": "portrait",
+            "prefer_related_applications": false,
+            "categories": [
+                "books",
+                "education",
+                "music",
+                "personalization",
+                "productivity"
             ]
         },
         workbox: {
