@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(config): Enhance PWA manifest with additional properties and improved structure">
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,24 +99,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#26 on creating-ui",
-    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#26 on creating-ui&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -185,15 +184,7 @@
       <workItem from="1739717770076" duration="316000" />
       <workItem from="1739718303154" duration="10525000" />
       <workItem from="1739776353710" duration="236000" />
-      <workItem from="1739776626615" duration="343000" />
-    </task>
-    <task id="LOCAL-00006" summary="fixed build">
-      <option name="closed" value="true" />
-      <created>1738430640998</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1738430640998</updated>
+      <workItem from="1739776626615" duration="1247000" />
     </task>
     <task id="LOCAL-00007" summary="changed url to production">
       <option name="closed" value="true" />
@@ -579,14 +570,21 @@
       <option name="project" value="LOCAL" />
       <updated>1739776563233</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options">
+      <option name="closed" value="true" />
+      <created>1739777064157</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1739777064157</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="♻️ refactor: Updated component imports to use index files" />
     <MESSAGE value="✨ feat(sentry): Integrated Sentry" />
     <MESSAGE value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
     <MESSAGE value="✨ feat: Added media session support to audio player with metadata and action handlers" />
@@ -611,6 +609,7 @@
     <MESSAGE value="✨ feat(search): Implement Algolia search functionality and update layout for search navigation" />
     <MESSAGE value="✨ feat(config): Update Vite configuration with additional icon sizes for PWA support" />
     <MESSAGE value="✨ feat(config): Enhance PWA manifest with additional properties and improved structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(config): Enhance PWA manifest with additional properties and improved structure" />
+    <MESSAGE value="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options" />
   </component>
 </project>
