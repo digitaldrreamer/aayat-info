@@ -518,7 +518,9 @@
 			<div class="absolute left-1/2 -translate-x-1/2 -top-6">
 				<Button
 					class="h-16 w-16 rounded-full bg-neutral-900 hover:bg-neutral-800 text-neutral-50 shadow-md"
-					onclick={() => (showVoiceSearch = !showVoiceSearch)}
+					onclick={() => toast.info('Voice Search', {
+						description: "Voice search is being fixed and is temporarily unavailable."
+					})}
 				>
 					<Mic class="w-6 h-6" />
 				</Button>
