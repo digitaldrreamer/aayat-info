@@ -9,6 +9,8 @@
 	import InfoModal from '$lib/components/podcasts/InfoModal.svelte';
 	import DownloadModal from '$lib/components/podcasts/DownloadModal.svelte';
 	import Loading from '$lib/components/Loading.svelte';
+	import { goto } from '$app/navigation';
+	import * as AlertDialog from '$lib/components/ui/alert-dialog/index'
 
 	// Enhanced fuzzy matching with scoring
 	function fuzzyMatch(query, text, threshold = 0.3) {
@@ -322,3 +324,22 @@
 		ondownload={downloadEpisode}
 	/>
 </div>
+
+
+<AlertDialog.Root open={true}>
+	<AlertDialog.Content>
+		<AlertDialog.Header>
+			<AlertDialog.Title>Podcasts Currently Available</AlertDialog.Title>
+			<AlertDialog.Description>
+				Unfortunately, Aayah.info Podcasts® is currently unavailable. We scrape daily from MuslimCentral, but they changed their website recently and made the podcasts load asynchronously, which made scraping it exponentially harder. You can visit the website yourself though. In the meantime, we're going to try to reach out to them or find an alternative.
+			</AlertDialog.Description>
+		</AlertDialog.Header>
+		<AlertDialog.Footer>
+			<AlertDialog.Cancel onclick={() => window.history.back()}>Go Back</AlertDialog.Cancel>
+			<AlertDialog.Action onclick={() => {
+				window.open('https://muslimcentral.com/audio/mufti-menk/')
+			}}>Visit Website
+			</AlertDialog.Action>
+		</AlertDialog.Footer>
+	</AlertDialog.Content>
+</AlertDialog.Root>

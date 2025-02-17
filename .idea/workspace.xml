@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(search): Implement Algolia search functionality and update layout for search navigation" />
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(config): Enhance PWA manifest with additional properties and improved structure">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/podcasts/+page.svelte" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +105,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "#25 on creating-ui",
+    "git-widget-placeholder": "#26 on creating-ui",
     "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/aayat-info/static",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -120,10 +123,10 @@
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static\images" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\api\v1\hadith\[book]\section\[section]\[number]" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\quiz" />
-      <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\src\routes\quran\surah" />
     </key>
   </component>
@@ -181,22 +184,8 @@
       <workItem from="1739704562010" duration="7658000" />
       <workItem from="1739717770076" duration="316000" />
       <workItem from="1739718303154" duration="10525000" />
-    </task>
-    <task id="LOCAL-00004" summary="feat(quran): Add Quran functionality&#10;&#10;This commit introduces several new features related to the Quran:&#10;&#10;Added Card, Progress, and Separator components for improved UI.&#10;&#10;Implemented a Quran player for audio playback.&#10;&#10;Created a dedicated Quran surah page for viewing individual surahs.&#10;&#10;Updated the overall layout and home page design.&#10;&#10;Added new tabs for easier navigation (Surah, Juz, Page)&#10;&#10;Added Juz and Page views.&#10;&#10;Added Basic search functionality&#10;&#10;Added loading screen with custom animation.&#10;&#10;Added Bismillah image to surah view&#10;&#10;Added audio controls&#10;&#10;Implemented basic copy and share functionality for verses.&#10;&#10;Added Hadith Section with book and chapter views.&#10;&#10;Added loading screens for Hadith and Quran pages.&#10;&#10;Improved error handling.">
-      <option name="closed" value="true" />
-      <created>1738427360584</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1738427360584</updated>
-    </task>
-    <task id="LOCAL-00005" summary="✨ feat(quran/hadith): Implemented audio transcription and added context to Hadith view&#10;&#10;Improved the `audio-recorder` component by adding audio transcription functionality.">
-      <option name="closed" value="true" />
-      <created>1738430512836</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1738430512836</updated>
+      <workItem from="1739776353710" duration="236000" />
+      <workItem from="1739776626615" duration="343000" />
     </task>
     <task id="LOCAL-00006" summary="fixed build">
       <option name="closed" value="true" />
@@ -574,15 +563,29 @@
       <option name="project" value="LOCAL" />
       <updated>1739738375465</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="✨ feat(config): Update Vite configuration with additional icon sizes for PWA support">
+      <option name="closed" value="true" />
+      <created>1739776483630</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1739776483630</updated>
+    </task>
+    <task id="LOCAL-00054" summary="✨ feat(config): Enhance PWA manifest with additional properties and improved structure">
+      <option name="closed" value="true" />
+      <created>1739776563233</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1739776563233</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="♻️ refactor(pitch): Removed stray &quot;npm r&quot; in `/pitch` and updated IDEA metadata" />
-    <MESSAGE value="♻️ refactor(`src/routes/pitch/+page.svelte`): Removed stray text and updated IDEA metadata" />
     <MESSAGE value="♻️ refactor: Updated component imports to use index files" />
     <MESSAGE value="✨ feat(sentry): Integrated Sentry" />
     <MESSAGE value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
@@ -606,6 +609,8 @@
     <MESSAGE value="✨ feat(layout): Add Sitemap button to navigation menu" />
     <MESSAGE value="✨ feat(layout): Remove Pitch button and add Developer Notice button in navigation" />
     <MESSAGE value="✨ feat(search): Implement Algolia search functionality and update layout for search navigation" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(search): Implement Algolia search functionality and update layout for search navigation" />
+    <MESSAGE value="✨ feat(config): Update Vite configuration with additional icon sizes for PWA support" />
+    <MESSAGE value="✨ feat(config): Enhance PWA manifest with additional properties and improved structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(config): Enhance PWA manifest with additional properties and improved structure" />
   </component>
 </project>
