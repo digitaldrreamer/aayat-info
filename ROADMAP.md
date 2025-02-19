@@ -1,0 +1,11 @@
+- Complete Search that allows offline search for Qur'an, Hadith, Dua (actual text).
+- Integrate hadith.is
+- Fix Voice Search
+- Find an alternative way to scrape the updated async loading muslimcentral website
+- Add more podcast lectures aside Mufti Menk
+- Add videos, audios and books from IslamHouse API
+- Add settings for changing reciter, more translations, theme.
+- Update Murajah Quiz to show actual verses in result card.
+- Make the UX easier to navigate and find things.
+- Restructure the home page for easier usage.
+- Package for Play & App Store Distribution (from PWA)
