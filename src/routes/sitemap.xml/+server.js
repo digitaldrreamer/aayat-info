@@ -4,7 +4,7 @@ let cachedSitemap = null;
 
 export const GET = async ({ fetch }) => {
 	if (!cachedSitemap) {
-		const req = await fetch(url + '/api/v1/search');
+		const req = await fetch(url +  '/v1/search');
 		const res = await req.json();
 
 		cachedSitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -16,7 +16,7 @@ export const GET = async ({ fetch }) => {
   </url>
   ${res.map(object => `
   <url>
-    <loc>${object.url}</loc>
+    <loc>${typeof object === "string" ? object : object.url}</loc>
     <changefreq>never</changefreq>
     <lastmod>2025-05-16</lastmod>
   </url>`).join('')}
