@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options">
+    <list default="true" id="88d338a0-3efd-4f91-9731-3e5fe5abc67b" name="Changes" comment="✨ feat(server): Update API endpoint for sitemap generation to use new path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/search/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/search/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,24 +101,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#26 on creating-ui&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Documents/Github/SvelteKit/aayat-info/static&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "creating-ui",
+    "last_opened_file_path": "C:/Users/user/Documents/Github/SvelteKit/netpadi",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\user\\Documents\\Github\\SvelteKit\\aayat-info\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\Documents\Github\SvelteKit\aayat-info\static" />
@@ -185,46 +187,11 @@
       <workItem from="1739718303154" duration="10525000" />
       <workItem from="1739776353710" duration="236000" />
       <workItem from="1739776626615" duration="1247000" />
-    </task>
-    <task id="LOCAL-00007" summary="changed url to production">
-      <option name="closed" value="true" />
-      <created>1738431368402</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1738431368402</updated>
-    </task>
-    <task id="LOCAL-00008" summary="typo in api endpoint">
-      <option name="closed" value="true" />
-      <created>1738431814568</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1738431814569</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fix: double bismillah audio fatiha">
-      <option name="closed" value="true" />
-      <created>1738432029239</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1738432029239</updated>
-    </task>
-    <task id="LOCAL-00010" summary="reflow endpoint">
-      <option name="closed" value="true" />
-      <created>1738433381505</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1738433381505</updated>
-    </task>
-    <task id="LOCAL-00011" summary="added logger">
-      <option name="closed" value="true" />
-      <created>1738433543249</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1738433543249</updated>
+      <workItem from="1739785283746" duration="699000" />
+      <workItem from="1739797479873" duration="13052000" />
+      <workItem from="1739945569451" duration="57000" />
+      <workItem from="1739947338640" duration="1501000" />
+      <workItem from="1740470861730" duration="4009000" />
     </task>
     <task id="LOCAL-00012" summary="Commit message:&#10;```&#10;Subject: [PATCH] feat: add Quran quiz feature with results and navigation&#10;&#10;- Implement quiz start page with dynamic question generation&#10;- Add state management for quiz progress, scoring, and audio control&#10;- Create ResultsCard component to display user scores and feedback&#10;- Integrate quiz navigation into existing surah/juz views&#10;- Add developer notice modal for incomplete features&#10;- Update store to track modal visibility state">
       <option name="closed" value="true" />
@@ -578,18 +545,53 @@
       <option name="project" value="LOCAL" />
       <updated>1739777064157</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="✨ feat(layout): Update voice search button to show toast notification for unavailability">
+      <option name="closed" value="true" />
+      <created>1739788416309</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1739788416309</updated>
+    </task>
+    <task id="LOCAL-00057" summary="✨ feat(roadmap): Add initial roadmap for upcoming features and improvements">
+      <option name="closed" value="true" />
+      <created>1739947770671</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1739947770671</updated>
+    </task>
+    <task id="LOCAL-00058" summary="✨ feat(server): Implement caching for sitemap generation and update XML structure">
+      <option name="closed" value="true" />
+      <created>1740471014904</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1740471014904</updated>
+    </task>
+    <task id="LOCAL-00059" summary="✨ feat(server): Update sitemap generation to use external API and handle object types">
+      <option name="closed" value="true" />
+      <created>1740472011365</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1740472011365</updated>
+    </task>
+    <task id="LOCAL-00060" summary="✨ feat(server): Update API endpoint for sitemap generation to use new path">
+      <option name="closed" value="true" />
+      <created>1740473517735</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1740473517735</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="✨ feat(sentry): Integrated Sentry" />
-    <MESSAGE value="✨ feat: Implemented audio player controls&#10;&#10;Alternatively:&#10;&#10;✨ feat: Added previous/next and 15sec skip buttons" />
-    <MESSAGE value="✨ feat: Added media session support to audio player with metadata and action handlers" />
-    <MESSAGE value="✨ feat: Added Umami analytics script to `+layout.svelte`" />
-    <MESSAGE value="✨ feat: Added Umami analytics script to +layout.svelte&#10;&#10;This commit integrates Umami analytics tracking into the application's root layout component to enable usage monitoring. The analytics script is added directly to the layout template to ensure it loads on all pages. Additionally, minor syntax adjustments were made to click handlers in the dua page component for consistency." />
     <MESSAGE value="✨ feat: Integrated Umami analytics and enhanced search/filter functionality&#10;&#10;- Upped minor version to 0.7.1&#10;- Added Umami analytics script to +layout.svelte for comprehensive usage tracking across all pages.&#10;- Implemented advanced filtering logic for surahs, juzs, and pages in the Quran page component:&#10;  - Filters based on search query matching name, Arabic name, number, or related attributes.&#10;  - Replaced static lists with derived filtered lists for dynamic updates.&#10;- Updated quiz functionality:&#10;  - Improved question generation logic with validated user settings (number of questions, range of surahs).&#10;  - Enhanced results display with detailed feedback, including correct/incorrect answers and audio playback options.&#10;  - Refactored state management and lifecycle hooks for better performance and maintainability.&#10;- Fixed minor syntax inconsistencies in click handlers and imports across components.&#10;- Updated ResultsCard component for a more detailed and user-friendly quiz results summary.&#10;- Adjusted conditional rendering logic in +layout.svelte to exclude specific routes from certain layouts.&#10;&#10; Chore: Minor code cleanups and consistency improvements." />
     <MESSAGE value="✨ feat: Updated app icon and implemented navigation to home page" />
     <MESSAGE value="✨ feat: Refactor dev-notice page layout and improve accessibility features" />
@@ -610,6 +612,11 @@
     <MESSAGE value="✨ feat(config): Update Vite configuration with additional icon sizes for PWA support" />
     <MESSAGE value="✨ feat(config): Enhance PWA manifest with additional properties and improved structure" />
     <MESSAGE value="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options" />
-    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(podcasts): Add alert dialog for unavailable podcasts with navigation options" />
+    <MESSAGE value="✨ feat(layout): Update voice search button to show toast notification for unavailability" />
+    <MESSAGE value="✨ feat(roadmap): Add initial roadmap for upcoming features and improvements" />
+    <MESSAGE value="✨ feat(server): Implement caching for sitemap generation and update XML structure" />
+    <MESSAGE value="✨ feat(server): Update sitemap generation to use external API and handle object types" />
+    <MESSAGE value="✨ feat(server): Update API endpoint for sitemap generation to use new path" />
+    <option name="LAST_COMMIT_MESSAGE" value="✨ feat(server): Update API endpoint for sitemap generation to use new path" />
   </component>
 </project>

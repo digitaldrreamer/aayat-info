@@ -499,7 +499,7 @@
 	</main>
 
 
-	{#if page.url.pathname !== '/podcasts' && !page.url.pathname.startsWith('/quiz') && page.url.pathname !== ('/pitch')}
+	{#if page.url.pathname !== '/podcasts' && page.url.pathname !== '/test' && !page.url.pathname.startsWith('/quiz') && page.url.pathname !== ('/pitch')}
 	<!-- Mobile Bottom Navigation -->
 	<nav
 		class="md:hidden fixed bottom-4 inset-x-4 h-14 bg-background border rounded-full shadow-lg z-50"
@@ -547,13 +547,13 @@
 				<Menubar.Menu>
 					<Menubar.Trigger>Search</Menubar.Trigger>
 					<Menubar.Content>
-						<Menubar.Item onclick={() => (showVoiceSearch = !showVoiceSearch)}>
+						<Menubar.Item onclick={() => toast.info('Voice Search', {
+						description: "Voice search is being fixed and is temporarily unavailable."
+					})}>
 							Audio Search
 						</Menubar.Item>
 							<Menubar.Item onclick={() => {
-								toast.error('Text Search', {
-									description: 'This feature is currently unavailable.'
-								})
+								goto('/search')
 							}}>
 								Text Search
 							</Menubar.Item>

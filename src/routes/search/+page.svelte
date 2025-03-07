@@ -13,7 +13,7 @@
 	import { AudioLines, Book, BookMarked, BookOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 
-	const navigate = (url) => goto(new URL(url).pathname)
+	const navigate = (url) => window.open(new URL(url).pathname)
 
 	onMount(() => {
 		// Dynamically inject styles for the search UI with light mode overrides
