@@ -96,7 +96,7 @@
 
 <Sheet.Root bind:open>
 	<Sheet.Overlay class="fixed inset-0 bg-black/40" />
-	<Sheet.Content class="fixed bottom-0 left-0 right-0 mt-24 flex h-[85vh] flex-col rounded-t-lg bg-background">
+	<Sheet.Content side="bottom" class="fixed bottom-0 left-0 right-0 mt-24 flex h-[85vh] flex-col rounded-t-lg bg-background">
 		<div class="flex items-center justify-between border-b px-4 py-3">
 			<span class="text-sm font-medium">Verse {chapter}:{verse}</span>
 			<div class="flex gap-2">
