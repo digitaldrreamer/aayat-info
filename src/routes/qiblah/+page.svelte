@@ -8,6 +8,8 @@
 	let compassCircle;
 	/** @type {HTMLElement} Reference to the my-point element */
 	let myPoint;
+	/** @type {HTMLElement} Reference to the qibla indicator element */
+	let qiblaIndicator;
 
 	// State variables
 	let compass = $state(0);
@@ -98,7 +100,7 @@
 		}
 
 		hasLocation = true;
-		statusMessage = "Location acquired. Point your device toward Qibla.";
+		statusMessage = "Qibla direction found. The needle points to Qibla.";
 	}
 
 	/**
@@ -140,7 +142,7 @@
 			recentReadings.shift();
 		}
 
-		// Update compass circle rotation
+		// Update compass circle rotation - now we rotate the compass to show true north
 		if (compassCircle) {
 			compassCircle.style.transform = `translate(-50%, -50%) rotate(${-compass}deg)`;
 		}
@@ -184,7 +186,7 @@
 		if (needsCalibration && !previousNeedsCalibration) {
 			statusMessage = "Please calibrate by moving your device in a figure-8 pattern.";
 		} else if (!needsCalibration && previousNeedsCalibration) {
-			statusMessage = "Calibration complete. Point your device toward Qibla.";
+			statusMessage = "Calibration complete. The needle points to Qibla.";
 		}
 
 		// Calculate accuracy percentage (inverted standard deviation)
@@ -337,21 +339,23 @@
 
 					<div class="compass-container mx-auto relative" style="width: 280px; height: 280px;">
 						<div class="absolute inset-0 rounded-full bg-white shadow-lg overflow-hidden">
+							<!-- North indicator -->
 							<div class="arrow absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4 z-10">
 								<div class="w-0 h-0 border-x-[10px] border-x-transparent border-b-[20px] border-b-red-500"></div>
 							</div>
 
+							<!-- Compass face that rotates to show true north -->
 							<div class="compass-circle absolute inset-[5%] rounded-full" bind:this={compassCircle}></div>
 
-							{#if pointDegree !== null}
-								<div class="qibla-direction absolute top-1/2 left-1/2 h-[140px] w-[16px] -mt-[140px] -ml-[8px] z-20" style="transform: rotate({pointDegree}deg)">
-									<div class="h-full w-full bg-green-500 opacity-70 rounded-t-full"></div>
-									<div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
-										Qibla
-									</div>
+							<!-- Fixed Qibla needle that always points to Qibla -->
+							<div class="qibla-needle absolute top-1/2 left-1/2 w-[4px] h-[120px] bg-green-600 -mt-[120px] -ml-[2px] z-20 origin-bottom"
+									 bind:this={qiblaIndicator}>
+								<div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">
+									Qibla Direction
 								</div>
-							{/if}
+							</div>
 
+							<!-- Alignment indicator -->
 							<div class="my-point absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-green-500 rounded-full opacity-0 transition-opacity duration-500 z-10"
 									 bind:this={myPoint}
 									 class:animate-pulse={isAligned}></div>
@@ -422,7 +426,7 @@
 				</li>
 				<li class="flex items-start">
 					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">3</span>
-					<span>Turn slowly until you see the green indicator light up</span>
+					<span>The green needle points to the Qibla direction</span>
 				</li>
 				<li class="flex items-start">
 					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">4</span>
