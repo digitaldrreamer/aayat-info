@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
+	import * as AlertDialog from "$lib/components/ui/alert-dialog";
+	import { Button } from "$lib/components/ui/button";
 
 	/** @type {HTMLElement} Reference to the compass circle element */
 	let compassCircle;
@@ -18,6 +20,8 @@
 	let accuracy = $state(0);
 	let recentReadings = $state([]);
 	let userPosition = $state(null);
+	let showSensorAlert = $state(false);
+	let sensorErrorMessage = $state("");
 
 	// Constants
 	/** @type {Object} Kaaba coordinates */
@@ -103,6 +107,8 @@
 	 */
 	function locationErrorHandler(error) {
 		console.error("Geolocation error:", error);
+		sensorErrorMessage = "Location services are not available or permission was denied.";
+		showSensorAlert = true;
 		statusMessage = "Error getting location. Please check your permissions and try again.";
 	}
 
@@ -186,10 +192,42 @@
 	}
 
 	/**
+	 * Check if device has required sensors
+	 * @returns {boolean} True if sensors are available
+	 */
+	function checkSensorAvailability() {
+		if (!browser) return false;
+
+		// Check for geolocation
+		if (!navigator || !navigator.geolocation) {
+			sensorErrorMessage = "Geolocation is not supported by your device or browser.";
+			return false;
+		}
+
+		// Check for device orientation
+		if (!window || (
+			!('DeviceOrientationEvent' in window) &&
+			!('ondeviceorientation' in window) &&
+			!('ondeviceorientationabsolute' in window)
+		)) {
+			sensorErrorMessage = "Orientation sensors are not available on your device.";
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Start the compass by requesting necessary permissions
 	 */
 	async function startCompass() {
 		if (!browser) return; // Safety check
+
+		// First check if sensors are available
+		if (!checkSensorAvailability()) {
+			showSensorAlert = true;
+			return;
+		}
 
 		try {
 			statusMessage = "Requesting permissions...";
@@ -202,7 +240,8 @@
 					{ enableHighAccuracy: true }
 				);
 			} else {
-				statusMessage = "Geolocation not supported in your browser.";
+				sensorErrorMessage = "Geolocation not supported in your browser.";
+				showSensorAlert = true;
 				return;
 			}
 
@@ -216,7 +255,8 @@
 						hasPermission = true;
 						statusMessage = "Sensor access granted. Getting location...";
 					} else {
-						statusMessage = "Sensor permission denied. Please allow motion and orientation access.";
+						sensorErrorMessage = "Sensor permission denied. Please allow motion and orientation access.";
+						showSensorAlert = true;
 					}
 				} else {
 					// Older iOS that doesn't require permission
@@ -230,14 +270,23 @@
 					window.addEventListener("deviceorientationabsolute", orientationHandler, true);
 				} else if (window) {
 					window.addEventListener("deviceorientation", orientationHandler, true);
+				} else {
+					sensorErrorMessage = "Orientation sensors not available on your device.";
+					showSensorAlert = true;
+					return;
 				}
 				hasPermission = true;
 				statusMessage = "Starting sensors. Getting location...";
 			}
 		} catch (error) {
 			console.error("Error starting compass:", error);
-			statusMessage = "Error starting compass. Your device may not support orientation sensors.";
+			sensorErrorMessage = "Error starting compass. Your device may not support orientation sensors.";
+			showSensorAlert = true;
 		}
+	}
+
+	function closeAlert() {
+		showSensorAlert = false;
 	}
 
 	onMount(() => {
@@ -265,227 +314,164 @@
 	});
 </script>
 
-<div class="container">
-	<div class="card w-full max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-		<div class="p-6">
-			<h2 class="text-2xl font-bold mb-2">Qibla Direction Finder</h2>
-			<p class="text-gray-600 mb-4">
-				Use your device's sensors to locate the direction to the Kaaba in Mecca
-			</p>
-
-			<div class="compass-wrapper">
-				<div class="compass">
-					<div class="arrow"></div>
-					<div class="compass-circle" bind:this={compassCircle}></div>
-					<div class="qibla-direction" style="transform: rotate({pointDegree}deg)"></div>
-					<div class="my-point" bind:this={myPoint} class:pulsing={isAligned}></div>
-				</div>
-
-				<div class="calibration-indicator" class:show={needsCalibration}>
-					<div class="calibration-icon"></div>
-					<span>Calibration needed</span>
-				</div>
-			</div>
-
-			<div class="mt-4 space-y-2" class:hidden={!hasPermission}>
-				<div class="flex justify-between text-sm">
-					<span>Sensor accuracy</span>
-					<span>{accuracy.toFixed(0)}%</span>
-				</div>
-				<div class="progress-container">
-					<div class="progress-bar" style="width: {accuracy}%"></div>
-				</div>
-			</div>
-
-			<div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md text-blue-800">
-				{statusMessage}
-			</div>
-
-			<button
-				class="w-full mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
-				onclick={startCompass}
-				class:hidden={hasPermission}
-			>
-				Start Compass
-			</button>
-
-			<div class="mt-4 text-center" class:hidden={!hasLocation}>
-				<p class="text-sm text-gray-600">
-					Qibla direction: {pointDegree !== null ? pointDegree.toFixed(1) : '–'}°
-					<span class="text-green-600 font-bold" class:hidden={!isAligned}>✓ Aligned</span>
+<div class="bg-neutral-50 min-h-screen py-8 px-4 sm:px-6">
+	<div class="max-w-md mx-auto">
+		<div class="bg-white rounded-xl shadow-lg overflow-hidden">
+			<div class="p-6">
+				<h2 class="text-2xl font-bold text-center mb-2">Qibla Direction Finder</h2>
+				<p class="text-gray-600 text-center mb-6">
+					Use your device's sensors to locate the direction to the Kaaba in Mecca
 				</p>
+
+				<div class="relative">
+					{#if needsCalibration}
+						<div class="absolute -top-12 left-1/2 transform -translate-x-1/2 z-10 flex items-center bg-amber-50 text-amber-800 px-4 py-2 rounded-full shadow-md">
+							<div class="animate-spin mr-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+								</svg>
+							</div>
+							<span class="text-sm font-medium">Calibration needed</span>
+						</div>
+					{/if}
+
+					<div class="compass-container mx-auto relative" style="width: 280px; height: 280px;">
+						<div class="absolute inset-0 rounded-full bg-white shadow-lg overflow-hidden">
+							<div class="arrow absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4 z-10">
+								<div class="w-0 h-0 border-x-[10px] border-x-transparent border-b-[20px] border-b-red-500"></div>
+							</div>
+
+							<div class="compass-circle absolute inset-[5%] rounded-full" bind:this={compassCircle}></div>
+
+							{#if pointDegree !== null}
+								<div class="qibla-direction absolute top-1/2 left-1/2 h-[140px] w-[16px] -mt-[140px] -ml-[8px] z-20" style="transform: rotate({pointDegree}deg)">
+									<div class="h-full w-full bg-green-500 opacity-70 rounded-t-full"></div>
+									<div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+										Qibla
+									</div>
+								</div>
+							{/if}
+
+							<div class="my-point absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-green-500 rounded-full opacity-0 transition-opacity duration-500 z-10"
+									 bind:this={myPoint}
+									 class:animate-pulse={isAligned}></div>
+						</div>
+					</div>
+				</div>
+
+				{#if hasPermission}
+					<div class="mt-6 space-y-2">
+						<div class="flex justify-between text-sm">
+							<span>Sensor accuracy</span>
+							<span class={accuracy > 70 ? 'text-green-600' : accuracy > 40 ? 'text-amber-600' : 'text-red-600'}>
+                {accuracy.toFixed(0)}%
+              </span>
+						</div>
+						<div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+							<div class="h-full transition-all duration-300 rounded-full"
+									 class:bg-green-500={accuracy > 70}
+									 class:bg-amber-500={accuracy > 40 && accuracy <= 70}
+									 class:bg-red-500={accuracy <= 40}
+									 style="width: {accuracy}%"></div>
+						</div>
+					</div>
+				{/if}
+
+				<div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-center">
+					{statusMessage}
+				</div>
+
+				{#if !hasPermission}
+					<button
+						class="w-full mt-6 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+						onclick={startCompass}
+					>
+						Start Compass
+					</button>
+				{/if}
+
+				{#if hasLocation}
+					<div class="mt-6 text-center">
+						<p class="text-sm">
+							<span class="text-gray-600">Qibla direction: </span>
+							<span class="font-semibold">{pointDegree !== null ? pointDegree.toFixed(1) : '–'}°</span>
+							{#if isAligned}
+                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <svg class="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  Aligned
+                </span>
+							{/if}
+						</p>
+					</div>
+				{/if}
 			</div>
 		</div>
-	</div>
 
-	<div class="mt-8 max-w-md mx-auto text-center px-4">
-		<h3 class="text-lg font-medium mb-2">How to use:</h3>
-		<ol class="text-sm text-left space-y-2 bg-white p-4 rounded-lg shadow-sm">
-			<li class="flex items-start">
-				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">1</span>
-				<span>Click "Start Compass" and allow sensor permissions</span>
-			</li>
-			<li class="flex items-start">
-				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">2</span>
-				<span>Hold your device flat with the screen facing up</span>
-			</li>
-			<li class="flex items-start">
-				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">3</span>
-				<span>Turn slowly until you see the green indicator light up</span>
-			</li>
-			<li class="flex items-start">
-				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">4</span>
-				<span>If prompted to calibrate, move your device in a figure-8 pattern</span>
-			</li>
-		</ol>
+		<div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+			<h3 class="text-lg font-medium text-center mb-4">How to use:</h3>
+			<ol class="space-y-4">
+				<li class="flex items-start">
+					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">1</span>
+					<span>Click "Start Compass" and allow sensor permissions</span>
+				</li>
+				<li class="flex items-start">
+					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">2</span>
+					<span>Hold your device flat with the screen facing up</span>
+				</li>
+				<li class="flex items-start">
+					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">3</span>
+					<span>Turn slowly until you see the green indicator light up</span>
+				</li>
+				<li class="flex items-start">
+					<span class="flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-3 flex-shrink-0">4</span>
+					<span>If prompted to calibrate, move your device in a figure-8 pattern</span>
+				</li>
+			</ol>
+		</div>
 	</div>
 </div>
 
+<AlertDialog.Root open={showSensorAlert}>
+	<AlertDialog.Content>
+		<AlertDialog.Header>
+			<AlertDialog.Title>Sensor Not Available</AlertDialog.Title>
+			<AlertDialog.Description>
+				{sensorErrorMessage}
+			</AlertDialog.Description>
+		</AlertDialog.Header>
+		<AlertDialog.Footer>
+			<AlertDialog.Action asChild>
+				<Button onclick={closeAlert}>Understand</Button>
+			</AlertDialog.Action>
+		</AlertDialog.Footer>
+	</AlertDialog.Content>
+</AlertDialog.Root>
+
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        min-height: 100vh;
-        padding: 2rem 1rem;
-        background-color: #f8f9fa;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 400px;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .w-full {
-        width: 100%;
-    }
-
-    .max-w-md {
-        max-width: 28rem;
-    }
-
-    .mx-auto {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .compass-wrapper {
-        position: relative;
-        width: 100%;
-        max-width: 300px;
-        aspect-ratio: 1 / 1;
-        margin: 2rem auto;
-    }
-
-    .compass {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        background-color: white;
-        overflow: hidden;
-    }
-
-    .compass > .arrow {
-        position: absolute;
-        width: 0;
-        height: 0;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-style: solid;
-        border-width: 30px 20px 0 20px;
-        border-color: #e53935 transparent transparent transparent;
-        z-index: 1;
-    }
-
-    .compass > .compass-circle {
-        position: absolute;
-        width: 90%;
-        height: 90%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: transform 0.1s ease-out;
+    .compass-circle {
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="195" fill="white" stroke="%23333" stroke-width="2"/><path d="M200,10 L205,25 L195,25 Z" fill="%23E53935"/><text x="200" y="45" text-anchor="middle" font-size="20" fill="%23333">N</text><path d="M200,390 L205,375 L195,375 Z" fill="%23333"/><text x="200" y="365" text-anchor="middle" font-size="20" fill="%23333">S</text><path d="M10,200 L25,195 L25,205 Z" fill="%23333"/><text x="45" y="205" text-anchor="middle" font-size="20" fill="%23333">W</text><path d="M390,200 L375,195 L375,205 Z" fill="%23333"/><text x="355" y="205" text-anchor="middle" font-size="20" fill="%23333">E</text><circle cx="200" cy="200" r="5" fill="%23333"/><line x1="200" y1="15" x2="200" y2="30" stroke="%23333" stroke-width="2"/><line x1="200" y1="370" x2="200" y2="385" stroke="%23333" stroke-width="2"/><line x1="15" y1="200" x2="30" y2="200" stroke="%23333" stroke-width="2"/><line x1="370" y1="200" x2="385" y2="200" stroke="%23333" stroke-width="2"/><line x1="58" y1="58" x2="68" y2="68" stroke="%23333" stroke-width="1"/><line x1="58" y1="342" x2="68" y2="332" stroke="%23333" stroke-width="1"/><line x1="342" y1="58" x2="332" y2="68" stroke="%23333" stroke-width="1"/><line x1="342" y1="342" x2="332" y2="332" stroke="%23333" stroke-width="1"/><g stroke="%23ccc" stroke-width="1"><circle cx="200" cy="200" r="50"/><circle cx="200" cy="200" r="100"/><circle cx="200" cy="200" r="150"/></g></svg>') center no-repeat;
         background-size: contain;
+        transition: transform 0.1s ease-out;
     }
 
-    .compass > .my-point {
-        position: absolute;
-        width: 20%;
-        height: 20%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(8, 223, 69, 0.5);
-        border-radius: 50%;
-        opacity: 0;
-        transition: opacity 0.5s ease-out;
-        z-index: 2;
-        box-shadow: 0 0 10px rgba(8, 223, 69, 0.7);
+    @keyframes pulse {
+        0% {
+            opacity: 0.7;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+        70% {
+            opacity: 0.9;
+            box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+        }
+        100% {
+            opacity: 0.7;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
     }
 
-    .compass > .qibla-direction {
-        position: absolute;
-        width: 0;
-        height: 0;
-        top: 50%;
-        left: 50%;
-        transform-origin: center;
-        z-index: 1;
-    }
-
-    .qibla-direction::after {
-        content: '';
-        position: absolute;
-        top: -140px;
-        left: -8px;
-        width: 16px;
-        height: 140px;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 140"><path d="M8,0 L16,140 L8,130 L0,140 Z" fill="none" stroke="%2343A047" stroke-width="2" stroke-dasharray="5,5"/></svg>') center no-repeat;
-    }
-
-    .calibration-indicator {
-        position: absolute;
-        top: -50px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: none;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        background-color: #fff;
-        border-radius: 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .calibration-indicator.show {
-        display: flex;
-    }
-
-    .calibration-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8L10.67,8.09C9.81,7.07 7.4,4.5 5,4.5C5,4.5 3.03,7.46 4.96,11.41C4.41,12.24 4.07,12.67 4,13.66L2.07,13.95L2.28,14.93L4.04,14.67L4.18,15.38L2.61,16.32L3.08,17.21L4.53,16.32C5.68,18.76 8.59,20 12,20C15.41,20 18.32,18.76 19.47,16.32L20.92,17.21L21.39,16.32L19.82,15.38L19.96,14.67L21.72,14.93L21.93,13.95L20,13.66C19.93,12.67 19.59,12.24 19.04,11.41C20.97,7.46 19,4.5 19,4.5C16.6,4.5 14.19,7.07 13.33,8.09L12,8M9,11A1,1 0 0,1 10,12A1,1 0 0,1 9,13A1,1 0 0,1 8,12A1,1 0 0,1 9,11M15,11A1,1 0 0,1 16,12A1,1 0 0,1 15,13A1,1 0 0,1 14,12A1,1 0 0,1 15,11M12,14L13.5,17H10.5L12,14Z" fill="%23FF9800"/></svg>') center no-repeat;
-        animation: rotate 2s infinite linear;
+    .animate-pulse {
+        animation: pulse 2s infinite;
     }
 </style>
