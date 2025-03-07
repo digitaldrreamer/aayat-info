@@ -1,9 +1,5 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { Button } from "$lib/components/ui/button";
-	import * as Card from "$lib/components/ui/card";
-	import * as Alert from "$lib/components/ui/alert";
-	import { Progress } from "$lib/components/ui/progress";
 	import { browser } from '$app/environment';
 
 	/** @type {HTMLElement} Reference to the compass circle element */
@@ -12,25 +8,15 @@
 	let myPoint;
 
 	// State variables
-	/** @type {number} Current compass heading in degrees */
 	let compass = $state(0);
-	/** @type {number} Qibla direction in degrees from current position */
 	let pointDegree = $state(null);
-	/** @type {boolean} Flag to track if sensors have permission */
 	let hasPermission = $state(false);
-	/** @type {boolean} Flag to track if location has been acquired */
 	let hasLocation = $state(false);
-	/** @type {boolean} Flag to track if the device is aligned with Qibla */
 	let isAligned = $state(false);
-	/** @type {string} Status message to show user */
 	let statusMessage = $state("Waiting to start...");
-	/** @type {boolean} Flag to indicate if sensor calibration is needed */
 	let needsCalibration = $state(false);
-	/** @type {number} Accuracy of the compass (0-100) */
 	let accuracy = $state(0);
-	/** @type {Array} Recent compass readings to detect stability */
 	let recentReadings = $state([]);
-	/** @type {Object} User's current position coordinates */
 	let userPosition = $state(null);
 
 	// Constants
@@ -290,39 +276,43 @@
 			<div class="compass-wrapper">
 				<div class="compass">
 					<div class="arrow"></div>
-					<div class="compass-circle" id="compassCircle"></div>
-					<div class="qibla-direction" id="qiblaDirection"></div>
-					<div class="my-point" id="myPoint"></div>
+					<div class="compass-circle" bind:this={compassCircle}></div>
+					<div class="qibla-direction" style="transform: rotate({pointDegree}deg)"></div>
+					<div class="my-point" bind:this={myPoint} class:pulsing={isAligned}></div>
 				</div>
 
-				<div class="calibration-indicator" id="calibrationIndicator">
+				<div class="calibration-indicator" class:show={needsCalibration}>
 					<div class="calibration-icon"></div>
 					<span>Calibration needed</span>
 				</div>
 			</div>
 
-			<div id="accuracyContainer" class="mt-4 space-y-2 hidden">
+			<div class="mt-4 space-y-2" class:hidden={!hasPermission}>
 				<div class="flex justify-between text-sm">
 					<span>Sensor accuracy</span>
-					<span id="accuracyValue">0%</span>
+					<span>{accuracy.toFixed(0)}%</span>
 				</div>
-				<div class="progress-container bg-gray-200 rounded-full h-2.5">
-					<div id="progressBar" class="progress-bar bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
+				<div class="progress-container">
+					<div class="progress-bar" style="width: {accuracy}%"></div>
 				</div>
 			</div>
 
-			<div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md text-blue-800" id="statusMessage">
-				Please start the compass to begin finding Qibla direction.
+			<div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md text-blue-800">
+				{statusMessage}
 			</div>
 
-			<button id="startButton" class="w-full mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
+			<button
+				class="w-full mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
+				onclick={startCompass}
+				class:hidden={hasPermission}
+			>
 				Start Compass
 			</button>
 
-			<div id="directionInfo" class="mt-4 text-center hidden">
+			<div class="mt-4 text-center" class:hidden={!hasLocation}>
 				<p class="text-sm text-gray-600">
-					Qibla direction: <span id="degreeValue">–</span>°
-					<span id="alignedIndicator" class="text-green-600 font-bold hidden">✓ Aligned</span>
+					Qibla direction: {pointDegree !== null ? pointDegree.toFixed(1) : '–'}°
+					<span class="text-green-600 font-bold" class:hidden={!isAligned}>✓ Aligned</span>
 				</p>
 			</div>
 		</div>
@@ -498,162 +488,4 @@
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8L10.67,8.09C9.81,7.07 7.4,4.5 5,4.5C5,4.5 3.03,7.46 4.96,11.41C4.41,12.24 4.07,12.67 4,13.66L2.07,13.95L2.28,14.93L4.04,14.67L4.18,15.38L2.61,16.32L3.08,17.21L4.53,16.32C5.68,18.76 8.59,20 12,20C15.41,20 18.32,18.76 19.47,16.32L20.92,17.21L21.39,16.32L19.82,15.38L19.96,14.67L21.72,14.93L21.93,13.95L20,13.66C19.93,12.67 19.59,12.24 19.04,11.41C20.97,7.46 19,4.5 19,4.5C16.6,4.5 14.19,7.07 13.33,8.09L12,8M9,11A1,1 0 0,1 10,12A1,1 0 0,1 9,13A1,1 0 0,1 8,12A1,1 0 0,1 9,11M15,11A1,1 0 0,1 16,12A1,1 0 0,1 15,13A1,1 0 0,1 14,12A1,1 0 0,1 15,11M12,14L13.5,17H10.5L12,14Z" fill="%23FF9800"/></svg>') center no-repeat;
         animation: rotate 2s infinite linear;
     }
-
-    .mt-4 {
-        margin-top: 1rem;
-    }
-
-    .mt-8 {
-        margin-top: 2rem;
-    }
-
-    .progress-container {
-        background-color: #e9ecef;
-        border-radius: 9999px;
-        height: 0.625rem;
-        width: 100%;
-    }
-
-    .progress-bar {
-        background-color: #4caf50;
-        height: 100%;
-        border-radius: 9999px;
-        transition: width 0.3s ease;
-    }
-
-    .space-y-2 > * + * {
-        margin-top: 0.5rem;
-    }
-
-    button {
-        background-color: #3b82f6;
-        color: white;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.15s ease;
-    }
-
-    button:hover {
-        background-color: #2563eb;
-    }
-
-    .pulsing {
-        animation: pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes pulse {
-        0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.5;
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1.1);
-            opacity: 0.8;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.5;
-        }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 640px) {
-        .container {
-            padding: 1rem;
-        }
-
-        .compass-wrapper {
-            max-width: 250px;
-        }
-
-        .calibration-indicator {
-            top: -40px;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.875rem;
-        }
-
-        .calibration-icon {
-            width: 20px;
-            height: 20px;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .compass-wrapper {
-            max-width: 220px;
-        }
-    }
-
-    /* Basic JavaScript to handle UI state changes */
-    <script>
-     document.addEventListener('DOMContentLoaded', function() {
-        const startButton = document.getElementById('startButton');
-        const qiblaDirection = document.getElementById('qiblaDirection');
-        const myPoint = document.getElementById('myPoint');
-        const statusMessage = document.getElementById('statusMessage');
-        const directionInfo = document.getElementById('directionInfo');
-        const degreeValue = document.getElementById('degreeValue');
-        const alignedIndicator = document.getElementById('alignedIndicator');
-        const accuracyContainer = document.getElementById('accuracyContainer');
-        const accuracyValue = document.getElementById('accuracyValue');
-        const progressBar = document.getElementById('progressBar');
-        const calibrationIndicator = document.getElementById('calibrationIndicator');
-
-    // Mock functionality for demo purposes
-    startButton.addEventListener('click', function() {
-    // Simulate compass starting
-    statusMessage.textContent = "Compass activated. Please hold your device flat.";
-    startButton.style.display = 'none';
-
-    // Show accuracy information
-    setTimeout(() => {
-    accuracyContainer.classList.remove('hidden');
-    directionInfo.classList.remove('hidden');
-
-    // Simulate increasing accuracy
-    let accuracy = 0;
-        const interval = setInterval(() => {
-        accuracy += 5;
-        if (accuracy > 85) {
-    clearInterval(interval);
-
-    // Show aligned state
-    myPoint.classList.add('pulsing');
-    myPoint.style.opacity = '1';
-    alignedIndicator.classList.remove('hidden');
-    statusMessage.textContent = "Qibla direction found. Face this direction to pray.";
-    }
-
-    accuracyValue.textContent = accuracy + '%';
-    progressBar.style.width = accuracy + '%';
-    degreeValue.textContent = Math.floor(Math.random() * 10) + 135; // Random value around 140 degrees
-
-    // Show calibration prompt occasionally
-    if (accuracy === 40) {
-    calibrationIndicator.classList.add('show');
-    setTimeout(() => {
-    calibrationIndicator.classList.remove('show');
-    }, 3000);
-    }
-
-    }, 500);
-
-    // Rotate qibla direction line
-    qiblaDirection.style.transform = 'rotate(140deg)';
-    }, 1000);
-    });
-    });
-    </script>
 </style>
