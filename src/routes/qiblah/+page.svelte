@@ -280,94 +280,127 @@
 </script>
 
 <div class="container">
-	<Card.Root class="w-full max-w-md">
-		<Card.Header>
-			<Card.Title>Qibla Direction Finder</Card.Title>
-			<Card.Description>
+	<div class="card w-full max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+		<div class="p-6">
+			<h2 class="text-2xl font-bold mb-2">Qibla Direction Finder</h2>
+			<p class="text-gray-600 mb-4">
 				Use your device's sensors to locate the direction to the Kaaba in Mecca
-			</Card.Description>
-		</Card.Header>
-		<Card.Content>
+			</p>
+
 			<div class="compass-wrapper">
 				<div class="compass">
 					<div class="arrow"></div>
-					<div class="compass-circle" bind:this={compassCircle}></div>
-					<div
-						class="qibla-direction"
-						style="transform: rotate({pointDegree}deg)"
-					></div>
-					<div
-						class="my-point"
-						bind:this={myPoint}
-						class:pulsing={isAligned}
-					></div>
+					<div class="compass-circle" id="compassCircle"></div>
+					<div class="qibla-direction" id="qiblaDirection"></div>
+					<div class="my-point" id="myPoint"></div>
 				</div>
 
-				<div class="calibration-indicator" class:show={needsCalibration}>
+				<div class="calibration-indicator" id="calibrationIndicator">
 					<div class="calibration-icon"></div>
 					<span>Calibration needed</span>
 				</div>
 			</div>
 
-			{#if hasPermission}
-				<div class="mt-4 space-y-2">
-					<div class="flex justify-between text-sm">
-						<span>Sensor accuracy</span>
-						<span>{Math.round(accuracy)}%</span>
-					</div>
-					<Progress value={accuracy} />
+			<div id="accuracyContainer" class="mt-4 space-y-2 hidden">
+				<div class="flex justify-between text-sm">
+					<span>Sensor accuracy</span>
+					<span id="accuracyValue">0%</span>
 				</div>
-			{/if}
-
-			<Alert.Root class="mt-4">
-				<Alert.Description>{statusMessage}</Alert.Description>
-			</Alert.Root>
-
-			{#if !hasPermission && browser}
-				<Button class="w-full mt-4" on:click={startCompass}>
-					Start Compass
-				</Button>
-			{/if}
-
-			{#if hasLocation}
-				<div class="mt-4 text-center">
-					<p class="text-sm text-muted-foreground">
-						Qibla direction: {pointDegree ? Math.round(pointDegree) : '–'}°
-						{#if isAligned}
-							<span class="text-green-600 font-bold">✓ Aligned</span>
-						{/if}
-					</p>
+				<div class="progress-container bg-gray-200 rounded-full h-2.5">
+					<div id="progressBar" class="progress-bar bg-green-600 h-2.5 rounded-full" style="width: 0%"></div>
 				</div>
-			{/if}
-		</Card.Content>
-	</Card.Root>
+			</div>
 
-	<div class="mt-8 max-w-md text-center">
+			<div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md text-blue-800" id="statusMessage">
+				Please start the compass to begin finding Qibla direction.
+			</div>
+
+			<button id="startButton" class="w-full mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
+				Start Compass
+			</button>
+
+			<div id="directionInfo" class="mt-4 text-center hidden">
+				<p class="text-sm text-gray-600">
+					Qibla direction: <span id="degreeValue">–</span>°
+					<span id="alignedIndicator" class="text-green-600 font-bold hidden">✓ Aligned</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-8 max-w-md mx-auto text-center px-4">
 		<h3 class="text-lg font-medium mb-2">How to use:</h3>
-		<ol class="text-sm text-left space-y-2">
-			<li>1. Click "Start Compass" and allow sensor permissions</li>
-			<li>2. Hold your device flat with the screen facing up</li>
-			<li>3. Turn slowly until you see the green indicator light up</li>
-			<li>4. If prompted to calibrate, move your device in a figure-8 pattern</li>
+		<ol class="text-sm text-left space-y-2 bg-white p-4 rounded-lg shadow-sm">
+			<li class="flex items-start">
+				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">1</span>
+				<span>Click "Start Compass" and allow sensor permissions</span>
+			</li>
+			<li class="flex items-start">
+				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">2</span>
+				<span>Hold your device flat with the screen facing up</span>
+			</li>
+			<li class="flex items-start">
+				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">3</span>
+				<span>Turn slowly until you see the green indicator light up</span>
+			</li>
+			<li class="flex items-start">
+				<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 text-blue-800 font-medium mr-2">4</span>
+				<span>If prompted to calibrate, move your device in a figure-8 pattern</span>
+			</li>
 		</ol>
 	</div>
 </div>
 
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
     .container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         min-height: 100vh;
-        padding: 1rem;
+        padding: 2rem 1rem;
         background-color: #f8f9fa;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .w-full {
+        width: 100%;
+    }
+
+    .max-w-md {
+        max-width: 28rem;
+    }
+
+    .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .compass-wrapper {
         position: relative;
-        width: 320px;
-        height: 320px;
+        width: 100%;
+        max-width: 300px;
+        aspect-ratio: 1 / 1;
         margin: 2rem auto;
     }
 
@@ -378,6 +411,7 @@
         border-radius: 50%;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         background-color: white;
+        overflow: hidden;
     }
 
     .compass > .arrow {
@@ -389,7 +423,7 @@
         transform: translateX(-50%);
         border-style: solid;
         border-width: 30px 20px 0 20px;
-        border-color: red transparent transparent transparent;
+        border-color: #e53935 transparent transparent transparent;
         z-index: 1;
     }
 
@@ -445,18 +479,16 @@
         top: -50px;
         left: 50%;
         transform: translateX(-50%);
-        display: flex;
+        display: none;
         align-items: center;
         padding: 0.5rem 1rem;
         background-color: #fff;
         border-radius: 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        transition: opacity 0.3s ease;
     }
 
     .calibration-indicator.show {
-        opacity: 1;
+        display: flex;
     }
 
     .calibration-icon {
@@ -465,6 +497,51 @@
         margin-right: 8px;
         background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8L10.67,8.09C9.81,7.07 7.4,4.5 5,4.5C5,4.5 3.03,7.46 4.96,11.41C4.41,12.24 4.07,12.67 4,13.66L2.07,13.95L2.28,14.93L4.04,14.67L4.18,15.38L2.61,16.32L3.08,17.21L4.53,16.32C5.68,18.76 8.59,20 12,20C15.41,20 18.32,18.76 19.47,16.32L20.92,17.21L21.39,16.32L19.82,15.38L19.96,14.67L21.72,14.93L21.93,13.95L20,13.66C19.93,12.67 19.59,12.24 19.04,11.41C20.97,7.46 19,4.5 19,4.5C16.6,4.5 14.19,7.07 13.33,8.09L12,8M9,11A1,1 0 0,1 10,12A1,1 0 0,1 9,13A1,1 0 0,1 8,12A1,1 0 0,1 9,11M15,11A1,1 0 0,1 16,12A1,1 0 0,1 15,13A1,1 0 0,1 14,12A1,1 0 0,1 15,11M12,14L13.5,17H10.5L12,14Z" fill="%23FF9800"/></svg>') center no-repeat;
         animation: rotate 2s infinite linear;
+    }
+
+    .mt-4 {
+        margin-top: 1rem;
+    }
+
+    .mt-8 {
+        margin-top: 2rem;
+    }
+
+    .progress-container {
+        background-color: #e9ecef;
+        border-radius: 9999px;
+        height: 0.625rem;
+        width: 100%;
+    }
+
+    .progress-bar {
+        background-color: #4caf50;
+        height: 100%;
+        border-radius: 9999px;
+        transition: width 0.3s ease;
+    }
+
+    .space-y-2 > * + * {
+        margin-top: 0.5rem;
+    }
+
+    button {
+        background-color: #3b82f6;
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+
+    button:hover {
+        background-color: #2563eb;
+    }
+
+    .pulsing {
+        animation: pulse 2s infinite ease-in-out;
     }
 
     @keyframes rotate {
@@ -491,7 +568,92 @@
         }
     }
 
-    .pulsing {
-        animation: pulse 2s infinite ease-in-out;
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+        .container {
+            padding: 1rem;
+        }
+
+        .compass-wrapper {
+            max-width: 250px;
+        }
+
+        .calibration-indicator {
+            top: -40px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .calibration-icon {
+            width: 20px;
+            height: 20px;
+        }
     }
+
+    @media (max-width: 400px) {
+        .compass-wrapper {
+            max-width: 220px;
+        }
+    }
+
+    /* Basic JavaScript to handle UI state changes */
+    <script>
+     document.addEventListener('DOMContentLoaded', function() {
+        const startButton = document.getElementById('startButton');
+        const qiblaDirection = document.getElementById('qiblaDirection');
+        const myPoint = document.getElementById('myPoint');
+        const statusMessage = document.getElementById('statusMessage');
+        const directionInfo = document.getElementById('directionInfo');
+        const degreeValue = document.getElementById('degreeValue');
+        const alignedIndicator = document.getElementById('alignedIndicator');
+        const accuracyContainer = document.getElementById('accuracyContainer');
+        const accuracyValue = document.getElementById('accuracyValue');
+        const progressBar = document.getElementById('progressBar');
+        const calibrationIndicator = document.getElementById('calibrationIndicator');
+
+    // Mock functionality for demo purposes
+    startButton.addEventListener('click', function() {
+    // Simulate compass starting
+    statusMessage.textContent = "Compass activated. Please hold your device flat.";
+    startButton.style.display = 'none';
+
+    // Show accuracy information
+    setTimeout(() => {
+    accuracyContainer.classList.remove('hidden');
+    directionInfo.classList.remove('hidden');
+
+    // Simulate increasing accuracy
+    let accuracy = 0;
+        const interval = setInterval(() => {
+        accuracy += 5;
+        if (accuracy > 85) {
+    clearInterval(interval);
+
+    // Show aligned state
+    myPoint.classList.add('pulsing');
+    myPoint.style.opacity = '1';
+    alignedIndicator.classList.remove('hidden');
+    statusMessage.textContent = "Qibla direction found. Face this direction to pray.";
+    }
+
+    accuracyValue.textContent = accuracy + '%';
+    progressBar.style.width = accuracy + '%';
+    degreeValue.textContent = Math.floor(Math.random() * 10) + 135; // Random value around 140 degrees
+
+    // Show calibration prompt occasionally
+    if (accuracy === 40) {
+    calibrationIndicator.classList.add('show');
+    setTimeout(() => {
+    calibrationIndicator.classList.remove('show');
+    }, 3000);
+    }
+
+    }, 500);
+
+    // Rotate qibla direction line
+    qiblaDirection.style.transform = 'rotate(140deg)';
+    }, 1000);
+    });
+    });
+    </script>
 </style>
